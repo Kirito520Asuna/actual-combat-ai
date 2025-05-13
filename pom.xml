@@ -10,11 +10,12 @@
     <packaging>pom</packaging>
 
     <properties>
+        <project-module.version>0.0.1-SNAPSHOT</project-module.version>
+        <revision>${project-module.version}</revision>
+
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project-module.version>0.0.1-SNAPSHOT</project-module.version>
-        <revision>${project-module.version}</revision>
         <!-- 插件版本 -->
         <maven-jar-plugin.verison>3.3.0</maven-jar-plugin.verison>
         <maven-resources-plugin.verison>3.3.0</maven-resources-plugin.verison>
@@ -77,6 +78,24 @@
 
     <build>
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.verison}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.verison}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
             <!-- 统一版本号管理 -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -103,6 +122,7 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 </project>

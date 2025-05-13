@@ -7,6 +7,7 @@
     <groupId>com.actual-combat</groupId>
     <artifactId>actual-combat-ai</artifactId>
     <version>${revision}</version>
+    <packaging>pom</packaging>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

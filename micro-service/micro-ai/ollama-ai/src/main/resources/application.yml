@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    #@spring.profiles.active@==>占位符
+    active: @spring.profiles.active@
+  ai:
+    ollama:
+      base-url: http://127.0.0.1:11434
+      chat:
+        model: deepseek-r1:latest

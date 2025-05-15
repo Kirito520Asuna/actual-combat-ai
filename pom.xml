@@ -9,10 +9,6 @@
     <version>${revision}</version>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>micro-service</module>
-    </modules>
-
     <properties>
         <project-module.version>0.0.1-SNAPSHOT</project-module.version>
         <revision>${project-module.version}</revision>
@@ -29,6 +25,10 @@
         <maven-compiler-plugin.verison>3.11.0</maven-compiler-plugin.verison>
         <flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
     </properties>
+
+    <modules>
+        <module>micro-service</module>
+    </modules>
 
     <!--远程仓库-->
     <repositories>

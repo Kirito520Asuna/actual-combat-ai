@@ -11,9 +11,13 @@
 
     <artifactId>micro-ai</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>ollama-ai</module>
+    </modules>
 
     <properties>
-        <spring-ai.version>1.0.0-SNAPSHOT</spring-ai.version>
+        <spring-ai.version>1.0.0-M5</spring-ai.version> <!-- 推荐使用里程碑版本 -->
+        <spring-boot.version>3.3.5</spring-boot.version> <!-- 确保使用 3.2.x 或 3.3.x -->
     </properties>
 
     <dependencyManagement>

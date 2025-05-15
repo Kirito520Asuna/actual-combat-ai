@@ -11,6 +11,9 @@
 
     <artifactId>micro-service</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>micro-ai</module>
+    </modules>
 
     <dependencyManagement>
         <dependencies>

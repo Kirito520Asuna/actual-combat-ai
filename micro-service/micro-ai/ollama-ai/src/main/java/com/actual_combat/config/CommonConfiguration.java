@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @Description
  */
 @Configuration
-public class BeanConfig {
+public class CommonConfiguration {
     @Bean
     public ChatClient chatClient(OllamaChatModel model) {
         ChatClient build = ChatClient.builder(model)

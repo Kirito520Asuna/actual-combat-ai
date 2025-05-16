@@ -12,6 +12,39 @@ spring:
       chat:
         model: deepseek-r1:latest
 
+
+
+knife4j:
+  #  cors: true
+  #  enable: true
+  setting:
+    enable-dynamic-parameter: true
+  #是否开启swagger登录验证
+  basic:
+    #enable: false
+    username: root
+    password: root
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  open:
+    default-group-configs:
+      enable: true
+  group-configs:
+#    - group: "api"
+#      paths-to-match: "/api/**"
+#    - group: "jwt"
+#      paths-to-match: "/jwt/**"
+#    - group: "test"
+#      paths-to-match:
+#        - "/test/**"
+  swagger-ui:
+    operations-sorter: alpha
+    path: /swagger-ui.html
+    tags-sorter: alpha
+
+
 logging:
   level:
     com.actual_combat: DEBUG

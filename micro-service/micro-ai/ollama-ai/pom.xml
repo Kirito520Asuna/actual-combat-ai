@@ -33,5 +33,13 @@
             <artifactId>spring-ai-ollama-spring-boot-starter</artifactId>
             <version>${spring-ai.version}</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>com.actual-combat</groupId>
+            <artifactId>framework-knife4j</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
     </dependencies>
 </project>

@@ -2,6 +2,10 @@ spring:
   profiles:
     #@spring.profiles.active@==>占位符
     active: @spring.profiles.active@
+
+  application:
+    name: micro-ai-ollama
+
   ai:
     ollama:
       base-url: http://127.0.0.1:11434
@@ -10,5 +14,5 @@ spring:
 
 logging:
   level:
-    com.actual_combat: INFO
+    com.actual_combat: DEBUG
     org.springframework.ai: DEBUG

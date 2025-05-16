@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <project-module.version>0.0.1-SNAPSHOT</project-module.version>
+        <project-module.version>0.0.1-BOOT3-SNAPSHOT</project-module.version>
         <revision>${project-module.version}</revision>
 
         <java.version>17</java.version>

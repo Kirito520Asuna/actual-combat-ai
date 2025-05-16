@@ -7,3 +7,8 @@ spring:
       base-url: http://127.0.0.1:11434
       chat:
         model: deepseek-r1:latest
+
+logging:
+  level:
+    com.actual_combat: INFO
+    org.springframework.ai: DEBUG

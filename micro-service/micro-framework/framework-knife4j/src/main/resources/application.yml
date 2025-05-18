@@ -22,6 +22,9 @@
 #  open:
 #    default-group-configs:
 #      enable: true
+#      api: true
+#      jwt: true
+#      other: true
 #  group-configs:
 #    - group: "api"
 #      paths-to-match: "/api/**"

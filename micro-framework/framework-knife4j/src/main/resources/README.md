@@ -123,7 +123,14 @@ knife4j:
              </dependency>
          </dependencies>
      </dependencyManagement>
-
+    <!--      网关引用需要排除
+    <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-webmvc</artifactId>
+                </exclusion>
+            </exclusions>
+            -->
     <dependencies>
         <!--swagger-->
         <dependency>
@@ -199,7 +206,14 @@ knife4j:
             </dependency>
         </dependencies>
     </dependencyManagement>
-
+    <!--      网关引用需要排除
+    <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-webmvc</artifactId>
+                </exclusion>
+            </exclusions>
+            -->
     <dependencies>
         <dependency>
             <groupId>com.github.xiaoymin</groupId>

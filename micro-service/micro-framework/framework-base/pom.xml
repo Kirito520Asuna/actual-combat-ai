@@ -10,7 +10,6 @@
     </parent>
 
     <artifactId>framework-base</artifactId>
-    <packaging>pom</packaging>
 
     <properties>
         <swagger-annotations.version>2.2.25</swagger-annotations.version>

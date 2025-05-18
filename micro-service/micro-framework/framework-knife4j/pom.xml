@@ -10,7 +10,6 @@
     </parent>
 
     <artifactId>framework-knife4j</artifactId>
-    <packaging>pom</packaging>
 
     <properties>
         <!--swagger 版本-->

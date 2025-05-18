@@ -6,11 +6,10 @@
     <parent>
         <groupId>com.actual-combat</groupId>
         <artifactId>micro-framework</artifactId>
-        <version>0.0.1-BOOT3-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>framework-dynamic-datasource</artifactId>
-    <packaging>pom</packaging>
 
     <properties>
         <dynamic-datasource.version>3.3.2</dynamic-datasource.version>

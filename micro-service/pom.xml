@@ -13,7 +13,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>micro-ai</module>
-        <module>micro-framework</module>
     </modules>
 
     <dependencyManagement>

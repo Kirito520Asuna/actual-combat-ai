@@ -33,6 +33,7 @@
     </properties>
 
     <modules>
+        <module>micro-framework</module>
         <module>micro-service</module>
     </modules>
 

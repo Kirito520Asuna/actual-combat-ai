@@ -22,7 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor @Accessors(chain = true)
 @JsonView(BaseJsonView.BaseView.class)
-public class ResultPage<T> implements Serializable, AtrPage {
+public class ResultPage<T> implements Serializable, AbsPage {
     private static final long serialVersionUID = 5716478706296860374L;
     /**
      * 返回列表

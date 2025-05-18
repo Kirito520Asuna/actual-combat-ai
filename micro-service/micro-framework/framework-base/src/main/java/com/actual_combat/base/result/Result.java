@@ -24,7 +24,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor @Accessors(chain = true)
 @JsonView(BaseJsonView.BaseView.class)
-public class Result<T> implements Serializable, AtrResult {
+public class Result<T> implements Serializable, AbsResult {
     private static final long serialVersionUID = 8831550221241490078L;
 
     /**

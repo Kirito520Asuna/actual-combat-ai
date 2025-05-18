@@ -10,7 +10,7 @@ import java.util.List;
  * @Date 2025/5/18 14:17:01
  * @Description
  */
-public interface AtrPage {
+public interface AbsPage {
     /**
      * 通用返回
      *

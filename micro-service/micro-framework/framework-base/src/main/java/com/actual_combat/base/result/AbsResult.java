@@ -5,7 +5,7 @@ package com.actual_combat.base.result;
  *
  * @author yan
  */
-public interface AtrResult {
+public interface AbsResult {
     /**
      * 获取返回代码
      *

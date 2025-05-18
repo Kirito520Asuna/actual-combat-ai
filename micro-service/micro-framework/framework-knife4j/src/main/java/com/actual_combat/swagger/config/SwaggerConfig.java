@@ -1,7 +1,7 @@
 package com.actual_combat.swagger.config;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.actual_combat.swagger.abstract_interface.AbstractSwagger;
+import com.actual_combat.swagger.abs.AbsSwagger;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -32,7 +32,7 @@ import java.util.Map;
 @Configuration
 @Slf4j
 @ConditionalOnBean(SwaggerConfiguration.class)
-public class SwaggerConfig implements AbstractSwagger {
+public class SwaggerConfig implements AbsSwagger {
     @Lazy
     @Resource
     private SwaggerConfiguration config;

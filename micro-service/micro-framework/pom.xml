@@ -15,6 +15,7 @@
     <modules>
         <module>framework-base</module>
         <module>framework-knife4j</module>
+        <module>framework-aop</module>
     </modules>
 
 

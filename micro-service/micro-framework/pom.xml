@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>framework-base</module>
         <module>framework-knife4j</module>
     </modules>
 

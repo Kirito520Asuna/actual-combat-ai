@@ -53,9 +53,9 @@
 #    username: root
 #    password: root
 
-#cors: true - 开启跨域资源共享（CORS），允许不同域名的请求访问。
-#enable: true - 启用knife4j。
-#setting: enable-dynamic-parameter: true - 开启动态参数功能，允许在运行时动态修改API接口参数。
-#basic: enable: true - 开启基本认证，使用用户名和密码进行认证。
-#username: root - 用户名为root。
-#password: root - 密码为root。
+##cors: true - 开启跨域资源共享（CORS），允许不同域名的请求访问。
+##enable: true - 启用knife4j。
+##setting: enable-dynamic-parameter: true - 开启动态参数功能，允许在运行时动态修改API接口参数。
+##basic: enable: true - 开启基本认证，使用用户名和密码进行认证。
+##username: root - 用户名为root。
+##password: root - 密码为root。

@@ -85,10 +85,18 @@ knife4j:
         <springdoc-openapi-ui.version>1.6.15</springdoc-openapi-ui.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <javax.annotation-api.version>1.3.2</javax.annotation-api.version>
+        <spring-boot.version>2.5.0</spring-boot.version>
     </properties>
     
      <dependencyManagement>
          <dependencies>
+             <dependency>
+                 <groupId>org.springframework.boot</groupId>
+                 <artifactId>spring-boot-dependencies</artifactId>
+                 <version>${spring-boot.version}</version>
+                 <type>pom</type>
+                 <scope>import</scope>
+             </dependency>
              <!--swagger-->
              <dependency>
                  <groupId>com.github.xiaoymin</groupId>
@@ -165,10 +173,19 @@ knife4j:
         <!--swagger 版本-->
         <knife4j.version>4.4.0</knife4j.version>
         <springdoc-openapi.version>2.6.0</springdoc-openapi.version>
+        <spring-boot.version>3.3.5</spring-boot.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>

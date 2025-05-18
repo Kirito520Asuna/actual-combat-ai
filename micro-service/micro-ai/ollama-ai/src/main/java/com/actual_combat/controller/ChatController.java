@@ -22,8 +22,8 @@ import reactor.core.publisher.Flux;
 @RestController
 public class ChatController {
     @Operation(summary = "聊天")
-    @GetMapping("/")
-    public Flux<String> chat(@RequestParam String message) {
+    @GetMapping(produces = {"text/html;charset=UTF-8"})
+    public Flux<String> chat(@RequestParam("message") String message) {
         ChatClient chatClient = SpringUtil.getBean(ChatClient.class);
         return chatClient.prompt().user(message).stream().content();
     }

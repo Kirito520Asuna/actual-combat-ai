@@ -17,6 +17,7 @@
         <module>framework-knife4j</module>
         <module>framework-aop</module>
         <module>framework-dynamic-datasource</module>
+        <module>framework-mybatis-plus</module>
     </modules>
 
 

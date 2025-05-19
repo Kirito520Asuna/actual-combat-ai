@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.actual-combat</groupId>
+        <artifactId>micro-framework</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>framework-sharding-sphere</artifactId>
+
+    <properties>
+        <!--2.4以下 Hoxton.SR12-2.2.7.RELEASE 2.4以上2021.0.5-2021.0.5.0 -->
+        <alibaba-druid.version>1.2.23</alibaba-druid.version>
+        <!--5.2.0该版本和drud存在冲突sql界面无法使用自动配置进入,
+        com.alibaba.druid.spring.boot.autoconfigure.stat.DruidFilterConfiguration
+        配置类filter  配置 和5.2.0版本自动配置存在空指针异常会导致服务无法启动
+        -->
+        <!--<shardingsphere.version>5.2.0</shardingsphere.version>-->
+        <!--5.0.0-alpha 稳定版本-->
+        <shardingsphere.version>5.0.0-alpha</shardingsphere.version>
+        <dynamic-datasource.version>3.3.2</dynamic-datasource.version>
+        <pagehelper-spring-boot-starter.version>1.2.13</pagehelper-spring-boot-starter.version>
+        <mybatis-plus-spring-boot-starter.version>3.5.3</mybatis-plus-spring-boot-starter.version>
+
+        <aviator.version>5.2.0</aviator.version>
+        <commons-beanutils.version>1.9.4</commons-beanutils.version>
+    </properties>
+
+    <dependencies>
+        <!--aviator-->
+        <dependency>
+            <groupId>com.googlecode.aviator</groupId>
+            <artifactId>aviator</artifactId>
+            <version>${aviator.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>${commons-beanutils.version}</version>
+        </dependency>
+
+        <!--分库分表-->
+        <!-- ShardingSphere -->
+        <!-- Sharding-JDBC -->
+        <dependency>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>shardingsphere-jdbc-core-spring-boot-starter</artifactId>
+            <version>${shardingsphere.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>shardingsphere-jdbc-core</artifactId>
+            <version>${shardingsphere.version}</version>
+        </dependency>
+        <!-- ShardingSphere 对 seata 事务 模式 支持-->
+        <dependency>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>shardingsphere-transaction-core</artifactId>
+            <version>${shardingsphere.version}</version>
+        </dependency>
+        <!--多数据源-->
+        <dependency>
+            <groupId>com.actual-combat</groupId>
+            <artifactId>framework-dynamic-datasource</artifactId>
+            <version>${revision}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.baomidou</groupId>
+                    <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+            <version>${dynamic-datasource.version}</version>
+        </dependency>
+        <!--说明：1，为shardingsphere使用druid数据源时，不要使用: druid-spring-boot-starter这个包，
+         因为它在会启动时自动从配置文件生成datasource,
+         2.使用druid-spring-boot-starter这个包需要排除 com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+         这个自动配置类，因为该自动配置类会生成datasource,从而保证druid监控界面可以正常使用
+        所以在这里使用druid这个包-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${alibaba-druid.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.alibaba</groupId>
+                    <artifactId>druid</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${alibaba-druid.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>${spring-boot.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+</project>

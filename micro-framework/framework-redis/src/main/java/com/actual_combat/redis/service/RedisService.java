@@ -2,6 +2,10 @@ package com.actual_combat.redis.service;
 
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.extra.spring.SpringUtil;
+import org.redisson.api.RAtomicLong;
+import org.redisson.api.RBucket;
+import org.redisson.api.RSet;
+import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -15,12 +19,14 @@ import java.util.concurrent.TimeUnit;
  * @Date 2025/5/19 15:52:42
  * @Description
  */
+
 public interface RedisService {
     default Logger log() {
         Logger logger = LoggerFactory.getLogger(this.getClass());
         return logger;
     }
 
+    /*[RedisTemplate]===========================================================================================*/
     default RedisTemplate getRedisTemplate() {
         return SpringUtil.getBean(RedisTemplate.class);
     }
@@ -52,10 +58,11 @@ public interface RedisService {
             value = redisTemplate.opsForValue().get(key);
         }
 
+        Logger log = log();
         if (value != null) {
-            log().debug("缓存命中，key:{},value:{}", key, value);
+            log.debug("[RT]缓存命中,key:{},value:{}", key, value);
         } else {
-            log().error("缓存未命中，key:{}", key);
+            log.error("[RT]缓存未命中,key:{}", key);
         }
         return value;
     }
@@ -70,10 +77,11 @@ public interface RedisService {
         RedisTemplate redisTemplate = getRedisTemplate();
         ValueOperations<String, T> operation = redisTemplate.opsForValue();
         T t = operation.get(key);
+        Logger log = log();
         if (t != null) {
-            log().debug("缓存命中，key:{},value:{}", key, t);
+            log.debug("[RT]缓存命中,key:{},value:{}", key, t);
         } else {
-            log().error("缓存未命中，key:{}", key);
+            log.error("[RT]缓存未命中,key:{}", key);
         }
         return t;
     }
@@ -141,12 +149,13 @@ public interface RedisService {
      */
     default boolean save(boolean random, String randomRange, String cacheName, boolean isHash, String key, Object value, long timeout, TimeUnit timeUnit) {
         RedisTemplate redisTemplate = getRedisTemplate();
+        Logger log = log();
         if (random) {
             try {
                 String[] split = randomRange.split("~");
                 timeout = RandomUtil.randomLong(Long.parseLong(split[0]), Long.parseLong(split[1]));
             } catch (Exception e) {
-                log().error("随机数生成失败:{}", e);
+                log.error("随机数生成失败:{}", e);
                 throw e;
             }
             redisTemplate.opsForValue().set(key, value, timeout, timeUnit);
@@ -160,7 +169,7 @@ public interface RedisService {
         } else {
             redisTemplate.opsForValue().set(key, value, timeout, timeUnit);
         }
-        log().debug("redis缓存数据成功，key:{},value:{},timeout:{}", key, value, timeout);
+        log.debug("[RT]缓存数据成功,key:{},value:{},timeout:{}", key, value, timeout);
         return true;
     }
 
@@ -184,12 +193,13 @@ public interface RedisService {
      */
     default boolean del(String cacheName, boolean isHash, String key) {
         RedisTemplate redisTemplate = getRedisTemplate();
+        Logger log = log();
         if (isHash) {
             redisTemplate.opsForHash().delete(cacheName, key);
-            log().debug("删除hash缓存成功，key:{}", key);
+            log.debug("[RT]删除hash缓存成功,key:{}", key);
         } else {
             redisTemplate.delete(key);
-            log().debug("删除缓存成功，key:{}", key);
+            log.debug("[RT]删除缓存成功,key:{}", key);
         }
         return true;
     }
@@ -203,10 +213,11 @@ public interface RedisService {
     default boolean delList(Collection collection) {
         RedisTemplate redisTemplate = getRedisTemplate();
         boolean del = redisTemplate.delete(collection) > 0;
+        Logger log = log();
         if (del) {
-            log().debug("删除集合缓存成功，key:{}", collection);
+            log.debug("[RT]删除集合缓存成功,key:{}", collection);
         } else {
-            log().error("删除集合缓存失败，key:{}", collection);
+            log.error("[RT]删除集合缓存失败,key:{}", collection);
         }
         return del;
     }
@@ -221,4 +232,61 @@ public interface RedisService {
         RedisTemplate redisTemplate = getRedisTemplate();
         return redisTemplate.keys(pattern);
     }
+
+    /*[RedissonClient]===========================================================================================*/
+
+    default RedissonClient getRedissonClient() {
+        return SpringUtil.getBean(RedissonClient.class);
+    }
+
+    /**
+     * 获取redisson的set
+     *
+     * @param key
+     * @return
+     */
+    default RSet<String> getSetByRS(String key) {
+        RSet<String> value = getRedissonClient().getSet(key);
+        Logger log = log();
+        if (value != null) {
+            log.debug("[RS]缓存命中,key:{},value:{}", key, value);
+        } else {
+            log.error("[RS]缓存未命中,key:{}", key);
+        }
+        return value;
+    }
+
+    /**
+     * 获取redisson的bucket
+     *
+     * @param key
+     * @return
+     */
+    default <V> RBucket<V> getBucketByRS(String key) {
+        RBucket<V> value = getRedissonClient().getBucket(key);
+        Logger log = log();
+        if (value != null) {
+            log.debug("[RS]缓存命中Bucket,key:{},value:{}", key, value);
+        } else {
+            log.error("[RS]缓存未命中Bucket,key:{}", key);
+        }
+        return value;
+    }
+
+    /**
+     * 获取redisson的RAtomicLong
+     * @param key
+     * @return
+     */
+    default RAtomicLong getAtomicLongByRS(String key) {
+        RAtomicLong atomicLong = getRedissonClient().getAtomicLong(key);
+        Logger log = log();
+        if (atomicLong != null) {
+            log.debug("[RS]缓存命中AtomicLong,key:{},value:{}", key, atomicLong);
+        } else {
+            log.error("[RS]缓存未命中AtomicLong,key:{}", key);
+        }
+        return atomicLong;
+    }
 }
+

@@ -22,7 +22,7 @@
         <spring-cloud.version>2022.0.5</spring-cloud.version>
         <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
 
-        <hutool.version>5.8.25</hutool.version>
+        <hutool.version>5.8.38</hutool.version>
         <lombok.version>1.18.26</lombok.version>
 
         <jackson-annotations.version>5.1.11</jackson-annotations.version>

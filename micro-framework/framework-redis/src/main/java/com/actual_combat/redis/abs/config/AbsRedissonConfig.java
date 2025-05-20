@@ -66,8 +66,9 @@ import java.util.List;
 public interface AbsRedissonConfig {
     Logger log = LoggerFactory.getLogger(AbsRedissonConfig.class);
     String DEFAULT_REDIS = "127.0.0.1:6379";
+
     enum RedisMode {
-        single, cluster,sentinel;
+        single, cluster, sentinel;
     }
 
     /**
@@ -91,24 +92,25 @@ public interface AbsRedissonConfig {
         }
         return getRedissonClient(addresses, redisPassword, redisTimeout, redisMode);
     }
-    default RedissonClient getRedissonClient(RedisConfiguration configuration){
+
+    default RedissonClient getRedissonClient(RedisConfiguration configuration) {
         log.debug("[init] [RedisProperties]  [RedissonClient]");
         Config config = new Config();
         BaseConfig baseConfig;
         RedisConfiguration.RedisMode redisModeEnum = configuration.getRedisModeEnum();
-        RedisProperties redisProperties ;
+        RedisProperties redisProperties;
         try {
             redisProperties = configuration.getRedisProperties();
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             log.error("[error] RedisProperties  ... ");
             redisProperties = SpringUtil.getBean(RedisProperties.class);
         }
         log.debug("RedisProperties:{}", JSONUtil.toJsonStr(redisProperties));
-        switch(redisModeEnum){
+        switch (redisModeEnum) {
             case cluster:
                 RedisProperties.Cluster cluster = redisProperties.getCluster();
                 List<String> nodes = cluster.getNodes();
-                nodes = CollUtil.isEmpty(nodes)?CollUtil.newArrayList(DEFAULT_REDIS):nodes;
+                nodes = CollUtil.isEmpty(nodes) ? CollUtil.newArrayList(DEFAULT_REDIS) : nodes;
                 // 集群模式 需要配置所有节点地址
                 ClusterServersConfig clusterServersConfig = config.useClusterServers();
                 clusterServersConfig.addNodeAddress(nodes.toArray(new String[0]));
@@ -117,7 +119,7 @@ public interface AbsRedissonConfig {
             case sentinel:
                 RedisProperties.Sentinel sentinel = redisProperties.getSentinel();
                 List<String> sentinelNodes = sentinel.getNodes();
-                sentinelNodes = CollUtil.isEmpty(sentinelNodes)?CollUtil.newArrayList(DEFAULT_REDIS):sentinelNodes;
+                sentinelNodes = CollUtil.isEmpty(sentinelNodes) ? CollUtil.newArrayList(DEFAULT_REDIS) : sentinelNodes;
                 // 哨兵模式
                 SentinelServersConfig sentinelServersConfig = config.useSentinelServers();
                 sentinelServersConfig
@@ -146,6 +148,7 @@ public interface AbsRedissonConfig {
 
         return Redisson.create(config);
     }
+
     default RedissonClient getRedissonClient(List<String> addresses, String redisPassword, Integer redisTimeout, String redisMode) {
         Config config = new Config();
         BaseConfig baseConfig;
@@ -209,7 +212,7 @@ public interface AbsRedissonConfig {
         template.setConnectionFactory(connectionFactory);
         // 使用Jackson进行JSON序列化
         GenericJackson2JsonRedisSerializer serializer = new GenericJackson2JsonRedisSerializer(initObjectMapper(null));
-        
+
         // 使用StringRedisSerializer来序列化和反序列化redis的key值
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
         template.setKeySerializer(stringRedisSerializer);
@@ -225,10 +228,11 @@ public interface AbsRedissonConfig {
 
     /**
      * 初始化ObjectMapper
+     *
      * @return
      */
     default ObjectMapper initObjectMapper(ObjectMapper objectMapper) {
-        objectMapper = ObjectUtil.isEmpty(objectMapper)? new ObjectMapper():objectMapper;
+        objectMapper = ObjectUtil.isEmpty(objectMapper) ? new ObjectMapper() : objectMapper;
 
         // 设置可见性
         objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);

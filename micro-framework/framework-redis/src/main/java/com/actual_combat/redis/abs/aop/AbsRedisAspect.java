@@ -7,6 +7,7 @@ import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONConfig;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.actual_combat.redis.aop.order.Order;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -22,6 +23,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.core.Ordered;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -35,8 +37,8 @@ import java.util.stream.Collectors;
  * @Date 2024/5/24 0024 10:00
  * @Description
  */
-public interface AbsRedisAspect {
-    JSONConfig config = new JSONConfig().setIgnoreNullValue(false);
+public interface AbsRedisAspect extends Ordered {
+    JSONConfig JSON_CONFIG = new JSONConfig().setIgnoreNullValue(false);
     /*#####################################################################################################################################*/
     /*常量模块*/
     // templateKey 缓存模板   placeholder 占位符   splicer 拼接符
@@ -45,6 +47,11 @@ public interface AbsRedisAspect {
     List<String> comparisonOperators = Arrays.stream("> < = >= <= != + - * / % & | ^ ! ? :".split(" ")).collect(Collectors.toList());
     // 条件截取剔除
     List<String> conditionOperators = Arrays.stream("( ) { }".split(" ")).collect(Collectors.toList());
+
+    @Override
+    default int getOrder() {
+        return Order.DEFAULT_ORDER;
+    }
 
     /*#####################################################################################################################################*/
     /*记录实体模块*/

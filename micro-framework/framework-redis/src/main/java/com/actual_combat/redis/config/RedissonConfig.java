@@ -1,9 +1,13 @@
 package com.actual_combat.redis.config;
 
+import com.actual_combat.redis.abs.ban.BanManager;
 import com.actual_combat.redis.abs.config.AbsRedissonConfig;
+import com.actual_combat.redis.ban.BanConfiguration;
+import com.actual_combat.redis.ban.SimpleBanManager;
 import jakarta.annotation.Resource;
 import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.*;
@@ -34,8 +38,6 @@ public class RedissonConfig implements AbsRedissonConfig {
     @Lazy
     private Environment env;
 
-
-
     @Bean
     public RedissonClient redissonClient() {
         return initRedissonClient();
@@ -49,6 +51,19 @@ public class RedissonConfig implements AbsRedissonConfig {
     @SuppressWarnings(value = {"unchecked", "rawtypes"})
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
         return initRedisTemplate(connectionFactory);
+    }
+
+
+    @Bean
+    @ConditionalOnExpression("${ip.enable:false}")
+    public BanConfiguration banConfiguration() {
+        return new BanConfiguration();
+    }
+
+    @Bean
+    @ConditionalOnBean({RedissonClient.class, BanConfiguration.class})
+    public BanManager banManager() {
+        return new SimpleBanManager();
     }
 
 }

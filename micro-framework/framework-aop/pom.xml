@@ -11,6 +11,11 @@
 
     <artifactId>framework-aop</artifactId>
 
+    <properties>
+        <spring-boot.version>3.1.0</spring-boot.version>
+        <springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -30,26 +35,38 @@
             <artifactId>aspectjweaver</artifactId>
         </dependency>
 
+        <!--Swagger3相关-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>${springfox-boot-starter.version}</version>
+            <optional>true</optional>
+        </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <optional>true</optional>
         </dependency>
+
         <dependency>
             <groupId>jakarta.annotation</groupId>
             <artifactId>jakarta.annotation-api</artifactId>
             <optional>true</optional>
         </dependency>
+
         <dependency>
             <groupId>net.minidev</groupId>
             <artifactId>json-smart</artifactId>
             <optional>true</optional>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <optional>true</optional>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

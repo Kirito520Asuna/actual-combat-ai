@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * @Date 2024/11/3 上午10:48:52
  * @Description
  */
-public interface AbsAsyncFutureAspect extends AbsAop {
+public interface AbsAsyncFuture extends AbsAop {
     @Override
     default int getOrder() {
         return AopConstants.AsyncOrder;

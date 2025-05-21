@@ -1,6 +1,6 @@
 package com.actual_combat.aop.all.aspect;
 
-import com.actual_combat.aop.abs.aspect.AbsAsyncFutureAspect;
+import com.actual_combat.aop.abs.aspect.AbsAsyncFuture;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Slf4j
 @Component
-public class AsyncFutureAspect implements AbsAsyncFutureAspect {
+public class AsyncFutureAspect implements AbsAsyncFuture {
 
 
     /**
@@ -26,7 +26,7 @@ public class AsyncFutureAspect implements AbsAsyncFutureAspect {
     @Override
     @Around(value = "Aop()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-        return AbsAsyncFutureAspect.super.around(joinPoint);
+        return AbsAsyncFuture.super.around(joinPoint);
     }
 
 }

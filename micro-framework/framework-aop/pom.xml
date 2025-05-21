@@ -15,6 +15,9 @@
         <spring-boot.version>3.1.0</spring-boot.version>
         <springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
 
+        <aviator.version>5.2.0</aviator.version>
+        <guava.version>30.0-jre</guava.version>
+
         <itext.version>2.1.7</itext.version>
         <itextpdf.version>5.5.9</itextpdf.version>
         <itext-asian.version>5.2.0</itext-asian.version>
@@ -37,6 +40,20 @@
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
+        </dependency>
+
+        <!--guava工具集-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
+        <!--aviator-->
+        <dependency>
+            <groupId>com.googlecode.aviator</groupId>
+            <artifactId>aviator</artifactId>
+            <version>${aviator.version}</version>
         </dependency>
 
         <!-- pdf -->

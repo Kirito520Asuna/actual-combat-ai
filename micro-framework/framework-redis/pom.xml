@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.actual-combat</groupId>
         <artifactId>micro-framework</artifactId>
-        <version>0.0.1-BOOT3-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>framework-redis</artifactId>

@@ -1,4 +1,4 @@
-package com.actual_combat.aop.abs;
+package com.actual_combat.aop.abs.bean;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
@@ -47,6 +47,11 @@ public interface AbsBean {
     }
 
     @JsonIgnore
+    default Logger log() {
+        return getLogger();
+    }
+
+    @JsonIgnore
     default Class<?> getAClass() {
         return getLogBean().getAClass();
     }
@@ -61,8 +66,7 @@ public interface AbsBean {
      */
     @PostConstruct
     default void init() {
-        LogBean logBean = getLogBean();
-        logBean.getLogger().info("[init]::[{}]: ", getAClassName());
+        log().info("[init]::[{}]: ", getAClassName());
     }
 
     /**
@@ -70,8 +74,7 @@ public interface AbsBean {
      */
     @PreDestroy
     default void destroy() {
-        LogBean logBean = getLogBean();
-        logBean.getLogger().info("[destroy]::[{}]", getAClassName());
+        log().info("[destroy]::[{}]", getAClassName());
     }
 
 }

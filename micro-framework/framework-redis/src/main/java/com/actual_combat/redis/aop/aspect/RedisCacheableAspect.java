@@ -9,6 +9,7 @@ import com.actual_combat.redis.abs.aop.AbsRedisAspect;
 import com.actual_combat.redis.aop.redis.RedisCacheable;
 import com.actual_combat.redis.exception.RedisException;
 import com.actual_combat.redis.service.RedisService;
+import com.alibaba.ttl.TransmittableThreadLocal;
 import jakarta.annotation.Resource;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +41,7 @@ public class RedisCacheableAspect implements AbsRedisAspect {
     /**
      * 缓存参数缓存key模板
      */
-    protected ThreadLocal<RedisCacheParameters> redisCacheThreadLocal = new ThreadLocal<>();
+    protected ThreadLocal<RedisCacheParameters> redisCacheThreadLocal = new TransmittableThreadLocal<>();
 
     public RedisCacheParameters getOne() {
         RedisCacheParameters one = redisCacheThreadLocal.get();

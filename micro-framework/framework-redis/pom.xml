@@ -17,6 +17,7 @@
         <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
         <commons-io.version>2.13.0</commons-io.version>
         <commons-jexl3.version>3.1</commons-jexl3.version>
+        <alibaba-ttl.version>2.14.4</alibaba-ttl.version>
     </properties>
 
     <dependencyManagement>
@@ -34,6 +35,12 @@
 
 
     <dependencies>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId>
+            <version>${alibaba-ttl.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>

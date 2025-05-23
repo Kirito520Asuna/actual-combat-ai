@@ -38,7 +38,6 @@ public interface AbsSysLog extends AbsAop {
     }
 
     default Object aroundSysLog(ProceedingJoinPoint joinPoint) throws Throwable {
-        log();
         String trackId = AopThreadMdcUtil.getTraceId();
         //获取是否有注解
         SysLog sysLog = getSysLog(joinPoint);

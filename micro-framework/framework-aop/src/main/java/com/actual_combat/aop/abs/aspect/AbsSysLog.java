@@ -92,7 +92,7 @@ public interface AbsSysLog extends AbsAop {
                     , trackId, applicationName, module, title, remoteAddr, url, method, args, declaringTypeName, name);
         }
         // 执行方法
-        Object around = around(joinPoint);
+        Object around = AbsAop.super.around(joinPoint);
 
         /**
          * 开启响应日志

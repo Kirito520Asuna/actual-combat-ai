@@ -7,4 +7,5 @@ public interface AopConstants {
     int LoginOrder = BaseOrder + 70;
     int AviatorOrder = BaseOrder + 80;
     int SysLogOrder = BaseOrder + 100;
+    int OperateLogOrder = SysLogOrder + 1;
 }

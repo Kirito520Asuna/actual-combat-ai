@@ -15,6 +15,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -62,7 +63,13 @@ execution(* com..*Controller.*(..))
 """)
     public Object checkGlobalBan(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("[{}]执行全局检查", System.currentTimeMillis());
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        if (requestAttributes == null) {
+            log.debug("内部自调 没有请求上下文，放行");
+            //内部自调 如果没有请求上下文，则直接放行
+            return joinPoint.proceed();
+        }
+        HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
         String ipAddress = getClientIP(request);
         BanConfiguration banConfiguration = DEFAULT_BAN_CONFIGURATION;
         boolean globalBanEnabled = banConfiguration.isGlobalBanEnabled();

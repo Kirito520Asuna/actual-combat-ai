@@ -38,7 +38,7 @@ public interface AbsSysLog extends AbsAop {
     }
 
     default Object aroundSysLog(ProceedingJoinPoint joinPoint) throws Throwable {
-        String trackId = AopThreadMdcUtil.getTraceId();
+        String traceId = AopThreadMdcUtil.getTraceId();
         //获取是否有注解
         SysLog sysLog = getSysLog(joinPoint);
         /**
@@ -77,7 +77,7 @@ public interface AbsSysLog extends AbsAop {
             String url = GatewayUtils.replaceUrl(request, requestURL.toString());
             log().info(new StringBuffer()
                             .append("\n====================================请求内容====================================")
-                            .append("\n==>TRACK_ID : {} <==")
+                            .append("\n==>TRACE_ID : {} <==")
                             .append("\n==>请求服务名 : {} <==")
                             .append("\n==>请求模块名 : {} <==")
                             .append("\n==>请求描述 : {} <==")
@@ -88,7 +88,7 @@ public interface AbsSysLog extends AbsAop {
                             .append("\n==>请求类方法 : {}.{} <==")
                             .append("\n================================================================================")
                             .toString()
-                    , trackId, applicationName, module, title, remoteAddr, url, method, args, declaringTypeName, name);
+                    , traceId, applicationName, module, title, remoteAddr, url, method, args, declaringTypeName, name);
         }
         // 执行方法
         Object around = AbsAop.super.around(joinPoint);
@@ -111,10 +111,10 @@ public interface AbsSysLog extends AbsAop {
             String jsonStr = JSONUtil.toJsonStr(returnObj);
             log().info(new StringBuffer()
                     .append("\n====================================响应内容====================================")
-                    .append("\n==>TRACK_ID : {} <==")
+                    .append("\n==>TRACE_ID : {} <==")
                     .append("\n==>响应 : {} <==")
                     .append("\n================================================================================")
-                    .toString(), trackId, jsonStr);
+                    .toString(), traceId, jsonStr);
         }
         return around;
     }

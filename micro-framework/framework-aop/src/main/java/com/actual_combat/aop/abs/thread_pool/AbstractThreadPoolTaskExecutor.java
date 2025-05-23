@@ -1,4 +1,4 @@
-package com.actual_combat.aop.config.thread_pool;
+package com.actual_combat.aop.abs.thread_pool;
 
 import com.actual_combat.aop.utils.thread.AopThreadMdcUtil;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;

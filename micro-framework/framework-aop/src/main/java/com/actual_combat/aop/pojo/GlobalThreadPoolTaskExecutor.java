@@ -1,5 +1,6 @@
-package com.actual_combat.aop.config.thread_pool;
+package com.actual_combat.aop.pojo;
 
+import com.actual_combat.aop.abs.thread_pool.AbstractThreadPoolTaskExecutor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;

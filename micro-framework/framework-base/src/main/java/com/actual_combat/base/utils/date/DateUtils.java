@@ -1,20 +1,18 @@
-package com.actual_combat.aop.utils.date;
+package com.actual_combat.base.utils.date;
 
-import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
  * @author yan
  * @date 2024/6/14 2:40
  */
-public class AopDateUtils extends DateUtil {
+public class DateUtils extends DateUtil {
     private static String[] parsePatterns = {
             "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM",
             "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM",
@@ -78,4 +76,5 @@ public class AopDateUtils extends DateUtil {
         ZonedDateTime zdt = localDateTime.atZone(ZoneId.systemDefault());
         return Date.from(zdt.toInstant());
     }
+
 }

@@ -20,6 +20,7 @@
         <module>framework-mybatis-plus</module>
         <module>framework-sharding-sphere</module>
         <module>framework-redis</module>
+        <module>framework-base-core</module>
     </modules>
 
 

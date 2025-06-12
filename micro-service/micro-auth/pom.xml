@@ -11,5 +11,8 @@
 
     <artifactId>micro-auth</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>auth</module>
+    </modules>
 
 </project>

@@ -154,4 +154,13 @@ public interface AbsAuthorization extends AbsBean {
         return userId;
     }
 
+    /**
+     * 检查token是否合法
+     * @param request
+     * @param response
+     * @return
+     */
+    default boolean checkToken(HttpServletRequest request, HttpServletResponse response){
+        return true;
+    }
 }

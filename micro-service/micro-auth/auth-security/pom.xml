@@ -5,16 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.actual-combat</groupId>
-        <artifactId>micro-service</artifactId>
+        <artifactId>micro-auth</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>micro-auth</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>auth</module>
-        <module>auth-security</module>
-        <module>auth-shiro</module>
-    </modules>
+    <artifactId>auth-security</artifactId>
+
 
 </project>

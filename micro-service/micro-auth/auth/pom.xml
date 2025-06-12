@@ -18,6 +18,18 @@
                 <artifactId>framework-base-core</artifactId>
                 <version>${revision}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.actual-combat</groupId>
+                <artifactId>auth-security</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.actual-combat</groupId>
+                <artifactId>auth-shiro</artifactId>
+                <version>${revision}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -25,6 +37,14 @@
         <dependency>
             <groupId>com.actual-combat</groupId>
             <artifactId>framework-base-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.actual-combat</groupId>
+            <artifactId>auth-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.actual-combat</groupId>
+            <artifactId>auth-shiro</artifactId>
         </dependency>
     </dependencies>
 

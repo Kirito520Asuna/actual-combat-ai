@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  * @Description
  */
 @Slf4j
-public class SecurityContextUtil {
+public class AuthSecurityContextUtil {
     // 获取SecurityContext
     public static SecurityContext getContext() {
         return SecurityContextHolder.getContext();

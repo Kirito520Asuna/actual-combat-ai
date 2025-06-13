@@ -2,7 +2,7 @@ package com.actual_combat.auth.security.auth;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.actual_combat.auth.security.config.SecurityAnnotationConfig;
-import com.actual_combat.auth.security.utils.SecurityContextUtil;
+import com.actual_combat.auth.security.utils.AuthSecurityContextUtil;
 import com.actual_combat.base.core.abs.auth.core.AbsSecurityExpressionRoot;
 import com.actual_combat.base.exceptions.ErrorInfo;
 
@@ -57,7 +57,7 @@ public class SecurityExpressionRoot implements AbsSecurityExpressionRoot {
 
     @Override
     public List<String> getAnyRoles() {
-        return SecurityContextUtil.getAnyRoles();
+        return AuthSecurityContextUtil.getAnyRoles();
     }
 
 

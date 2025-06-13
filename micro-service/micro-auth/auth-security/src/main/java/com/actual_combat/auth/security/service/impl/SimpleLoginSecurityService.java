@@ -2,7 +2,7 @@ package com.actual_combat.auth.security.service.impl;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.actual_combat.auth.security.service.AbsUserDetailsService;
-import com.actual_combat.auth.security.utils.SecurityContextUtil;
+import com.actual_combat.auth.security.utils.AuthSecurityContextUtil;
 import com.actual_combat.base.core.abs.auth.service.AbstractLoginService;
 import com.actual_combat.base.core.abs.auth.service.AbstractUserService;
 import com.actual_combat.base.core.pojo.auth.TokenInfo;
@@ -27,14 +27,14 @@ public class SimpleLoginSecurityService implements AbstractLoginService {
         TokenInfo tokenInfo = AbstractLoginService.super.login(userInfo);
 
         UserInfo oneByUserName = SpringUtil.getBean(AbstractUserService.class).getOneByUserName(userInfo.getUsername());
-        SecurityContextUtil.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(oneByUserName.getId(),null,
+        AuthSecurityContextUtil.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(oneByUserName.getId(),null,
                 oneByUserName.getRoles().stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList())));
         return tokenInfo;
     }
 
     @Override
     public String getCurrentUserId() {
-        return SecurityContextUtil.getUserIdNoThrow();
+        return AuthSecurityContextUtil.getUserIdNoThrow();
     }
 
     /**

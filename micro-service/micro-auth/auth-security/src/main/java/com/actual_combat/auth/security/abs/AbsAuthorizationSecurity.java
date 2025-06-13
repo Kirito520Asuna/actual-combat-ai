@@ -5,7 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.actual_combat.auth.security.pojo.UserBase;
 import com.actual_combat.auth.security.service.AbsUserDetailsService;
-import com.actual_combat.auth.security.utils.SecurityContextUtil;
+import com.actual_combat.auth.security.utils.AuthSecurityContextUtil;
 import com.actual_combat.base.core.abs.auth.core.AbsAuthorization;
 import com.actual_combat.base.core.config.jwt.JwtConfig;
 import com.actual_combat.base.core.pojo.auth.UserInfo;
@@ -97,11 +97,11 @@ public interface AbsAuthorizationSecurity extends AbsAuthorization {
         if (ObjectUtil.isNotEmpty(userId)) {
             //存入SecurityContextHolder
             UsernamePasswordAuthenticationToken authenticationToken = generateUsernamePasswordAuthenticationToken(userId);
-            SecurityContextUtil.getContext().setAuthentication(authenticationToken);
+            AuthSecurityContextUtil.getContext().setAuthentication(authenticationToken);
             log().debug("Authentication=>{},userId=>{},anyRoles=>{};"
-                    , SecurityContextUtil.getAuthentication()
-                    , SecurityContextUtil.getUserId()
-                    , SecurityContextUtil.getAnyRoles()
+                    , AuthSecurityContextUtil.getAuthentication()
+                    , AuthSecurityContextUtil.getUserId()
+                    , AuthSecurityContextUtil.getAnyRoles()
             );
         }
         return true;
@@ -109,10 +109,10 @@ public interface AbsAuthorizationSecurity extends AbsAuthorization {
 
 
     default void checkTokenLogin(HttpServletRequest request, HttpServletResponse response) {
-        String userIdNoThrow = SecurityContextUtil.getUserIdNoThrow();
+        String userIdNoThrow = AuthSecurityContextUtil.getUserIdNoThrow();
         if (ObjectUtil.isEmpty(userIdNoThrow)) {
             checkToken(request, response);
-            SecurityContextUtil.getUserId();
+            AuthSecurityContextUtil.getUserId();
         }
     }
 }

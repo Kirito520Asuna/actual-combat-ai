@@ -2,6 +2,7 @@ package com.actual_combat.mp.handler;
 
 import com.actual_combat.mp.abs.handler.AbsEntityHandler;
 import org.apache.ibatis.reflection.MetaObject;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.stereotype.Component;
 
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
  * @Description
  */
 @Component
+@ConditionalOnMissingBean(AbsEntityHandler.class)
 public class EntityHandler implements AbsEntityHandler {
     @Override
     public void insertFill(MetaObject metaObject) {

@@ -3,6 +3,7 @@ package com.actual_combat.mp.abs.service.impl;
 import com.actual_combat.mp.abs.handler.AbsEntityHandler;
 import com.actual_combat.mp.abs.service.MpUserService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,5 +13,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @ConditionalOnBean(AbsEntityHandler.class)
+@ConditionalOnMissingBean(MpUserService.class)
 public class MpUserServiceImpl implements MpUserService {
 }

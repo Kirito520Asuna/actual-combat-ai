@@ -1,6 +1,7 @@
 package com.actual_combat.mp.config;
 
 import com.actual_combat.mp.abs.config.AbsDruidConfig;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * @Description Druid配置
  */
 @Configuration
+@ConditionalOnMissingBean(AbsDruidConfig.class)
 public class DruidConfig implements AbsDruidConfig {
     /**
      * 注册servletRegistrationBean

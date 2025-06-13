@@ -4,6 +4,7 @@ import com.actual_combat.mp.abs.config.AbsMybatisPlusConfig;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
  *
  */
 @Configuration
+@ConditionalOnMissingBean(AbsMybatisPlusConfig.class)
 public class MybatisPlusConfig implements AbsMybatisPlusConfig {
     /**
      * 3.4.0之前的版本用这个
@@ -23,9 +25,11 @@ public class MybatisPlusConfig implements AbsMybatisPlusConfig {
 
     /**
      * 分页插件 3.5.X
+     *
      * @author
      */
-    @Bean @Override
+    @Bean
+    @Override
     public PaginationInnerInterceptor paginationInnerInterceptor() {
         return AbsMybatisPlusConfig.super.paginationInnerInterceptor();
     }
@@ -35,13 +39,15 @@ public class MybatisPlusConfig implements AbsMybatisPlusConfig {
      *
      * @return
      */
-    @Bean @Override
+    @Bean
+    @Override
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         return AbsMybatisPlusConfig.super.mybatisPlusInterceptor();
     }
 
     /**
      * 防止全表更新与删除插件
+     *
      * @return
      */
     @Bean
@@ -52,9 +58,11 @@ public class MybatisPlusConfig implements AbsMybatisPlusConfig {
 
     /**
      * 乐观锁支持
+     *
      * @return
      */
-    @Bean @Override
+    @Bean
+    @Override
     public MybatisPlusInterceptor optimisticLockerInterceptor() {
         return AbsMybatisPlusConfig.super.optimisticLockerInterceptor();
     }

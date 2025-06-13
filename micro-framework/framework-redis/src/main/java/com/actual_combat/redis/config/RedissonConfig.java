@@ -8,6 +8,7 @@ import jakarta.annotation.Resource;
 import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.*;
@@ -56,12 +57,14 @@ public class RedissonConfig implements AbsRedissonConfig {
 
     @Bean
     @ConditionalOnExpression("${ip.enable:false}")
+    @ConditionalOnMissingBean(BanConfiguration.class)
     public BanConfiguration banConfiguration() {
         return new BanConfiguration();
     }
 
     @Bean
     @ConditionalOnBean({RedissonClient.class, BanConfiguration.class})
+    @ConditionalOnMissingBean(BanManager.class)
     public BanManager banManager() {
         return new SimpleBanManager();
     }

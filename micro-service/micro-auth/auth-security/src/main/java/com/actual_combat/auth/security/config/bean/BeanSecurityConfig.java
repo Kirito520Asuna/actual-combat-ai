@@ -36,7 +36,7 @@ public class BeanSecurityConfig {
     }
 
     @Bean
-    @ConditionalOnExpression("${config.auth.security.enabled:true}")
+    @ConditionalOnExpression("${config.auth.security.enable:true}")
     public SecurityConfig securityConfig() {
         return new SecurityConfig();
     }

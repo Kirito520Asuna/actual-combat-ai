@@ -9,6 +9,8 @@ import com.actual_combat.auth.security.service.impl.SimpleLoginSecurityService;
 import com.actual_combat.base.core.abs.auth.core.AbsSecurityExpressionRoot;
 import com.actual_combat.base.core.abs.auth.service.SimpleUserDetailsService;
 import com.actual_combat.base.core.abs.auth.service.*;
+import com.actual_combat.base.core.abs.bean.AbstractBean;
+import com.actual_combat.base.core.abs.bean.AbstractSecurityBean;
 import com.actual_combat.base.core.config.bean.BeanConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -25,9 +27,9 @@ import org.springframework.context.annotation.Configuration;
  * @Description
  */
 @Slf4j
-@AutoConfigureBefore(BeanConfig.class)
+@AutoConfigureBefore(AbstractBean.class)
 @Configuration
-public class BeanSecurityConfig {
+public class BeanSecurityConfig implements AbstractSecurityBean {
 
     @Bean
     @ConditionalOnMissingBean(AbsSecurityConfig.class)

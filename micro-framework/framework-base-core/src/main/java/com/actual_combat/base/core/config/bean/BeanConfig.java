@@ -6,6 +6,7 @@ import com.actual_combat.base.core.abs.api.AbsApiInterceptor;
 import com.actual_combat.base.core.abs.auth.AbsAuthFilter;
 import com.actual_combat.base.core.abs.auth.AbsAuthInterceptor;
 import com.actual_combat.base.core.abs.auth.service.*;
+import com.actual_combat.base.core.abs.bean.AbstractBean;
 import com.actual_combat.base.core.config.api.ApiConfig;
 import com.actual_combat.base.core.config.jwt.JwtConfig;
 import com.actual_combat.base.core.constant.ExpressionConstants;
@@ -29,7 +30,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Slf4j
 @Configuration
-public class BeanConfig {
+public class BeanConfig implements AbstractBean {
     @Bean
     @ConditionalOnExpression("${config.api.enable:true}")
     public ApiConfig apiConfig() {

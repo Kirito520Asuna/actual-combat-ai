@@ -3,7 +3,8 @@ package com.actual_combat.auth.shiro.config.bean;
 import com.actual_combat.auth.shiro.config.ShiroConfig;
 import com.actual_combat.auth.shiro.service.impl.SimpleAuthShiroService;
 import com.actual_combat.base.core.abs.auth.service.AbsAuthService;
-import com.actual_combat.base.core.config.bean.BeanConfig;
+import com.actual_combat.base.core.abs.bean.AbstractBean;
+import com.actual_combat.base.core.abs.bean.AbstractShiroBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -18,9 +19,9 @@ import org.springframework.context.annotation.Configuration;
  * @Description
  */
 @Slf4j
-@AutoConfigureBefore(BeanConfig.class)
+@AutoConfigureBefore(AbstractBean.class)
 @Configuration
-public class BeanShiroConfig {
+public class BeanShiroConfig implements AbstractShiroBean {
 
     @Bean
     @ConditionalOnExpression("${config.auth.shiro.enable:true}")

@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * @Date 2025/6/12 23:32:47
  * @Description
  */
-public class SimpleLoginService implements AbstractLoginService {
+public class SimpleLoginSecurityService implements AbstractLoginService {
     /**
      * @param userInfo
      * @return

@@ -7,5 +7,5 @@ import com.actual_combat.auth.security.service.AuthService;
  * @Date 2025/6/12 23:27:45
  * @Description
  */
-public class SimpleAuthService implements AuthService {
+public class SimpleAuthSecurityService implements AuthService {
 }

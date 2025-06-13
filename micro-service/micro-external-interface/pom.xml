@@ -12,6 +12,10 @@
     <artifactId>micro-external-interface</artifactId>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>micro-ai</module>
+    </modules>
+
     <build>
         <plugins>
             <plugin>

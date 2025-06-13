@@ -12,7 +12,6 @@
     <artifactId>micro-service</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>micro-ai</module>
         <module>micro-auth</module>
         <module>micro-central</module>
         <module>micro-external-interface</module>

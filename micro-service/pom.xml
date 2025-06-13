@@ -15,6 +15,7 @@
         <module>micro-ai</module>
         <module>micro-auth</module>
         <module>micro-central</module>
+        <module>micro-external-interface</module>
     </modules>
 
     <dependencyManagement>

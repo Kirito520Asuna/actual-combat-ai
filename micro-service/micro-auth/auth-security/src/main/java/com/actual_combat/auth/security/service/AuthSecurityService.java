@@ -1,7 +1,7 @@
 package com.actual_combat.auth.security.service;
 
 import com.actual_combat.auth.security.auth.AuthSecurityInterceptor;
-import com.actual_combat.base.core.abs.auth.AbsAuthFiler;
+import com.actual_combat.base.core.abs.auth.AbsAuthFilter;
 import com.actual_combat.base.core.abs.auth.AbsAuthInterceptor;
 import com.actual_combat.base.core.abs.auth.service.AbsAuthService;
 
@@ -17,7 +17,7 @@ public interface AuthSecurityService extends AbsAuthService {
     }
 
     @Override
-    default AbsAuthFiler getAuthFiler() {
+    default AbsAuthFilter getAuthFiler() {
         return AbsAuthService.super.getAuthFiler();
     }
 }

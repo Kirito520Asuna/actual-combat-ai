@@ -1,6 +1,6 @@
 package com.actual_combat.base.core.filter;
 
-import com.actual_combat.base.core.abs.auth.AbsAuthFiler;
+import com.actual_combat.base.core.abs.auth.AbsAuthFilter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,7 +14,7 @@ import java.io.IOException;
  * @Date 2025/6/12 17:05:24
  * @Description
  */
-public class SimpleAuthFilter extends OncePerRequestFilter implements AbsAuthFiler {
+public class SimpleAuthFilter extends OncePerRequestFilter implements AbsAuthFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         checkToken(request, response);

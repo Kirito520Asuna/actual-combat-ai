@@ -3,7 +3,7 @@ package com.actual_combat.base.core.config.bean;
 import cn.hutool.extra.spring.SpringUtil;
 import com.actual_combat.base.core.abs.api.AbsApiFiler;
 import com.actual_combat.base.core.abs.api.AbsApiInterceptor;
-import com.actual_combat.base.core.abs.auth.AbsAuthFiler;
+import com.actual_combat.base.core.abs.auth.AbsAuthFilter;
 import com.actual_combat.base.core.abs.auth.AbsAuthInterceptor;
 import com.actual_combat.base.core.abs.auth.service.*;
 import com.actual_combat.base.core.config.api.ApiConfig;
@@ -103,16 +103,16 @@ public class BeanConfig {
 
     @Bean
     @ConditionalOnBean(BeanFilter.class)
-    @ConditionalOnMissingBean({AbsAuthInterceptor.class,AbsAuthFiler.class})
-    public AbsAuthFiler authFiler() {
+    @ConditionalOnMissingBean({AbsAuthInterceptor.class, AbsAuthFilter.class})
+    public AbsAuthFilter authFiler() {
         AbsAuthService auth = SpringUtil.getBean(AbsAuthService.class);
-        AbsAuthFiler authFiler = auth.getAuthFiler();
+        AbsAuthFilter authFiler = auth.getAuthFiler();
         return authFiler;
     }
 
     @Bean
     @ConditionalOnBean(BeanInterceptor.class)
-    @ConditionalOnMissingBean({AbsAuthFiler.class,AbsAuthInterceptor.class})
+    @ConditionalOnMissingBean({AbsAuthFilter.class,AbsAuthInterceptor.class})
     public AbsAuthInterceptor authInterceptor() {
         AbsAuthService auth = SpringUtil.getBean(AbsAuthService.class);
         AbsAuthInterceptor authInterceptor = auth.getAuthInterceptor();

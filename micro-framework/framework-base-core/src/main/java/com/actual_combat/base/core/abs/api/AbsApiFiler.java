@@ -5,6 +5,9 @@ import com.actual_combat.base.core.abs.api.core.AbsApiSign;
 import com.actual_combat.base.core.abs.filter.AbsCommonFilter;
 import com.actual_combat.base.core.abs.order.FilterOrderConstants;
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.*;
+
+import java.io.IOException;
 
 /**
  * @Author yan
@@ -21,5 +24,10 @@ public interface AbsApiFiler extends AbsApiSign, AbsCommonFilter {
     @PostConstruct
     default void init() {
        log().debug("[Bean]-[ApiFiler]-[init]::[{}]",getAClassName());
+    }
+
+    @Override
+    default void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        AbsCommonFilter.super.doFilter(servletRequest, servletResponse, filterChain);
     }
 }

@@ -1,7 +1,7 @@
 package com.actual_combat.auth.security.abs;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.actual_combat.auth.security.auth.JwtFilter;
+import com.actual_combat.auth.security.auth.JwtAuthSecurityFilter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 /**
@@ -12,13 +12,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 public class SimpleSecurityConfig implements AbsSecurityConfig {
     @Override
     public void addFilterBeforeList(HttpSecurity http) {
-        JwtFilter jwtFilter = null;
+        JwtAuthSecurityFilter authFilter = null;
         try {
-            jwtFilter = SpringUtil.getBean(JwtFilter.class);
+            authFilter = SpringUtil.getBean(JwtAuthSecurityFilter.class);
         }catch (Exception e){
             log().error("class:{},err:{}",getAClassName(),e.getMessage());
         }
-        if (jwtFilter == null) {
+        if (authFilter == null) {
             log().warn("JwtFilter is null, please make sure it's a Spring Bean");
         }
     }

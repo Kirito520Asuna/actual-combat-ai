@@ -9,7 +9,7 @@ import com.actual_combat.base.core.abs.order.FilterOrderConstants;
  * @Date 2025/3/10 3:31:21
  * @Description
  */
-public interface AbsAuthFiler extends AbsAuthorization, AbsCommonFilter {
+public interface AbsAuthFilter extends AbsAuthorization, AbsCommonFilter {
     @Override
     default void init() {
         log().debug("[Bean]-[Authorization]-[Filter]-[init]::[{}]: ", getAClassName());

@@ -81,7 +81,13 @@ public class SecurityConfig implements AbsAuthSecurityConfig {
                 });
 
         if (openFilter) {
-            SpringUtil.getBean(AbsSecurityConfig.class).addFilterBeforeList(http); // 添加自定义过滤器
+            try {
+                AbsSecurityConfig config = SpringUtil.getBean(AbsSecurityConfig.class);
+                config.addFilterBeforeList(http); // 添加自定义过滤器
+            }catch (Exception e){
+                log().warn("自定义过滤器 AbsSecurityConfig is Null");
+                log().error("class:{},err:{}",getAClassName(),e.getMessage());
+            }
         }
 
         return http.build();
@@ -133,8 +139,8 @@ public class SecurityConfig implements AbsAuthSecurityConfig {
         AuthenticationProvider authenticationProvider = null;
         try {
             authenticationProvider = SpringUtil.getBean(AuthenticationProvider.class);
-        }catch (Exception e){
-            log().error("class:{},err:{}",getAClassName(),e.getMessage());
+        } catch (Exception e) {
+            log().error("class:{},err:{}", getAClassName(), e.getMessage());
             log().warn("自定义认证提供者 authenticationProvider is Null");
         }
         if (authenticationProvider != null) {

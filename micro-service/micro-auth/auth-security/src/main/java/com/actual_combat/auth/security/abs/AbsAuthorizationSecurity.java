@@ -78,7 +78,7 @@ public interface AbsAuthorizationSecurity extends AbsAuthorization {
     default boolean checkToken(HttpServletRequest request, HttpServletResponse response){
         JwtUtils bean = SpringUtil.getBean(JwtUtils.class);
         JwtConfig jwtConfig = SpringUtil.getBean(JwtConfig.class);
-        log().info("jwtConfig=>{}", jwtConfig);
+        log().debug("jwtConfig=>{}", jwtConfig);
         String tokenName = ObjectUtils.defaultIfEmpty(jwtConfig.getTokenName(), JwtUtils.HEADER_AS_TOKEN);
         String userId = null;
         //获取token
@@ -98,7 +98,7 @@ public interface AbsAuthorizationSecurity extends AbsAuthorization {
             //存入SecurityContextHolder
             UsernamePasswordAuthenticationToken authenticationToken = generateUsernamePasswordAuthenticationToken(userId);
             SecurityContextUtil.getContext().setAuthentication(authenticationToken);
-            log().info("Authentication=>{},userId=>{},anyRoles=>{};"
+            log().debug("Authentication=>{},userId=>{},anyRoles=>{};"
                     , SecurityContextUtil.getAuthentication()
                     , SecurityContextUtil.getUserId()
                     , SecurityContextUtil.getAnyRoles()

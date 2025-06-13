@@ -15,6 +15,7 @@
         <module>micro-auth</module>
         <module>micro-central</module>
         <module>micro-external-interface</module>
+        <module>micro-sub-service</module>
     </modules>
 
     <dependencyManagement>

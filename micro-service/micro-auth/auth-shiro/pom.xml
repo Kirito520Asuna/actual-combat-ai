@@ -12,15 +12,49 @@
     <artifactId>auth-shiro</artifactId>
 
     <properties>
-        <shiro.version>1.13.0</shiro.version>
+        <shiro.version>2.0.1</shiro.version>
         <security-crypto.version>5.3.9.RELEASE</security-crypto.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- Shiro -->
             <dependency>
                 <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-spring-boot-starter</artifactId>
+                <classifier>jakarta</classifier>
+                <version>${shiro.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.shiro</groupId>
+                        <artifactId>shiro-crypto-cipher</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.shiro</groupId>
+                        <artifactId>shiro-crypto-hash</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.shiro</groupId>
+                        <artifactId>shiro-web</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.shiro</groupId>
+                        <artifactId>shiro-spring</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-web</artifactId>
+                <classifier>jakarta</classifier>
+                <version>${shiro.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+                <classifier>jakarta</classifier>
                 <version>${shiro.version}</version>
             </dependency>
 
@@ -48,6 +82,38 @@
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring-boot-starter</artifactId>
+            <classifier>jakarta</classifier>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.shiro</groupId>
+                    <artifactId>shiro-crypto-cipher</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.shiro</groupId>
+                    <artifactId>shiro-crypto-hash</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.shiro</groupId>
+                    <artifactId>shiro-web</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.shiro</groupId>
+                    <artifactId>shiro-spring</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <classifier>jakarta</classifier>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <classifier>jakarta</classifier>
+            <version>${shiro.version}</version>
         </dependency>
 
         <dependency>

@@ -2,9 +2,11 @@ package com.actual_combat.auth.security.config.bean;
 
 import com.actual_combat.auth.security.abs.AbsSecurityConfig;
 import com.actual_combat.auth.security.abs.SimpleSecurityConfig;
+import com.actual_combat.auth.security.auth.SecurityExpressionRoot;
 import com.actual_combat.auth.security.config.SecurityConfig;
 import com.actual_combat.auth.security.service.impl.SimpleAuthService;
 import com.actual_combat.auth.security.service.impl.SimpleLoginService;
+import com.actual_combat.base.core.abs.auth.core.AbsSecurityExpressionRoot;
 import com.actual_combat.base.core.abs.auth.service.SimpleUserDetailsService;
 import com.actual_combat.base.core.abs.auth.service.*;
 import com.actual_combat.base.core.config.bean.BeanConfig;
@@ -39,6 +41,12 @@ public class BeanSecurityConfig {
         return new SecurityConfig();
     }
 
+    @Bean
+    @ConditionalOnBean(SecurityConfig.class)
+    @ConditionalOnMissingBean(AbsSecurityExpressionRoot.class)
+    public AbsSecurityExpressionRoot securityExpressionRoot(){
+        return new SecurityExpressionRoot();
+    }
 
     @Bean
     @ConditionalOnBean(SecurityConfig.class)

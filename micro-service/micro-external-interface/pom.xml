@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>micro-external-interface</artifactId>
+    <packaging>pom</packaging>
 
     <build>
         <plugins>

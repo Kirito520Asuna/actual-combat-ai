@@ -10,5 +10,6 @@
     </parent>
 
     <artifactId>micro-central</artifactId>
+    <packaging>pom</packaging>
 
 </project>

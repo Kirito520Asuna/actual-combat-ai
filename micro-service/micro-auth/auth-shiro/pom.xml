@@ -72,7 +72,7 @@
 
             <dependency>
                 <groupId>com.actual-combat</groupId>
-                <artifactId>framework-base-core</artifactId>
+                <artifactId>base-core</artifactId>
                 <version>${revision}</version>
             </dependency>
         </dependencies>
@@ -128,7 +128,7 @@
 
         <dependency>
             <groupId>com.actual-combat</groupId>
-            <artifactId>framework-base-core</artifactId>
+            <artifactId>base-core</artifactId>
         </dependency>
     </dependencies>
 

@@ -12,4 +12,8 @@
     <artifactId>micro-cores</artifactId>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>base-core</module>
+    </modules>
+
 </project>

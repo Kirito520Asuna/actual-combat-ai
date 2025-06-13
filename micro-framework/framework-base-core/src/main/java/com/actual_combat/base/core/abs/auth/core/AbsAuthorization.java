@@ -63,7 +63,7 @@ public interface AbsAuthorization extends AbsBean {
             msg = "two-";
         }
         ResponseUtils.responseSetHeader(response,hashMap);
-        log().info("[{}]生成{}token推送至响应器",getAClass().getName(),msg);
+        log().debug("[{}]生成{}token推送至响应器",getAClass().getName(),msg);
         return hashMap;
     }
 
@@ -99,7 +99,7 @@ public interface AbsAuthorization extends AbsBean {
             e.printStackTrace();
             throw new GlobalCustomException(ApiCode.UNAUTHORIZED);
         }
-        log().info("[{}]刷新长token处理",getAClass().getName());
+        log().debug("[{}]刷新长token处理",getAClass().getName());
         return userId;
     }
 
@@ -145,7 +145,7 @@ public interface AbsAuthorization extends AbsBean {
                         pushTwoToken(userId, tokenName, null, response);
                     }
                 }
-                log().info("[{}][{}]获取用户ID通过Token",getAClass().getName(),msg);
+                log().debug("[{}][{}]获取用户ID通过Token",getAClass().getName(),msg);
             }
         } catch (Exception e) {
             e.printStackTrace();

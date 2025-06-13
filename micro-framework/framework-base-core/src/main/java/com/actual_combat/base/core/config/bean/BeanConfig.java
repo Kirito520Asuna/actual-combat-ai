@@ -5,8 +5,7 @@ import com.actual_combat.base.core.abs.api.AbsApiFiler;
 import com.actual_combat.base.core.abs.api.AbsApiInterceptor;
 import com.actual_combat.base.core.abs.auth.AbsAuthFiler;
 import com.actual_combat.base.core.abs.auth.AbsAuthInterceptor;
-import com.actual_combat.base.core.abs.auth.service.AbsAuthService;
-import com.actual_combat.base.core.abs.auth.service.SimpleAuthService;
+import com.actual_combat.base.core.abs.auth.service.*;
 import com.actual_combat.base.core.config.api.ApiConfig;
 import com.actual_combat.base.core.config.jwt.JwtConfig;
 import com.actual_combat.base.core.constant.ExpressionConstants;
@@ -47,6 +46,7 @@ public class BeanConfig {
 
     @Bean
     @ConditionalOnBean(CorsProperties.class)
+    @ConditionalOnMissingBean(CorsRequestFilter.class)
     public CorsRequestFilter corsRequestFilter() {
         return new CorsRequestFilter();
     }
@@ -65,26 +65,45 @@ public class BeanConfig {
 
     @Bean
     @ConditionalOnBean(BeanFilter.class)
-    @ConditionalOnMissingBean({AbsApiInterceptor.class})
+    @ConditionalOnMissingBean({AbsApiInterceptor.class,AbsApiFiler.class})
     public AbsApiFiler apiFiler() {
         return new ApiFilter();
     }
 
     @Bean
     @ConditionalOnBean(BeanInterceptor.class)
-    @ConditionalOnMissingBean({AbsApiFiler.class})
+    @ConditionalOnMissingBean({AbsApiFiler.class,AbsApiInterceptor.class})
     public AbsApiInterceptor apiInterceptor() {
         return new ApiInterceptor();
     }
 
     @Bean
+    @ConditionalOnMissingBean({AbsAuthService.class})
     public AbsAuthService authService() {
         return new SimpleAuthService();
     }
 
     @Bean
+    @ConditionalOnMissingBean({AbstractLoginService.class})
+    public AbstractLoginService authLoginService() {
+        return new SimpleLoginService();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean({AbstractUserService.class})
+    public AbstractUserService authUserService() {
+        return new SimpleUserService();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(AbstractUserDetailsService.class)
+    public AbstractUserDetailsService authUserDetailsService(){
+        return new SimpleUserDetailsService();
+    }
+
+    @Bean
     @ConditionalOnBean(BeanFilter.class)
-    @ConditionalOnMissingBean({AbsAuthInterceptor.class})
+    @ConditionalOnMissingBean({AbsAuthInterceptor.class,AbsAuthFiler.class})
     public AbsAuthFiler authFiler() {
         AbsAuthService auth = SpringUtil.getBean(AbsAuthService.class);
         AbsAuthFiler authFiler = auth.getAuthFiler();
@@ -93,7 +112,7 @@ public class BeanConfig {
 
     @Bean
     @ConditionalOnBean(BeanInterceptor.class)
-    @ConditionalOnMissingBean({AbsAuthFiler.class})
+    @ConditionalOnMissingBean({AbsAuthFiler.class,AbsAuthInterceptor.class})
     public AbsAuthInterceptor authInterceptor() {
         AbsAuthService auth = SpringUtil.getBean(AbsAuthService.class);
         AbsAuthInterceptor authInterceptor = auth.getAuthInterceptor();

@@ -2,6 +2,7 @@ package com.actual_combat.base.core.abs.auth.service;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.extra.spring.SpringUtil;
+import com.actual_combat.aop.abs.bean.AbsBean;
 import com.actual_combat.base.core.config.jwt.JwtConfig;
 import com.actual_combat.base.core.constant.Roles;
 import com.actual_combat.base.core.pojo.auth.TokenInfo;
@@ -11,17 +12,15 @@ import com.actual_combat.base.utils.jwt.JwtUtils;
 import com.actual_combat.base.utils.object.ObjectUtils;
 
 import java.util.List;
-import java.util.logging.Logger;
+
 
 /**
  * @Author yan
  * @Date 2024/5/20 0020 17:39
  * @Description
  */
-public interface AbstractUserService {
+public interface AbstractUserService extends AbsBean {
 
-
-    //Logger log = Logger.getLogger(AbstractUserService.class.getName());
     default UserInfo getOneByUserName(String userName) {
         return new UserInfo()
                 .setId("-1")
@@ -60,7 +59,6 @@ public interface AbstractUserService {
         return tokenInfo;
     }
 
-    //@RedisCachePut(cacheName = Redis.login_user, condition = "#re!=null&&#re.user!=null", key = "#re.user.id", responseAsName = "re")
     default User login(String username, String password) {
         return null;
     }
@@ -92,8 +90,7 @@ public interface AbstractUserService {
      * @return
      */
     default List<String> getRoles(Long userId) {
-        Logger log = Logger.getLogger(this.getClass().getName());
-        log.info("getRoles:{}" + userId);
+        log().info("getRoles:{}" ,userId);
         return CollUtil.newArrayList();
     }
 
@@ -115,8 +112,7 @@ public interface AbstractUserService {
      * @return
      */
     default List<String> getPerms(Long userId) {
-        Logger log = Logger.getLogger(this.getClass().getName());
-        log.info("getPerms:{}" + userId);
+        log().info("getPerms:{}" , userId);
         return CollUtil.newArrayList();
     }
 

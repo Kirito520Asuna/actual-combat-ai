@@ -10,7 +10,7 @@ import com.actual_combat.base.core.abs.auth.service.AbsAuthService;
  * @Date 2025/6/12 23:27:01
  * @Description
  */
-public interface AuthService extends AbsAuthService {
+public interface AuthSecurityService extends AbsAuthService {
     @Override
     default AbsAuthInterceptor getAuthInterceptor() {
         return new AuthSecurityInterceptor();

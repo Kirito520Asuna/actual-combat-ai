@@ -31,12 +31,14 @@ public class HomeControllerWebMvc implements HomeMvc {
         return routeLocator;
     }
     //@GetMapping(value = "/api-path")
+    @Override
     public Result<?> homePage() {
         log().debug("homePage");
         return Result.ok(fetchHomePage(routeLocator));
     }
 
     @GetMapping(value = "/api-path")
+    @Override
     public Mono<Result<?>> homePageMono() {
         return Mono.just(homePage());
     }

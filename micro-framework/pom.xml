@@ -22,6 +22,7 @@
         <module>framework-redis</module>
         <module>framework-base-core</module>
         <module>framework-nacos</module>
+        <module>framework-seata</module>
     </modules>
 
 

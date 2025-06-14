@@ -1,5 +1,6 @@
 package com.actual_combat.base.core.properties.cors;
 
+import com.actual_combat.base.core.constant.ConfigConstant;
 import com.actual_combat.base.core.properties.bean.BeanProperties;
 import com.actual_combat.base.core.properties.PropertiesConstants;
 import com.fasterxml.jackson.annotation.JsonProperty;

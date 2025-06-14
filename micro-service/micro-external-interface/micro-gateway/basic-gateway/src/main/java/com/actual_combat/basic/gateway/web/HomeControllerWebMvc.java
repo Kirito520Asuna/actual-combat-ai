@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 
 /**
@@ -29,11 +30,15 @@ public class HomeControllerWebMvc implements HomeMvc {
     public RouteLocator fetchRouteLocator() {
         return routeLocator;
     }
-
-    @GetMapping(value = "/api-path")
+    //@GetMapping(value = "/api-path")
     public Result<?> homePage() {
         log().debug("homePage");
         return Result.ok(fetchHomePage(routeLocator));
+    }
+
+    @GetMapping(value = "/api-path")
+    public Mono<Result<?>> homePageMono() {
+        return Mono.just(homePage());
     }
 
 }

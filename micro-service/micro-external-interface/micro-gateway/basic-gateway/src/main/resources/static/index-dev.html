@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--suppress JSUnresolvedFunction, HtmlUnknownTarget, CssOverwrittenProperties, noinspection JSDeprecatedSymbols,JSUnresolvedVariable -->
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>统一网关</title>
+    <link rel="icon" href="/dev/assert/swagger.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/dev/assert/swagger.ico" type="image/x-icon">
+    <link href="/dev/assert/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="/dev/assert/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="/dev/assert/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <style>
+        .vertical-center {
+            min-height: 100%; /* Fallback for browsers do NOT support vh unit */
+            min-height: 100vh; /* These two lines are counted as one :-)       */
+
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<div id="gateway-ui" class="bg-dark"></div>
+<div class="jumbotron vertical-center bg-dark">
+    <div class="container">
+        <div id="tab-swagger" class="row row-cols-1 row-cols-md-3 g-4 align-items-center">
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    (function () {
+        let origin = window.location.origin;
+        let apiPath = $(location).prop("href").split("/").slice(0, -1).join("/");
+        $.ajax({
+            sync: true,
+            url: apiPath + "/api-path",
+            cache: false,
+            dataType: 'json',
+            success: function (result) {
+                $.each(result.data, function (index, value) {
+                    $("#tab-swagger").append("<div class=\"col-2\">\n" +
+                        "            <div class=\"card\" role=\"button\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\'" + value.summary + "\'\n" +
+                        "                 onclick=\"openAnotherTab('" + value.path + "')\">\n" +
+                        "                <img src=\'" + apiPath + "/assert/image/swagger.png\'\n" +
+                        "                     class=\"card-img-top\">\n" +
+                        "                <div class=\"card-body\">\n" +
+                        "                    <h5 class=\"card-title\">" + value.summary + "</h5>\n" +
+                        "                    <p class=\"card-text\">" + value.description + "</p>\n" +
+                        "                </div>\n" +
+                        "            </div>\n" +
+                        "        </div>")
+                });
+
+            }
+        });
+    })();
+
+    function openAnotherTab(url) {
+        window.open(window.location.origin.concat(url));
+    }
+</script>
+</html>

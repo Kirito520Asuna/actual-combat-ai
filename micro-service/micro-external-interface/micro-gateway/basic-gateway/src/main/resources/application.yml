@@ -1,0 +1,54 @@
+
+spring:
+  application:
+    name: gateway
+
+  main:
+    web-application-type: reactive
+
+
+# \u81EA\u5B9A\u4E49open API\u516C\u5171\u63CF\u8FF0\u4FE1\u606F
+#api:
+#  common:
+#    version: 3.0.0
+#    title: SecuityAPI
+#    description: SecuityAPI
+#    termsOfService:
+#    license: \u672A\u7ECF\u8BB8\u53EF\u4E0D\u5F97\u8F6C\u8F7D
+#    licenseUrl: xxx.license.com
+#    externalDocDesc:
+#    externalDocUrl:
+#    contact:
+#      name: kirito-asuna
+#      url: fsdf
+#      email: sdfe
+#
+#springdoc:
+#  api-docs:
+#    path: ${server.servlet.context-path}/v3/api-docs
+#  group-configs:
+#    - group: "api"
+#      paths-to-match: "/api/**"
+#    - group: "jwt"
+#      paths-to-match: "/jwt/**"
+#    - group: "other"
+#      paths-to-exclude:
+#        - "/swagger-resources/**"
+#        - "/**/api-docs"
+#        - "/api/**"
+#        - "/jwt/**"
+#  swagger-ui:
+#    operations-sorter: alpha
+#    path: /swagger-ui.html
+#    tags-sorter: alpha
+#
+#knife4j:
+#  cors: true
+#  enable: true
+#  setting:
+#    enable-dynamic-parameter: true
+#  #swagger
+#  basic:
+#    #    enable: true
+#    username: root
+#    password: root

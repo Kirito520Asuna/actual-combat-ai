@@ -1,0 +1,48 @@
+#在配置nacos实现聚合swagger时由于
+#/v3/api-docs引起的网关路由找不到具体服务器的api-docs文档，导致swagger生成文档失败
+#解决方法：可以直接在application.yaml配置后，网关路由正常
+server:
+  servlet:
+    context-path: /
+springfox:
+  documentation:
+    open-api:
+      v3:
+        path: /v3/api-docs
+
+spring:
+  cloud:
+    nacos:
+      server-addr: 192.168.3.22:8848
+    gateway:
+      discovery:
+        #docker启动时远程调用失败  需要将docker所在服务器地址设置一下
+        #        ip: ${LOCAL_IP_ADDRESS:192.168.200.128}
+        locator:
+          # 服务名小写转换
+          lower-case-service-id: true
+          # 字段映射转发 满足 http://网关地址:网关端口/服务名/服务接口地址
+          # 自动转为 http://服务名/服务接口地址
+          # 商用false
+          #  这里需要注意的是，如果我们的配置了 server.servlet.context-path 属性，这会导致自动路由失败的问题，因此我们需要做如下两个修改：
+          enabled: true
+          # 重写过滤链，解决项目设置了 server.servlet.context-path 导致 locator.enabled=true 默认路由策略404的问题
+          # 现实生产可使用nginx先处理掉 server.servlet.context-path,再通过gateway处理
+          filters[0]: PreserveHostHeader
+
+      routes:
+        - id: gateway
+          uri: no://op
+          predicates:
+            - Path=${server.servlet.context-path}/**,false
+          filters:
+            #本地
+            - RedirectTo=302, http://${domains.all-paths}
+
+        - id: static-resource
+          uri: lb://gateway
+          order: 1
+          predicates:
+            - Path=${server.servlet.context-path}/assert/**
+          filters:
+            - StripPrefix=1

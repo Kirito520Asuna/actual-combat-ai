@@ -1,0 +1,19 @@
+#spring:
+#  profiles:
+#    active: test
+#  cloud:
+#    nacos:
+#      discovery:
+#        service: im
+#      config:
+#        # nacos 配置实时更新
+#        # 1：该方案不一定你解决
+#        # 因为springboot 2.4版本以后默认关闭加载bootstrap.yml，所以只能通过此方式连接到nacos config
+#        import: nacos:${spring.cloud.nacos.discovery.service}.${spring.cloud.nacos.config.file-extension},${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+#        enabled: true
+#        # 2：
+#        refresh-enabled: true
+#        #refreshable-dataids: im-test.yaml
+#        refreshable-dataids: ${spring.cloud.nacos.discovery.service:${spring.application.name}}-${spring.profiles.active:test}.${spring.cloud.nacos.config.file-extension:yaml}
+#
+#

@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.actual-combat</groupId>
-        <artifactId>micro-sub-service</artifactId>
+        <artifactId>micro-external-interface</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>micro-gateway-core</artifactId>
+    <artifactId>micro-gateway</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>basic-gateway-core</module>
+        <module>basic-gateway</module>
     </modules>
 
 

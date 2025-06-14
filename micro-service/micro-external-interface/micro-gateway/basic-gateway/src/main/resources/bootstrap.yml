@@ -1,0 +1,83 @@
+server:
+  port: 10110
+  servlet:
+   context-path: /${spring.profiles.active}
+#===========================================================================
+spring:
+  profiles:
+    active: @spring.profiles.active@
+#===========================================================================
+  application:
+    name: gateway
+#===========================================================================
+  cloud:
+    nacos:
+      username: nacos
+      password: nacos
+      discovery:
+        service: ${spring.application.name}
+
+    gateway:
+      # 网关跨域配置start---------------------------------
+      # 开启网关的跨域功能，具体微服务上的跨域需要进行关闭，否则无效
+#      default-filters:
+#        # 解决响应头重复问题  options
+#        - DedupeResponseHeader=Vary Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+#      globalcors:
+#        add-to-simple-url-handler-mapping: true # 解决options请求被拦截问题
+#        cors-configurations:
+#          '[/**]': # 匹配所有请求
+
+##            allowedOriginPatterns: "*" # 跨域处理 允许所有的域
+##            allowedOrigins: "*" # 跨域处理 允许所有的域
+#            allowedOrigins: # 允许哪些网站的跨域请求
+#              - "http://localhost:5173"
+#              - "http://127.0.0.1:5173"
+##              - "http://localhost:8081"
+#            allowedMethods: # 允许的跨域ajax的请求方式
+#              - "GET"
+#              - "POST"
+#              - "DELETE"
+#              - "PUT"
+#              - "OPTIONS"
+#            allowedHeaders: "*" # 允许在请求中携带的头信息
+#            allowCredentials: true # 是否允许携带cookie
+#            maxAge: 360000 # 这次跨域检测的有效期
+#
+#      # 网关跨域配置end---------------------------------
+#===========================================================================
+knife4j:
+  cors: true
+  enable: true
+  setting:
+    enable-dynamic-parameter: true
+#===========================================================================
+#===========================================================================
+config:
+  cors:
+    enabled: true
+    prop:
+      pattern: "/**"
+      allowedOrigin: "*"
+      allowedOriginPattern: "*"
+      allowedMethods: "GET,POST,PUT,DELETE,OPTIONS,HEAD,PATCH"
+      allowedHeader: "*"
+      allowCredentials: true
+      maxAge: 360000
+  gateway:
+    enabled: true
+    cors:
+      enabled: false
+      prop:
+        default-filter: true
+        web-filter: false
+        distinct-headers-filter: true
+        https-to-http-filter: false
+#==================================域名配置==================================
+    domains:
+      name: 127.0.0.1:${server.port}
+      full-path: ${config.gateway.domains.name}${server.servlet.context-path:}
+
+logging:
+  level:
+    com.actual_combat: debug

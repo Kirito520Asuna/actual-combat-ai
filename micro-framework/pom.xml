@@ -21,6 +21,7 @@
         <module>framework-sharding-sphere</module>
         <module>framework-redis</module>
         <module>framework-base-core</module>
+        <module>framework-nacos</module>
     </modules>
 
 

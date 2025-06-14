@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,6 +25,7 @@ import org.springframework.context.annotation.Configuration;
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
+@ConditionalOnMissingBean(CorsProperties.class)
 @ConditionalOnExpression("${" + PropertiesConstants.CORS_ENABLED + ":true}")
 @ConfigurationProperties(prefix = PropertiesConstants.CORS_PREFIX)
 public class CorsProperties implements BeanProperties {

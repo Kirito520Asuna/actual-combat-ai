@@ -11,7 +11,6 @@ import com.actual_combat.basic.core.abs.auth.service.AbsAuthService;
 import com.actual_combat.basic.core.abs.auth.service.AbstractLoginService;
 import com.actual_combat.basic.core.abs.auth.service.AbstractUserDetailsService;
 import com.actual_combat.basic.core.abs.auth.service.SimpleUserDetailsService;
-import com.actual_combat.base.core.abs.auth.service.*;
 import com.actual_combat.basic.core.abs.bean.AbstractBean;
 import com.actual_combat.basic.core.abs.bean.AbstractSecurityBean;
 import lombok.extern.slf4j.Slf4j;

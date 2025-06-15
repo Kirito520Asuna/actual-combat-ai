@@ -1,7 +1,7 @@
 package com.actual_combat.basic.openfeign.factory.interfaces;
 
-import com.actual_combat.base.enums.ApiCode;
-import com.actual_combat.base.result.Result;
+import com.actual_combat.basic.enums.ApiCode;
+import com.actual_combat.basic.result.Result;
 import com.actual_combat.basic.openfeign.factory.AbsEnum;
 
 /**

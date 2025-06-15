@@ -44,7 +44,7 @@
 
         <dependency>
             <groupId>com.actual-combat</groupId>
-            <artifactId>base-core</artifactId>
+            <artifactId>basic-core</artifactId>
             <version>${revision}</version>
         </dependency>
 

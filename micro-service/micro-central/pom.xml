@@ -11,6 +11,11 @@
 
     <artifactId>micro-central</artifactId>
     <packaging>pom</packaging>
+
+    <modules>
+        <module>basic-openfeign</module>
+    </modules>
+
     <build>
         <resources>
             <resource>

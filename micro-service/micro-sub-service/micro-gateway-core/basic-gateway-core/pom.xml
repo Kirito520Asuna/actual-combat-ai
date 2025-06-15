@@ -35,7 +35,7 @@
             </dependency>
             <dependency>
                 <groupId>com.actual-combat</groupId>
-                <artifactId>base-core</artifactId>
+                <artifactId>basic-core</artifactId>
                 <version>${revision}</version>
             </dependency>
         </dependencies>
@@ -56,7 +56,7 @@
         </dependency>
         <dependency>
             <groupId>com.actual-combat</groupId>
-            <artifactId>base-core</artifactId>
+            <artifactId>basic-core</artifactId>
         </dependency>
         <!--devtools热部署-->
         <dependency>

@@ -13,14 +13,14 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>framework-base</module>
+        <module>framework-basic</module>
         <module>framework-knife4j</module>
         <module>framework-aop</module>
         <module>framework-dynamic-datasource</module>
         <module>framework-mybatis-plus</module>
         <module>framework-sharding-sphere</module>
         <module>framework-redis</module>
-        <module>framework-base-core</module>
+        <module>framework-basic-core</module>
         <module>framework-nacos</module>
         <module>framework-seata</module>
     </modules>

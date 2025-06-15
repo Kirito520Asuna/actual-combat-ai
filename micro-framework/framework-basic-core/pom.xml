@@ -9,7 +9,7 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>framework-base-core</artifactId>
+    <artifactId>framework-basic-core</artifactId>
 
     <properties>
         <jackson.version>2.12.5</jackson.version>
@@ -29,7 +29,7 @@
             </dependency>
             <dependency>
                 <groupId>com.actual-combat</groupId>
-                <artifactId>framework-base</artifactId>
+                <artifactId>framework-basic</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
@@ -63,7 +63,7 @@
     <dependencies>
         <dependency>
             <groupId>com.actual-combat</groupId>
-            <artifactId>framework-base</artifactId>
+            <artifactId>framework-basic</artifactId>
         </dependency>
         <dependency>
             <groupId>com.actual-combat</groupId>

@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>base-core</module>
+        <module>basic-core</module>
     </modules>
 
     <build>

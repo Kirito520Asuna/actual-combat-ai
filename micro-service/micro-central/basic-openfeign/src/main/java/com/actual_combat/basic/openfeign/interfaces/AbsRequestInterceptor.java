@@ -110,10 +110,10 @@ public interface AbsRequestInterceptor extends RequestInterceptor, AbsBean {
                         requestBody.putAll(getRequestBody(requestTemplate));
                     } else if (JSONUtil.isTypeJSON(json)) {
                         //Map<String, Object> bean = JSONUtil.toBean(json, JSONConfig.create().setIgnoreNullValue(true), Map.class);
-                        Map<String, Object> bean = com.alibaba.fastjson2.JSON.parseObject(json, Map.class);
+                        Map<String, Object> bean = JSON.parseObject(json, Map.class);
                         if (ObjectUtil.isNotEmpty(bean)) {
                             requestBody.putAll(bean);
-                            Map<String, Object> readValue = com.alibaba.fastjson2.JSON.parseObject(json, Map.class);
+                            Map<String, Object> readValue = JSON.parseObject(json, Map.class);
                             readValue.entrySet().stream().forEach(o -> {
                                 String empty = null;
                                 if (o.getValue() instanceof String) {

@@ -8,11 +8,11 @@ import com.actual_combat.auth.shiro.aop.ShiroLogical;
 import com.actual_combat.auth.shiro.aop.ShiroPermissions;
 import com.actual_combat.auth.shiro.aop.ShiroRoles;
 import com.actual_combat.auth.shiro.config.ShiroAnnotationConfig;
-import com.actual_combat.base.core.config.auth.AuthorizationConfig;
-import com.actual_combat.base.core.constant.Roles;
-import com.actual_combat.base.enums.ApiCode;
-import com.actual_combat.base.exceptions.GlobalCustomException;
-import com.actual_combat.base.utils.object.ObjectUtils;
+import com.actual_combat.basic.core.config.auth.AuthorizationConfig;
+import com.actual_combat.basic.core.constant.Roles;
+import com.actual_combat.basic.enums.ApiCode;
+import com.actual_combat.basic.exceptions.GlobalCustomException;
+import com.actual_combat.basic.utils.object.ObjectUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.aspectj.lang.JoinPoint;
 

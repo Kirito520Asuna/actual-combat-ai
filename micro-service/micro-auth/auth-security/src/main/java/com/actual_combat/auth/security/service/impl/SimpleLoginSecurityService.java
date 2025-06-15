@@ -3,10 +3,10 @@ package com.actual_combat.auth.security.service.impl;
 import cn.hutool.extra.spring.SpringUtil;
 import com.actual_combat.auth.security.service.AbsUserDetailsService;
 import com.actual_combat.auth.security.utils.AuthSecurityContextUtil;
-import com.actual_combat.base.core.abs.auth.service.AbstractLoginService;
-import com.actual_combat.base.core.abs.auth.service.AbstractUserService;
-import com.actual_combat.base.core.pojo.auth.TokenInfo;
-import com.actual_combat.base.core.pojo.auth.UserInfo;
+import com.actual_combat.basic.core.abs.auth.service.AbstractLoginService;
+import com.actual_combat.basic.core.abs.auth.service.AbstractUserService;
+import com.actual_combat.basic.core.pojo.auth.TokenInfo;
+import com.actual_combat.basic.core.pojo.auth.UserInfo;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 

@@ -1,9 +1,9 @@
 package com.actual_combat.auth.security.service;
 
 import com.actual_combat.auth.security.auth.AuthSecurityInterceptor;
-import com.actual_combat.base.core.abs.auth.AbsAuthFilter;
-import com.actual_combat.base.core.abs.auth.AbsAuthInterceptor;
-import com.actual_combat.base.core.abs.auth.service.AbsAuthService;
+import com.actual_combat.basic.core.abs.auth.AbsAuthFilter;
+import com.actual_combat.basic.core.abs.auth.AbsAuthInterceptor;
+import com.actual_combat.basic.core.abs.auth.service.AbsAuthService;
 
 /**
  * @Author yan

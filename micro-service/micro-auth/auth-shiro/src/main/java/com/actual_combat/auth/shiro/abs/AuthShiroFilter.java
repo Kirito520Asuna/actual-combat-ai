@@ -2,11 +2,9 @@ package com.actual_combat.auth.shiro.abs;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.extra.spring.SpringUtil;
-import com.actual_combat.base.core.abs.auth.AbsAuthFilter;
-import com.actual_combat.base.core.config.jwt.JwtConfig;
-import com.actual_combat.base.utils.jwt.JwtUtils;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
+import com.actual_combat.basic.core.abs.auth.AbsAuthFilter;
+import com.actual_combat.basic.core.config.jwt.JwtConfig;
+import com.actual_combat.basic.utils.jwt.JwtUtils;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,8 +12,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.util.StringUtils;
-
-import java.io.IOException;
 
 /**
  * @Author yan

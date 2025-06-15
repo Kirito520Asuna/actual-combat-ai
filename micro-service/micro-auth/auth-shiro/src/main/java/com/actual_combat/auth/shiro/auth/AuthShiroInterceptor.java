@@ -1,7 +1,7 @@
 package com.actual_combat.auth.shiro.auth;
 
 import com.actual_combat.auth.shiro.abs.AbsAuthorizationShiro;
-import com.actual_combat.base.core.abs.auth.AbsAuthInterceptor;
+import com.actual_combat.basic.core.abs.auth.AbsAuthInterceptor;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 

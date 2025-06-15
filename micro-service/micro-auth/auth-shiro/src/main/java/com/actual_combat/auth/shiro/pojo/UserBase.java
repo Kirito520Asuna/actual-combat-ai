@@ -1,7 +1,7 @@
 package com.actual_combat.auth.shiro.pojo;
 
-import com.actual_combat.base.core.pojo.auth.User;
-import com.actual_combat.base.core.pojo.auth.UserInfo;
+import com.actual_combat.basic.core.pojo.auth.User;
+import com.actual_combat.basic.core.pojo.auth.UserInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.Accessors;

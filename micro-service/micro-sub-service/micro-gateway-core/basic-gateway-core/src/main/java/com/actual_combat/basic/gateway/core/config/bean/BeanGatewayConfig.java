@@ -1,10 +1,9 @@
 package com.actual_combat.basic.gateway.core.config.bean;
 
-import com.actual_combat.base.core.abs.bean.AbstractBean;
-import com.actual_combat.base.core.abs.bean.AbstractGatewayBean;
-import com.actual_combat.base.core.constant.ConfigConstant;
-import com.actual_combat.base.core.properties.cors.CorsGatewayProperties;
-import com.actual_combat.base.core.properties.cors.CorsProperties;
+import com.actual_combat.basic.core.abs.bean.AbstractGatewayBean;
+import com.actual_combat.basic.core.constant.ConfigConstant;
+import com.actual_combat.basic.core.properties.cors.CorsGatewayProperties;
+import com.actual_combat.basic.core.properties.cors.CorsProperties;
 import com.actual_combat.basic.gateway.core.abs.CorsFilter;
 import com.actual_combat.basic.gateway.core.abs.GatewayDistinctResponseHeaderFilter;
 import com.actual_combat.basic.gateway.core.abs.GatewayDomainsHeaderFilter;

@@ -2,9 +2,9 @@ package com.actual_combat.auth.shiro.config.bean;
 
 import com.actual_combat.auth.shiro.config.ShiroConfig;
 import com.actual_combat.auth.shiro.service.impl.SimpleAuthShiroService;
-import com.actual_combat.base.core.abs.auth.service.AbsAuthService;
-import com.actual_combat.base.core.abs.bean.AbstractBean;
-import com.actual_combat.base.core.abs.bean.AbstractShiroBean;
+import com.actual_combat.basic.core.abs.auth.service.AbsAuthService;
+import com.actual_combat.basic.core.abs.bean.AbstractBean;
+import com.actual_combat.basic.core.abs.bean.AbstractShiroBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;

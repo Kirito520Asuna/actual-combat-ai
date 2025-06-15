@@ -1,6 +1,6 @@
 package com.actual_combat.basic.gateway.web;
 
-import com.actual_combat.base.result.Result;
+import com.actual_combat.basic.result.Result;
 import com.actual_combat.basic.gateway.core.abs.HomeMvc;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

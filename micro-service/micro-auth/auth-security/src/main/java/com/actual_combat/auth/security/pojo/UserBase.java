@@ -1,8 +1,8 @@
 package com.actual_combat.auth.security.pojo;
 
 import cn.hutool.core.collection.CollUtil;
-import com.actual_combat.base.core.pojo.auth.User;
-import com.actual_combat.base.core.pojo.auth.UserInfo;
+import com.actual_combat.basic.core.pojo.auth.User;
+import com.actual_combat.basic.core.pojo.auth.UserInfo;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

@@ -1,10 +1,9 @@
 package com.actual_combat.auth.security.abs;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.actual_combat.auth.security.auth.JwtAuthSecurityFilter;
-import com.actual_combat.base.core.abs.auth.AbsAuthFilter;
-import com.actual_combat.base.core.abs.auth.config.AbsAuthorizationConfig;
-import com.actual_combat.base.exceptions.ErrorInfo;
+import com.actual_combat.basic.core.abs.auth.AbsAuthFilter;
+import com.actual_combat.basic.core.abs.auth.config.AbsAuthorizationConfig;
+import com.actual_combat.basic.exceptions.ErrorInfo;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 

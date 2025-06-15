@@ -1,6 +1,6 @@
 package com.actual_combat.auth.security.abs;
 
-import com.actual_combat.base.core.abs.auth.AbsAuthFilter;
+import com.actual_combat.basic.core.abs.auth.AbsAuthFilter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;

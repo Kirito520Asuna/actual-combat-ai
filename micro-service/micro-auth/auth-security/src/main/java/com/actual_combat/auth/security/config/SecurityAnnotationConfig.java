@@ -1,6 +1,6 @@
 package com.actual_combat.auth.security.config;
 
-import com.actual_combat.base.core.constant.ConfigConstant;
+import com.actual_combat.basic.core.constant.ConfigConstant;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.Data;

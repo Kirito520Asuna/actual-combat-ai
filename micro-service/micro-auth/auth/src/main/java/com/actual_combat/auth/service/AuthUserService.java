@@ -2,10 +2,10 @@ package com.actual_combat.auth.service;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.actual_combat.aop.abs.bean.AbsBean;
-import com.actual_combat.base.core.abs.auth.service.AbstractUserService;
-import com.actual_combat.base.core.config.auth.AuthorizationConfig;
-import com.actual_combat.base.core.constant.Roles;
-import com.actual_combat.base.core.pojo.auth.User;
+import com.actual_combat.basic.core.abs.auth.service.AbstractUserService;
+import com.actual_combat.basic.core.config.auth.AuthorizationConfig;
+import com.actual_combat.basic.core.constant.Roles;
+import com.actual_combat.basic.core.pojo.auth.User;
 
 import java.util.List;
 import java.util.stream.Collectors;

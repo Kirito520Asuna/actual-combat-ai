@@ -2,9 +2,9 @@ package com.actual_combat.auth.shiro.service;
 
 import com.actual_combat.auth.shiro.auth.AuthShiroInterceptor;
 import com.actual_combat.auth.shiro.auth.JwtAuthShiroFilter;
-import com.actual_combat.base.core.abs.auth.AbsAuthFilter;
-import com.actual_combat.base.core.abs.auth.AbsAuthInterceptor;
-import com.actual_combat.base.core.abs.auth.service.AbsAuthService;
+import com.actual_combat.basic.core.abs.auth.AbsAuthFilter;
+import com.actual_combat.basic.core.abs.auth.AbsAuthInterceptor;
+import com.actual_combat.basic.core.abs.auth.service.AbsAuthService;
 
 /**
  * @Author yan

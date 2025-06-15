@@ -3,8 +3,8 @@ package com.actual_combat.auth.security.auth;
 import cn.hutool.extra.spring.SpringUtil;
 import com.actual_combat.auth.security.config.SecurityAnnotationConfig;
 import com.actual_combat.auth.security.utils.AuthSecurityContextUtil;
-import com.actual_combat.base.core.abs.auth.core.AbsSecurityExpressionRoot;
-import com.actual_combat.base.exceptions.ErrorInfo;
+import com.actual_combat.basic.core.abs.auth.core.AbsSecurityExpressionRoot;
+import com.actual_combat.basic.exceptions.ErrorInfo;
 
 import java.util.List;
 

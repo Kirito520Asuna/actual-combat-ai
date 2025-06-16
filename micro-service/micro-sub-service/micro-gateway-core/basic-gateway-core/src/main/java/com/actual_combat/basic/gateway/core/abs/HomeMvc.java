@@ -41,7 +41,8 @@ public interface HomeMvc extends AbsBean {
             RoutePath routePath = new RoutePath();
             String needParse = route.getPredicate().toString();
             String service = needParse.substring(needParse.indexOf("/"), needParse.lastIndexOf("/"));
-            String path = route.getMetadata().get("document-uri") == null ? service.concat("/swagger-ui/index.html") : service.concat((String) route.getMetadata().get("document-uri"));
+            //String path = route.getMetadata().get("document-uri") == null ? service.concat("/swagger-ui/index.html") : service.concat((String) route.getMetadata().get("document-uri"));
+            String path = route.getMetadata().get("document-uri") == null ? service.concat("/swagger-ui.html") : service.concat((String) route.getMetadata().get("document-uri"));
             Object summary = route.getMetadata().get("summary") == null ? "" : route.getMetadata().get("summary");
             Object description = route.getMetadata().get("description") == null ? "" : route.getMetadata().get("description");
             routePath.setPath(path);

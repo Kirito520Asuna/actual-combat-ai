@@ -73,6 +73,12 @@
         <dependency>
             <groupId>com.actual-combat</groupId>
             <artifactId>framework-knife4j</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springdoc</groupId>
+                    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

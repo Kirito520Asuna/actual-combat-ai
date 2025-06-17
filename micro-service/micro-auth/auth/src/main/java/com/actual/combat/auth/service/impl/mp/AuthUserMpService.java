@@ -1,7 +1,7 @@
 package com.actual.combat.auth.service.impl.mp;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.actual_combat.aop.abs.bean.AbsBean;
+import com.actual.combat.aop.abs.bean.AbsBean;
 import com.actual.combat.mp.abs.service.MpUserService;
 
 /**

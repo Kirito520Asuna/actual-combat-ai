@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.actual.combat.im.mapper.chat.ChatWindowMapper">
+  <resultMap id="BaseResultMap" type="com.actual.combat.im.domain.chat.ChatWindow">
+    <!--@mbg.generated-->
+    <!--@Table `chat_window`-->
+    <id column="chat_id" jdbcType="BIGINT" property="chatId" />
+    <result column="chat_type" jdbcType="VARCHAR" property="chatType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    `chat_id`, `chat_type`, `create_time`, `update_time`
+  </sql>
+
+  <select id="getChatWindow" resultMap="BaseResultMap">
+<!--      select *-->
+<!--      from chat_window cw-->
+<!--               inner join chat_user cu on cw.chat_id = cu.chat_id-->
+<!--      where cw.chat_type = #{chatType.name}-->
+<!--        and cu.chat_type = #{chatType.name}-->
+<!--        and cu.user_id in (#{tid}, #{uid})-->
+
+      select *
+      from chat_window cw
+               inner join chat_user cu on cw.chat_id = cu.chat_id
+               inner join (select cw.*, cu.user_id
+                           from chat_window cw
+                                    inner join chat_user cu on cw.chat_id = cu.chat_id
+                           where cw.chat_type = #{chatType.name}
+                             and cu.chat_type = #{chatType.name}) a
+                          on a.`chat_id` = cw.chat_id
+      where cw.chat_type = #{chatType.name}
+        and cu.chat_type = #{chatType.name}
+        and cu.user_id = #{tid}
+        and a.user_id = #{uid}
+  </select>
+</mapper>

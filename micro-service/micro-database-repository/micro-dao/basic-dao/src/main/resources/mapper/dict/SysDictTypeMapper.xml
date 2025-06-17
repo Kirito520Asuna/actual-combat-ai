@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.actual.combat.dict.mapper.SysDictTypeMapper">
+    <resultMap id="BaseResultMap" type="com.actual.combat.dict.domain.SysDictType">
+        <!--@mbg.generated-->
+        <!--@Table sys_dict_type-->
+        <id column="dict_id" jdbcType="BIGINT" property="dictId"/>
+        <result column="dict_name" jdbcType="VARCHAR" property="dictName"/>
+        <result column="dict_type" jdbcType="VARCHAR" property="dictType"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        dict_id, dict_name, dict_type, `status`, create_by, create_time, update_by, update_time,
+        remark
+    </sql>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update sys_dict_type
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="dict_name = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when dict_id = #{item.dictId,jdbcType=BIGINT} then #{item.dictName,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="dict_type = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when dict_id = #{item.dictId,jdbcType=BIGINT} then #{item.dictType,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="`status` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when dict_id = #{item.dictId,jdbcType=BIGINT} then #{item.status,jdbcType=CHAR}
+                </foreach>
+            </trim>
+            <trim prefix="create_by = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when dict_id = #{item.dictId,jdbcType=BIGINT} then #{item.createBy,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="create_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when dict_id = #{item.dictId,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+                </foreach>
+            </trim>
+            <trim prefix="update_by = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when dict_id = #{item.dictId,jdbcType=BIGINT} then #{item.updateBy,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="update_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when dict_id = #{item.dictId,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+                </foreach>
+            </trim>
+            <trim prefix="remark = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when dict_id = #{item.dictId,jdbcType=BIGINT} then #{item.remark,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+        </trim>
+        where dict_id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.dictId,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update sys_dict_type
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="dict_name = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.dictName != null">
+                        when dict_id = #{item.dictId,jdbcType=BIGINT} then #{item.dictName,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="dict_type = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.dictType != null">
+                        when dict_id = #{item.dictId,jdbcType=BIGINT} then #{item.dictType,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="`status` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.status != null">
+                        when dict_id = #{item.dictId,jdbcType=BIGINT} then #{item.status,jdbcType=CHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="create_by = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.createBy != null">
+                        when dict_id = #{item.dictId,jdbcType=BIGINT} then #{item.createBy,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="create_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.createTime != null">
+                        when dict_id = #{item.dictId,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="update_by = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.updateBy != null">
+                        when dict_id = #{item.dictId,jdbcType=BIGINT} then #{item.updateBy,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="update_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.updateTime != null">
+                        when dict_id = #{item.dictId,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="remark = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.remark != null">
+                        when dict_id = #{item.dictId,jdbcType=BIGINT} then #{item.remark,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where dict_id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.dictId,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <insert id="batchInsert" keyColumn="dict_id" keyProperty="dictId" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into sys_dict_type
+        (dict_name, dict_type, `status`, create_by, create_time, update_by, update_time,
+        remark)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.dictName,jdbcType=VARCHAR}, #{item.dictType,jdbcType=VARCHAR}, #{item.status,jdbcType=CHAR},
+            #{item.createBy,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR},
+            #{item.updateTime,jdbcType=TIMESTAMP}, #{item.remark,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <update id="updateBatchUseMultiQuery" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        <foreach collection="list" item="item" separator=";">
+            update sys_dict_type
+            <set>
+                <if test="item.dictName != null and item.dictName != ''">
+                    dict_name = #{item.dictName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.dictType != null and item.dictType != ''">
+                    dict_type = #{item.dictType,jdbcType=VARCHAR},
+                </if>
+                <if test="item.status != null and item.status != ''">
+                    `status` = #{item.status,jdbcType=CHAR},
+                </if>
+                <if test="item.createBy != null and item.createBy != ''">
+                    create_by = #{item.createBy,jdbcType=VARCHAR},
+                </if>
+                <if test="item.createTime != null">
+                    create_time = #{item.createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.updateBy != null and item.updateBy != ''">
+                    update_by = #{item.updateBy,jdbcType=VARCHAR},
+                </if>
+                <if test="item.updateTime != null">
+                    update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.remark != null and item.remark != ''">
+                    remark = #{item.remark,jdbcType=VARCHAR},
+                </if>
+            </set>
+            where dict_id = #{item.dictId,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <insert id="batchInsertSelectiveUseDefaultForNull" keyColumn="dict_id" keyProperty="dictId" parameterType="map"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into sys_dict_type
+        (dict_name, dict_type, `status`, create_by, create_time, update_by, update_time,
+        remark)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+            <choose>
+                <when test="item.dictName != null">
+                    #{item.dictName,jdbcType=VARCHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.dictType != null">
+                    #{item.dictType,jdbcType=VARCHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.status != null">
+                    #{item.status,jdbcType=CHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.createBy != null">
+                    #{item.createBy,jdbcType=VARCHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.createTime != null">
+                    #{item.createTime,jdbcType=TIMESTAMP},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.updateBy != null">
+                    #{item.updateBy,jdbcType=VARCHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.updateTime != null">
+                    #{item.updateTime,jdbcType=TIMESTAMP},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.remark != null">
+                    #{item.remark,jdbcType=VARCHAR}
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT
+                </otherwise>
+            </choose>
+            )
+        </foreach>
+    </insert>
+    <insert id="insertOnDuplicateUpdate" keyColumn="dict_id" keyProperty="dictId"
+            parameterType="com.actual.combat.dict.domain.SysDictType" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into sys_dict_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dictId != null">
+                dict_id,
+            </if>
+            dict_name,
+            dict_type,
+            `status`,
+            create_by,
+            create_time,
+            update_by,
+            update_time,
+            remark,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dictId != null">
+                #{dictId,jdbcType=BIGINT},
+            </if>
+            #{dictName,jdbcType=VARCHAR},
+            #{dictType,jdbcType=VARCHAR},
+            #{status,jdbcType=CHAR},
+            #{createBy,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateBy,jdbcType=VARCHAR},
+            #{updateTime,jdbcType=TIMESTAMP},
+            #{remark,jdbcType=VARCHAR},
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="dictId != null">
+                dict_id = #{dictId,jdbcType=BIGINT},
+            </if>
+            dict_name = #{dictName,jdbcType=VARCHAR},
+            dict_type = #{dictType,jdbcType=VARCHAR},
+            `status` = #{status,jdbcType=CHAR},
+            create_by = #{createBy,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_by = #{updateBy,jdbcType=VARCHAR},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            remark = #{remark,jdbcType=VARCHAR},
+        </trim>
+    </insert>
+    <insert id="insertOnDuplicateUpdateSelective" keyColumn="dict_id" keyProperty="dictId"
+            parameterType="com.actual.combat.dict.domain.SysDictType" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into sys_dict_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dictId != null">
+                dict_id,
+            </if>
+            <if test="dictName != null and dictName != ''">
+                dict_name,
+            </if>
+            <if test="dictType != null and dictType != ''">
+                dict_type,
+            </if>
+            <if test="status != null and status != ''">
+                `status`,
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="remark != null and remark != ''">
+                remark,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dictId != null">
+                #{dictId,jdbcType=BIGINT},
+            </if>
+            <if test="dictName != null and dictName != ''">
+                #{dictName,jdbcType=VARCHAR},
+            </if>
+            <if test="dictType != null and dictType != ''">
+                #{dictType,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null and status != ''">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null and remark != ''">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="dictId != null">
+                dict_id = #{dictId,jdbcType=BIGINT},
+            </if>
+            <if test="dictName != null and dictName != ''">
+                dict_name = #{dictName,jdbcType=VARCHAR},
+            </if>
+            <if test="dictType != null and dictType != ''">
+                dict_type = #{dictType,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null and status != ''">
+                `status` = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="checkDictTypeUnique" resultMap="BaseResultMap">
+        select<include refid="Base_Column_List"/>
+        from sys_dict_type
+        where dict_type = #{dictType} limit 1
+    </select>
+
+    <select id="selectDictTypeList" resultMap="BaseResultMap">
+      select<include refid="Base_Column_List"/>
+      from sys_dict_type
+      <where>
+          <if test="dictName != null and dictName != ''">
+              AND dict_name like concat('%', #{dictName}, '%')
+          </if>
+          <if test="status != null and status != ''">
+              AND status = #{status}
+          </if>
+          <if test="dictType != null and dictType != ''">
+              AND dict_type like concat('%', #{dictType}, '%')
+          </if>
+          <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+              and date_format(create_time,'%Y%m%d') &gt;= date_format(#{params.beginTime},'%Y%m%d')
+          </if>
+          <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+              and date_format(create_time,'%Y%m%d') &lt;= date_format(#{params.endTime},'%Y%m%d')
+          </if>
+      </where>
+    </select>
+</mapper>

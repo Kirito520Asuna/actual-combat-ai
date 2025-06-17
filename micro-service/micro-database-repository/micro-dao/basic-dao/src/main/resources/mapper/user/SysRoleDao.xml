@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.actual.combat.user.mapper.SysRoleDao">
+  <resultMap id="BaseResultMap" type="com.actual.combat.user.domain.SysRole">
+    <!--@mbg.generated-->
+    <!--@Table sys_role-->
+    <id column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_key" jdbcType="VARCHAR" property="roleKey" />
+    <result column="role_sort" jdbcType="INTEGER" property="roleSort" />
+    <result column="data_scope" jdbcType="CHAR" property="dataScope" />
+    <result column="menu_check_strictly" jdbcType="BOOLEAN" property="menuCheckStrictly" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    role_id, role_name, role_key, role_sort, data_scope, menu_check_strictly, `status`, 
+    del_flag, create_by, create_time, update_by, update_time, remark
+  </sql>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update sys_role
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="role_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.roleName != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.roleName,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="role_key = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.roleKey != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.roleKey,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="role_sort = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.roleSort != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.roleSort,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="data_scope = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.dataScope != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.dataScope,jdbcType=CHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="menu_check_strictly = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.menuCheckStrictly != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.menuCheckStrictly,jdbcType=BOOLEAN}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`status` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.status != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.status,jdbcType=CHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="del_flag = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.delFlag != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.delFlag,jdbcType=CHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_by = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createBy != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.createBy,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_by = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateBy != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.updateBy,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateTime != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="remark = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.remark != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.remark,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where role_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.roleId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="role_id" keyProperty="roleId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_role
+    (role_name, role_key, role_sort, data_scope, menu_check_strictly, `status`, del_flag, 
+      create_by, create_time, update_by, update_time, remark)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.roleName,jdbcType=VARCHAR}, #{item.roleKey,jdbcType=VARCHAR}, #{item.roleSort,jdbcType=INTEGER}, 
+        #{item.dataScope,jdbcType=CHAR}, #{item.menuCheckStrictly,jdbcType=BOOLEAN}, #{item.status,jdbcType=CHAR}, 
+        #{item.delFlag,jdbcType=CHAR}, #{item.createBy,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, 
+        #{item.updateBy,jdbcType=VARCHAR}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.remark,jdbcType=VARCHAR}
+        )
+    </foreach>
+  </insert>
+  <delete id="deleteByPrimaryKeyIn">
+    <!--@mbg.generated-->
+    delete from sys_role where role_id in 
+    <foreach close=")" collection="list" item="roleId" open="(" separator=", ">
+      #{roleId,jdbcType=BIGINT}
+    </foreach>
+  </delete>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    <foreach collection="list" item="item" separator=";">
+      update sys_role
+      <set>
+        <if test="item.roleName != null">
+          role_name = #{item.roleName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.roleKey != null">
+          role_key = #{item.roleKey,jdbcType=VARCHAR},
+        </if>
+        <if test="item.roleSort != null">
+          role_sort = #{item.roleSort,jdbcType=INTEGER},
+        </if>
+        <if test="item.dataScope != null">
+          data_scope = #{item.dataScope,jdbcType=CHAR},
+        </if>
+        <if test="item.menuCheckStrictly != null">
+          menu_check_strictly = #{item.menuCheckStrictly,jdbcType=BOOLEAN},
+        </if>
+        <if test="item.status != null">
+          `status` = #{item.status,jdbcType=CHAR},
+        </if>
+        <if test="item.delFlag != null">
+          del_flag = #{item.delFlag,jdbcType=CHAR},
+        </if>
+        <if test="item.createBy != null">
+          create_by = #{item.createBy,jdbcType=VARCHAR},
+        </if>
+        <if test="item.createTime != null">
+          create_time = #{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.updateBy != null">
+          update_by = #{item.updateBy,jdbcType=VARCHAR},
+        </if>
+        <if test="item.updateTime != null">
+          update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.remark != null">
+          remark = #{item.remark,jdbcType=VARCHAR},
+        </if>
+      </set>
+      where role_id = #{item.roleId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsertSelectiveUseDefaultForNull" keyColumn="role_id" keyProperty="roleId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_role
+    (role_name, role_key, role_sort, data_scope, menu_check_strictly, `status`, del_flag, 
+      create_by, create_time, update_by, update_time, remark)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <choose>
+        <when test="item.roleName != null">
+          #{item.roleName,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.roleKey != null">
+          #{item.roleKey,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.roleSort != null">
+          #{item.roleSort,jdbcType=INTEGER},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.dataScope != null">
+          #{item.dataScope,jdbcType=CHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.menuCheckStrictly != null">
+          #{item.menuCheckStrictly,jdbcType=BOOLEAN},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.status != null">
+          #{item.status,jdbcType=CHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.delFlag != null">
+          #{item.delFlag,jdbcType=CHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.createBy != null">
+          #{item.createBy,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.createTime != null">
+          #{item.createTime,jdbcType=TIMESTAMP},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.updateBy != null">
+          #{item.updateBy,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.updateTime != null">
+          #{item.updateTime,jdbcType=TIMESTAMP},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.remark != null">
+          #{item.remark,jdbcType=VARCHAR}
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT
+        </otherwise>
+      </choose>
+      )
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="role_id" keyProperty="roleId" parameterType="com.actual.combat.user.domain.SysRole" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      role_name,
+      role_key,
+      role_sort,
+      data_scope,
+      menu_check_strictly,
+      `status`,
+      del_flag,
+      create_by,
+      create_time,
+      update_by,
+      update_time,
+      remark,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      #{roleName,jdbcType=VARCHAR},
+      #{roleKey,jdbcType=VARCHAR},
+      #{roleSort,jdbcType=INTEGER},
+      #{dataScope,jdbcType=CHAR},
+      #{menuCheckStrictly,jdbcType=BOOLEAN},
+      #{status,jdbcType=CHAR},
+      #{delFlag,jdbcType=CHAR},
+      #{createBy,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{updateBy,jdbcType=VARCHAR},
+      #{updateTime,jdbcType=TIMESTAMP},
+      #{remark,jdbcType=VARCHAR},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      role_name = #{roleName,jdbcType=VARCHAR},
+      role_key = #{roleKey,jdbcType=VARCHAR},
+      role_sort = #{roleSort,jdbcType=INTEGER},
+      data_scope = #{dataScope,jdbcType=CHAR},
+      menu_check_strictly = #{menuCheckStrictly,jdbcType=BOOLEAN},
+      `status` = #{status,jdbcType=CHAR},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="role_id" keyProperty="roleId" parameterType="com.actual.combat.user.domain.SysRole" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="roleKey != null">
+        role_key,
+      </if>
+      <if test="roleSort != null">
+        role_sort,
+      </if>
+      <if test="dataScope != null">
+        data_scope,
+      </if>
+      <if test="menuCheckStrictly != null">
+        menu_check_strictly,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleKey != null">
+        #{roleKey,jdbcType=VARCHAR},
+      </if>
+      <if test="roleSort != null">
+        #{roleSort,jdbcType=INTEGER},
+      </if>
+      <if test="dataScope != null">
+        #{dataScope,jdbcType=CHAR},
+      </if>
+      <if test="menuCheckStrictly != null">
+        #{menuCheckStrictly,jdbcType=BOOLEAN},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleKey != null">
+        role_key = #{roleKey,jdbcType=VARCHAR},
+      </if>
+      <if test="roleSort != null">
+        role_sort = #{roleSort,jdbcType=INTEGER},
+      </if>
+      <if test="dataScope != null">
+        data_scope = #{dataScope,jdbcType=CHAR},
+      </if>
+      <if test="menuCheckStrictly != null">
+        menu_check_strictly = #{menuCheckStrictly,jdbcType=BOOLEAN},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=CHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

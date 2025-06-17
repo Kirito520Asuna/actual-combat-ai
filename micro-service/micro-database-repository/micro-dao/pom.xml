@@ -12,4 +12,8 @@
     <artifactId>micro-dao</artifactId>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>basic-dao</module>
+    </modules>
+
 </project>

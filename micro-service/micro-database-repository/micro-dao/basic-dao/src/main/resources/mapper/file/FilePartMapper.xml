@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.actual.combat.file.mapper.FilePartMapper">
+  <resultMap id="BaseResultMap" type="com.actual.combat.file.domain.FilePart">
+    <!--@mbg.generated-->
+    <!--@Table file_part-->
+    <id column="part_id" jdbcType="BIGINT" property="partId" />
+    <result column="part_code" jdbcType="VARCHAR" property="partCode" />
+    <result column="file_id" jdbcType="BIGINT" property="fileId" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="local_resource" jdbcType="VARCHAR" property="localResource" />
+    <result column="is_local" jdbcType="BOOLEAN" property="local" />
+    <result column="part_size" jdbcType="BIGINT" property="partSize" />
+    <result column="part_sort" jdbcType="INTEGER" property="partSort" />
+    <result column="merge_delete" jdbcType="BOOLEAN" property="mergeDelete" />
+    <result column="os_type" jdbcType="VARCHAR" property="osType" />
+    <result column="upload_dir" jdbcType="VARCHAR" property="uploadDir" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    part_id, part_code, file_id, url, local_resource, is_local, part_size, part_sort, 
+    merge_delete, os_type, upload_dir
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update file_part
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="part_code = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when part_id = #{item.partId,jdbcType=BIGINT} then #{item.partCode,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="file_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when part_id = #{item.partId,jdbcType=BIGINT} then #{item.fileId,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="url = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when part_id = #{item.partId,jdbcType=BIGINT} then #{item.url,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="local_resource = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when part_id = #{item.partId,jdbcType=BIGINT} then #{item.localResource,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="is_local = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when part_id = #{item.partId,jdbcType=BIGINT} then #{item.local,jdbcType=BOOLEAN}
+        </foreach>
+      </trim>
+      <trim prefix="part_size = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when part_id = #{item.partId,jdbcType=BIGINT} then #{item.partSize,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="part_sort = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when part_id = #{item.partId,jdbcType=BIGINT} then #{item.partSort,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="merge_delete = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when part_id = #{item.partId,jdbcType=BIGINT} then #{item.mergeDelete,jdbcType=BOOLEAN}
+        </foreach>
+      </trim>
+      <trim prefix="os_type = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when part_id = #{item.partId,jdbcType=BIGINT} then #{item.osType,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="upload_dir = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when part_id = #{item.partId,jdbcType=BIGINT} then #{item.uploadDir,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+    </trim>
+    where part_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.partId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update file_part
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="part_code = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.partCode != null">
+            when part_id = #{item.partId,jdbcType=BIGINT} then #{item.partCode,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="file_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.fileId != null">
+            when part_id = #{item.partId,jdbcType=BIGINT} then #{item.fileId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="url = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.url != null">
+            when part_id = #{item.partId,jdbcType=BIGINT} then #{item.url,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="local_resource = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.localResource != null">
+            when part_id = #{item.partId,jdbcType=BIGINT} then #{item.localResource,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_local = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.local != null">
+            when part_id = #{item.partId,jdbcType=BIGINT} then #{item.local,jdbcType=BOOLEAN}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="part_size = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.partSize != null">
+            when part_id = #{item.partId,jdbcType=BIGINT} then #{item.partSize,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="part_sort = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.partSort != null">
+            when part_id = #{item.partId,jdbcType=BIGINT} then #{item.partSort,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="merge_delete = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.mergeDelete != null">
+            when part_id = #{item.partId,jdbcType=BIGINT} then #{item.mergeDelete,jdbcType=BOOLEAN}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="os_type = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.osType != null">
+            when part_id = #{item.partId,jdbcType=BIGINT} then #{item.osType,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="upload_dir = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.uploadDir != null">
+            when part_id = #{item.partId,jdbcType=BIGINT} then #{item.uploadDir,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where part_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.partId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="part_id" keyProperty="partId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into file_part
+    (part_code, file_id, url, local_resource, is_local, part_size, part_sort, merge_delete, 
+      os_type, upload_dir)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.partCode,jdbcType=VARCHAR}, #{item.fileId,jdbcType=BIGINT}, #{item.url,jdbcType=VARCHAR}, 
+        #{item.localResource,jdbcType=VARCHAR}, #{item.local,jdbcType=BOOLEAN}, #{item.partSize,jdbcType=BIGINT}, 
+        #{item.partSort,jdbcType=INTEGER}, #{item.mergeDelete,jdbcType=BOOLEAN}, #{item.osType,jdbcType=VARCHAR}, 
+        #{item.uploadDir,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <insert id="batchInsertOrUpdate" keyColumn="part_id" keyProperty="partId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into file_part
+    (part_code, file_id, url, local_resource, is_local, part_size, part_sort, merge_delete, 
+      os_type, upload_dir)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.partCode,jdbcType=VARCHAR}, #{item.fileId,jdbcType=BIGINT}, #{item.url,jdbcType=VARCHAR}, 
+        #{item.localResource,jdbcType=VARCHAR}, #{item.local,jdbcType=BOOLEAN}, #{item.partSize,jdbcType=BIGINT}, 
+        #{item.partSort,jdbcType=INTEGER}, #{item.mergeDelete,jdbcType=BOOLEAN}, #{item.osType,jdbcType=VARCHAR}, 
+        #{item.uploadDir,jdbcType=VARCHAR})
+    </foreach>
+    on duplicate key update 
+    part_code=values(part_code),
+    file_id=values(file_id),
+    url=values(url),
+    local_resource=values(local_resource),
+    is_local=values(is_local),
+    part_size=values(part_size),
+    part_sort=values(part_sort),
+    merge_delete=values(merge_delete),
+    os_type=values(os_type),
+    upload_dir=values(upload_dir)
+  </insert>
+  <delete id="deleteByPrimaryKeyIn">
+    <!--@mbg.generated-->
+    delete from file_part where part_id in 
+    <foreach close=")" collection="list" item="partId" open="(" separator=", ">
+      #{partId,jdbcType=BIGINT}
+    </foreach>
+  </delete>
+  <update id="updateBatchUseMultiQuery" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    <foreach collection="list" item="item" separator=";">
+      update file_part
+      <set>
+        <if test="item.partCode != null">
+          part_code = #{item.partCode,jdbcType=VARCHAR},
+        </if>
+        <if test="item.fileId != null">
+          file_id = #{item.fileId,jdbcType=BIGINT},
+        </if>
+        <if test="item.url != null">
+          url = #{item.url,jdbcType=VARCHAR},
+        </if>
+        <if test="item.localResource != null">
+          local_resource = #{item.localResource,jdbcType=VARCHAR},
+        </if>
+        <if test="item.local != null">
+          is_local = #{item.local,jdbcType=BOOLEAN},
+        </if>
+        <if test="item.partSize != null">
+          part_size = #{item.partSize,jdbcType=BIGINT},
+        </if>
+        <if test="item.partSort != null">
+          part_sort = #{item.partSort,jdbcType=INTEGER},
+        </if>
+        <if test="item.mergeDelete != null">
+          merge_delete = #{item.mergeDelete,jdbcType=BOOLEAN},
+        </if>
+        <if test="item.osType != null">
+          os_type = #{item.osType,jdbcType=VARCHAR},
+        </if>
+        <if test="item.uploadDir != null">
+          upload_dir = #{item.uploadDir,jdbcType=VARCHAR},
+        </if>
+      </set>
+      where part_id = #{item.partId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsertSelectiveUseDefaultForNull" keyColumn="part_id" keyProperty="partId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into file_part
+    (part_code, file_id, url, local_resource, is_local, part_size, part_sort, merge_delete, 
+      os_type, upload_dir)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <choose>
+        <when test="item.partCode != null">
+          #{item.partCode,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.fileId != null">
+          #{item.fileId,jdbcType=BIGINT},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.url != null">
+          #{item.url,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.localResource != null">
+          #{item.localResource,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.local != null">
+          #{item.local,jdbcType=BOOLEAN},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.partSize != null">
+          #{item.partSize,jdbcType=BIGINT},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.partSort != null">
+          #{item.partSort,jdbcType=INTEGER},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.mergeDelete != null">
+          #{item.mergeDelete,jdbcType=BOOLEAN},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.osType != null">
+          #{item.osType,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.uploadDir != null">
+          #{item.uploadDir,jdbcType=VARCHAR}
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT
+        </otherwise>
+      </choose>
+      )
+    </foreach>
+  </insert>
+  <insert id="insertOnDuplicateUpdate" keyColumn="part_id" keyProperty="partId" parameterType="com.actual.combat.file.domain.FilePart" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into file_part
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="partId != null">
+        part_id,
+      </if>
+      part_code,
+      file_id,
+      url,
+      local_resource,
+      is_local,
+      part_size,
+      part_sort,
+      merge_delete,
+      os_type,
+      upload_dir,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="partId != null">
+        #{partId,jdbcType=BIGINT},
+      </if>
+      #{partCode,jdbcType=VARCHAR},
+      #{fileId,jdbcType=BIGINT},
+      #{url,jdbcType=VARCHAR},
+      #{localResource,jdbcType=VARCHAR},
+      #{local,jdbcType=BOOLEAN},
+      #{partSize,jdbcType=BIGINT},
+      #{partSort,jdbcType=INTEGER},
+      #{mergeDelete,jdbcType=BOOLEAN},
+      #{osType,jdbcType=VARCHAR},
+      #{uploadDir,jdbcType=VARCHAR},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="partId != null">
+        part_id = #{partId,jdbcType=BIGINT},
+      </if>
+      part_code = #{partCode,jdbcType=VARCHAR},
+      file_id = #{fileId,jdbcType=BIGINT},
+      url = #{url,jdbcType=VARCHAR},
+      local_resource = #{localResource,jdbcType=VARCHAR},
+      is_local = #{local,jdbcType=BOOLEAN},
+      part_size = #{partSize,jdbcType=BIGINT},
+      part_sort = #{partSort,jdbcType=INTEGER},
+      merge_delete = #{mergeDelete,jdbcType=BOOLEAN},
+      os_type = #{osType,jdbcType=VARCHAR},
+      upload_dir = #{uploadDir,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateUpdateSelective" keyColumn="part_id" keyProperty="partId" parameterType="com.actual.combat.file.domain.FilePart" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into file_part
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="partId != null">
+        part_id,
+      </if>
+      <if test="partCode != null">
+        part_code,
+      </if>
+      <if test="fileId != null">
+        file_id,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="localResource != null">
+        local_resource,
+      </if>
+      <if test="local != null">
+        is_local,
+      </if>
+      <if test="partSize != null">
+        part_size,
+      </if>
+      <if test="partSort != null">
+        part_sort,
+      </if>
+      <if test="mergeDelete != null">
+        merge_delete,
+      </if>
+      <if test="osType != null">
+        os_type,
+      </if>
+      <if test="uploadDir != null">
+        upload_dir,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="partId != null">
+        #{partId,jdbcType=BIGINT},
+      </if>
+      <if test="partCode != null">
+        #{partCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null">
+        #{fileId,jdbcType=BIGINT},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="localResource != null">
+        #{localResource,jdbcType=VARCHAR},
+      </if>
+      <if test="local != null">
+        #{local,jdbcType=BOOLEAN},
+      </if>
+      <if test="partSize != null">
+        #{partSize,jdbcType=BIGINT},
+      </if>
+      <if test="partSort != null">
+        #{partSort,jdbcType=INTEGER},
+      </if>
+      <if test="mergeDelete != null">
+        #{mergeDelete,jdbcType=BOOLEAN},
+      </if>
+      <if test="osType != null">
+        #{osType,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadDir != null">
+        #{uploadDir,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="partId != null">
+        part_id = #{partId,jdbcType=BIGINT},
+      </if>
+      <if test="partCode != null">
+        part_code = #{partCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null">
+        file_id = #{fileId,jdbcType=BIGINT},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="localResource != null">
+        local_resource = #{localResource,jdbcType=VARCHAR},
+      </if>
+      <if test="local != null">
+        is_local = #{local,jdbcType=BOOLEAN},
+      </if>
+      <if test="partSize != null">
+        part_size = #{partSize,jdbcType=BIGINT},
+      </if>
+      <if test="partSort != null">
+        part_sort = #{partSort,jdbcType=INTEGER},
+      </if>
+      <if test="mergeDelete != null">
+        merge_delete = #{mergeDelete,jdbcType=BOOLEAN},
+      </if>
+      <if test="osType != null">
+        os_type = #{osType,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadDir != null">
+        upload_dir = #{uploadDir,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+    <select id="getPartList" resultType="com.actual.combat.vo.PartVo">
+        select url, local_resource localResource, is_local `local`,upload_dir uploadDir,os_type osType
+        from file_part
+        where
+        part_code = #{identifier}
+        <if test="fileId != null">
+            and file_id = #{fileId}
+        </if>
+        order by part_sort asc
+    </select>
+
+    <delete id="deleteByFileId">
+        delete from file_part where part_code = #{identifier}
+        <if test="identifier != null and identifier != ''">
+            and file_id = #{fileId}
+        </if>
+    </delete>
+
+    <select id="getPartsByFileIdFirstPartCount" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from file_part
+        where file_id = #{fileId}
+        <if test="excludeIds != null and excludeIds.size() != 0">
+            and part_id not in
+            <foreach close=")" collection="excludeIds" item="item" open="(" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        order by part_sort asc limit #{partCount}
+    </select>
+</mapper>

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.actual.combat.user.mapper.SysMenuAncestorDao">
+    <resultMap id="BaseResultMap" type="com.actual.combat.user.domain.SysMenuAncestor">
+        <!--@mbg.generated-->
+        <!--@Table sys_menu_ancestor-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="menu_id" jdbcType="BIGINT" property="menuId"/>
+        <result column="menu_parent_id" jdbcType="BIGINT" property="menuParentId"/>
+        <result column="level" jdbcType="BIGINT" property="level"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, menu_id, menu_parent_id, `level`
+    </sql>
+
+    <sql id="ancestorInsertInto">
+        <!--@mbg.generated-->
+        <if test="ids != null and ids.size() != 0">
+            INSERT INTO `sys_menu_ancestor` (`menu_id`, `menu_parent_id`, `level`)
+            SELECT `id`, `parent_id`, `level`
+            FROM (
+            <foreach collection="ids" item="idOneInsert" index="i">
+                SELECT #{idOneInsert} as `id`, #{idOneInsert} as `parent_id`, 0 as `level`
+                UNION ALL
+                -- 递归查询所有父级菜单 ID
+                (WITH RECURSIVE ParentMenus AS (SELECT `menu_id`, `parent_id`, 1 AS `level`
+                FROM `sys_menu`
+                WHERE `menu_id` = #{idOneInsert}
+                UNION ALL
+                SELECT m.`menu_id`, m.`parent_id`, (pm.`level` + 1) as `level`
+                FROM `sys_menu` m
+                INNER JOIN ParentMenus pm ON m.`menu_id` = pm.`parent_id`)
+                SELECT #{idOneInsert} as `id`, `parent_id`, `level`
+                FROM ParentMenus
+                WHERE `parent_id` != 0)
+                <choose>
+                    <when test="i != (ids.size() - 1)">
+                        UNION ALL
+                    </when>
+                </choose>
+            </foreach>
+            ) as ancestorInsertInto
+        </if>
+    </sql>
+
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update sys_menu_ancestor
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="`menu_id` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.menuId != null">
+                        when `id` = #{item.id,jdbcType=BIGINT} then #{item.menuId,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="`menu_parent_id` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.menuParentId != null">
+                        when `id` = #{item.id,jdbcType=BIGINT} then #{item.menuParentId,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="`level` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.level != null">
+                        when `id` = #{item.id,jdbcType=BIGINT} then #{item.level,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where `id` in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into sys_menu_ancestor
+        (menu_id, menu_parent_id, `level`)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.menuId,jdbcType=BIGINT}, #{item.menuParentId,jdbcType=BIGINT}, #{item.level,jdbcType=BIGINT}
+            )
+        </foreach>
+    </insert>
+    <delete id="deleteByPrimaryKeyIn">
+        <!--@mbg.generated-->
+        delete from `sys_menu_ancestor` where `id`
+        <foreach close=")" collection="list" item="id" open=" in (" separator=", ">
+            #{id,jdbcType=BIGINT}
+        </foreach>
+    </delete>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        <foreach collection="list" item="item" separator=";">
+            update `sys_menu_ancestor`
+            <set>
+                <if test="item.menuId != null">
+                    `menu_id` = #{item.menuId,jdbcType=BIGINT},
+                </if>
+                <if test="item.menuParentId != null">
+                    `menu_parent_id` = #{item.menuParentId,jdbcType=BIGINT},
+                </if>
+                <if test="item.level != null">
+                    `level` = #{item.level,jdbcType=BIGINT},
+                </if>
+            </set>
+            where `id` = #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <insert id="batchInsertSelectiveUseDefaultForNull" keyColumn="id" keyProperty="id" parameterType="map"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into sys_menu_ancestor
+        (menu_id, menu_parent_id, `level`)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+            <choose>
+                <when test="item.menuId != null">
+                    #{item.menuId,jdbcType=BIGINT},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.menuParentId != null">
+                    #{item.menuParentId,jdbcType=BIGINT},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.level != null">
+                    #{item.level,jdbcType=BIGINT}
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT
+                </otherwise>
+            </choose>
+            )
+        </foreach>
+    </insert>
+    <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.actual.combat.user.domain.SysMenuAncestor"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into sys_menu_ancestor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            menu_id,
+            menu_parent_id,
+            `level`,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            #{menuId,jdbcType=BIGINT},
+            #{menuParentId,jdbcType=BIGINT},
+            #{level,jdbcType=BIGINT},
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            menu_id = #{menuId,jdbcType=BIGINT},
+            menu_parent_id = #{menuParentId,jdbcType=BIGINT},
+            `level` = #{level,jdbcType=BIGINT},
+        </trim>
+    </insert>
+    <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.actual.combat.user.domain.SysMenuAncestor" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into `sys_menu_ancestor`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="menuId != null">
+                menu_id,
+            </if>
+            <if test="menuParentId != null">
+                menu_parent_id,
+            </if>
+            <if test="level != null">
+                `level`,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="menuId != null">
+                #{menuId,jdbcType=BIGINT},
+            </if>
+            <if test="menuParentId != null">
+                #{menuParentId,jdbcType=BIGINT},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=BIGINT},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="menuId != null">
+                menu_id = #{menuId,jdbcType=BIGINT},
+            </if>
+            <if test="menuParentId != null">
+                menu_parent_id = #{menuParentId,jdbcType=BIGINT},
+            </if>
+            <if test="level != null">
+                `level` = #{level,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectByCustomMap" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `sys_menu_ancestor`
+        <where>
+            <if test="menuId != null">
+                and menu_id = #{menuId,jdbcType=BIGINT}
+            </if>
+            <if test="menuParentId != null">
+                and `menu_parent_id` = #{menuParentId,jdbcType=BIGINT}
+            </if>
+            <if test="level != null">
+                and `level` = #{level,jdbcType=INTEGER}
+            </if>
+            <if test="levelNeq != null">
+                and `level` != #{level,jdbcType=INTEGER}
+            </if>
+            <if test="levelGt != null">
+                and `level` &gt;= #{levelGt,jdbcType=INTEGER}
+            </if>
+            <if test="parentIds != null and parentIds.size() != 0">
+                and `menu_parent_id` in
+                <foreach close=")" collection="parentIds" item="parentId" open=" (" separator=",">
+                    #{parentId,jdbcType=INTEGER}
+                </foreach>
+            </if>
+            <if test="treeIds != null and treeIds.size() != 0">
+                and `menu_id` in
+                <foreach close=")" collection="treeIds" item="id" open=" (" separator=",">
+                    #{id,jdbcType=INTEGER}
+                </foreach>
+            </if>
+        </where>
+        <if test="levelOrderAsc">
+            order by `level` asc
+        </if>
+        <if test="levelOrderDesc">
+            order by `level` desc
+        </if>
+        <if test="limitOne">
+            limit 1
+        </if>
+    </select>
+
+    <delete id="deleteByCustomMap">
+        <if test="map != null">
+            delete from `sys_menu_ancestor`
+            <where>
+                <if test="map.ids != null and map.ids.size() != 0">
+                    and `id` in
+                    <foreach close=")" collection="map.ids" item="idOne" open="(" separator=",">
+                        #{idOne}
+                    </foreach>
+                </if>
+                <if test="map.menuId != null">
+                    and `menu_id` = #{map.menuId}
+                </if>
+                <if test="map.menuParentId != null">
+                    and `menu_parent_id` = #{map.menuParentId}
+                </if>
+                <if test="map.levelGt != null">
+                    and `level` &gt;= #{map.levelGt}
+                </if>
+            </where>
+        </if>
+    </delete>
+</mapper>

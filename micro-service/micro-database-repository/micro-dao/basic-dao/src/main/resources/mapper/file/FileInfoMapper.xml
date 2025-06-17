@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.actual.combat.file.mapper.FileInfoMapper">
+  <resultMap id="BaseResultMap" type="com.actual.combat.file.domain.FileInfo">
+    <!--@mbg.generated-->
+    <!--@Table file_info-->
+    <id column="file_id" jdbcType="BIGINT" property="fileId" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="upload_dir" jdbcType="VARCHAR" property="uploadDir" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="suffix" jdbcType="VARCHAR" property="suffix" />
+    <result column="is_img" jdbcType="BOOLEAN" property="img" />
+    <result column="size" jdbcType="BIGINT" property="size" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="is_dir" jdbcType="BOOLEAN" property="dir" />
+    <result column="is_local" jdbcType="BOOLEAN" property="local" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="part_code" jdbcType="VARCHAR" property="partCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    file_id, url, upload_dir, `name`, file_name, suffix, is_img, `size`, `type`, is_dir, 
+    is_local, parent_id, create_by, create_time, update_by, update_time, remark, part_code
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update file_info
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="url = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.url,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="upload_dir = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.uploadDir,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="`name` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.name,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="file_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.fileName,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="suffix = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.suffix,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="is_img = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.img,jdbcType=BOOLEAN}
+        </foreach>
+      </trim>
+      <trim prefix="`size` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.size,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="`type` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.type,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="is_dir = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.dir,jdbcType=BOOLEAN}
+        </foreach>
+      </trim>
+      <trim prefix="is_local = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.local,jdbcType=BOOLEAN}
+        </foreach>
+      </trim>
+      <trim prefix="parent_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.parentId,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="create_by = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.createBy,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="update_by = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.updateBy,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="remark = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.remark,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="part_code = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.partCode,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+    </trim>
+    where file_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.fileId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update file_info
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="url = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.url != null">
+            when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.url,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="upload_dir = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.uploadDir != null">
+            when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.uploadDir,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`name` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.name != null">
+            when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.name,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="file_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.fileName != null">
+            when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.fileName,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="suffix = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.suffix != null">
+            when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.suffix,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_img = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.img != null">
+            when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.img,jdbcType=BOOLEAN}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`size` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.size != null">
+            when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.size,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`type` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.type != null">
+            when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.type,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_dir = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.dir != null">
+            when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.dir,jdbcType=BOOLEAN}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_local = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.local != null">
+            when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.local,jdbcType=BOOLEAN}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="parent_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.parentId != null">
+            when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.parentId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_by = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createBy != null">
+            when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.createBy,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_by = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateBy != null">
+            when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.updateBy,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateTime != null">
+            when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="remark = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.remark != null">
+            when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.remark,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="part_code = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.partCode != null">
+            when file_id = #{item.fileId,jdbcType=BIGINT} then #{item.partCode,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where file_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.fileId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="file_id" keyProperty="fileId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into file_info
+    (url, upload_dir, `name`, file_name, suffix, is_img, `size`, `type`, is_dir, is_local, 
+      parent_id, create_by, create_time, update_by, update_time, remark, part_code)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.url,jdbcType=VARCHAR}, #{item.uploadDir,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, 
+        #{item.fileName,jdbcType=VARCHAR}, #{item.suffix,jdbcType=VARCHAR}, #{item.img,jdbcType=BOOLEAN}, 
+        #{item.size,jdbcType=BIGINT}, #{item.type,jdbcType=VARCHAR}, #{item.dir,jdbcType=BOOLEAN}, 
+        #{item.local,jdbcType=BOOLEAN}, #{item.parentId,jdbcType=BIGINT}, #{item.createBy,jdbcType=VARCHAR}, 
+        #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateTime,jdbcType=TIMESTAMP}, 
+        #{item.remark,jdbcType=VARCHAR}, #{item.partCode,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <delete id="deleteByPrimaryKeyIn">
+    <!--@mbg.generated-->
+    delete from file_info where file_id in 
+    <foreach close=")" collection="list" item="fileId" open="(" separator=", ">
+      #{fileId,jdbcType=BIGINT}
+    </foreach>
+  </delete>
+  <update id="updateBatchUseMultiQuery" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    <foreach collection="list" item="item" separator=";">
+      update file_info
+      <set>
+        <if test="item.url != null">
+          url = #{item.url,jdbcType=VARCHAR},
+        </if>
+        <if test="item.uploadDir != null">
+          upload_dir = #{item.uploadDir,jdbcType=VARCHAR},
+        </if>
+        <if test="item.name != null">
+          `name` = #{item.name,jdbcType=VARCHAR},
+        </if>
+        <if test="item.fileName != null">
+          file_name = #{item.fileName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.suffix != null">
+          suffix = #{item.suffix,jdbcType=VARCHAR},
+        </if>
+        <if test="item.img != null">
+          is_img = #{item.img,jdbcType=BOOLEAN},
+        </if>
+        <if test="item.size != null">
+          `size` = #{item.size,jdbcType=BIGINT},
+        </if>
+        <if test="item.type != null">
+          `type` = #{item.type,jdbcType=VARCHAR},
+        </if>
+        <if test="item.dir != null">
+          is_dir = #{item.dir,jdbcType=BOOLEAN},
+        </if>
+        <if test="item.local != null">
+          is_local = #{item.local,jdbcType=BOOLEAN},
+        </if>
+        <if test="item.parentId != null">
+          parent_id = #{item.parentId,jdbcType=BIGINT},
+        </if>
+        <if test="item.createBy != null">
+          create_by = #{item.createBy,jdbcType=VARCHAR},
+        </if>
+        <if test="item.createTime != null">
+          create_time = #{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.updateBy != null">
+          update_by = #{item.updateBy,jdbcType=VARCHAR},
+        </if>
+        <if test="item.updateTime != null">
+          update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.remark != null">
+          remark = #{item.remark,jdbcType=VARCHAR},
+        </if>
+        <if test="item.partCode != null">
+          part_code = #{item.partCode,jdbcType=VARCHAR},
+        </if>
+      </set>
+      where file_id = #{item.fileId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsertSelectiveUseDefaultForNull" keyColumn="file_id" keyProperty="fileId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into file_info
+    (url, upload_dir, `name`, file_name, suffix, is_img, `size`, `type`, is_dir, is_local, 
+      parent_id, create_by, create_time, update_by, update_time, remark, part_code)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <choose>
+        <when test="item.url != null">
+          #{item.url,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.uploadDir != null">
+          #{item.uploadDir,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.name != null">
+          #{item.name,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.fileName != null">
+          #{item.fileName,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.suffix != null">
+          #{item.suffix,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.img != null">
+          #{item.img,jdbcType=BOOLEAN},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.size != null">
+          #{item.size,jdbcType=BIGINT},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.type != null">
+          #{item.type,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.dir != null">
+          #{item.dir,jdbcType=BOOLEAN},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.local != null">
+          #{item.local,jdbcType=BOOLEAN},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.parentId != null">
+          #{item.parentId,jdbcType=BIGINT},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.createBy != null">
+          #{item.createBy,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.createTime != null">
+          #{item.createTime,jdbcType=TIMESTAMP},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.updateBy != null">
+          #{item.updateBy,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.updateTime != null">
+          #{item.updateTime,jdbcType=TIMESTAMP},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.remark != null">
+          #{item.remark,jdbcType=VARCHAR},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.partCode != null">
+          #{item.partCode,jdbcType=VARCHAR}
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT
+        </otherwise>
+      </choose>
+      )
+    </foreach>
+  </insert>
+  <insert id="insertOnDuplicateUpdate" keyColumn="file_id" keyProperty="fileId" parameterType="com.actual.combat.file.domain.FileInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into file_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        file_id,
+      </if>
+      url,
+      upload_dir,
+      `name`,
+      file_name,
+      suffix,
+      is_img,
+      `size`,
+      `type`,
+      is_dir,
+      is_local,
+      parent_id,
+      create_by,
+      create_time,
+      update_by,
+      update_time,
+      remark,
+      part_code,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        #{fileId,jdbcType=BIGINT},
+      </if>
+      #{url,jdbcType=VARCHAR},
+      #{uploadDir,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR},
+      #{fileName,jdbcType=VARCHAR},
+      #{suffix,jdbcType=VARCHAR},
+      #{img,jdbcType=BOOLEAN},
+      #{size,jdbcType=BIGINT},
+      #{type,jdbcType=VARCHAR},
+      #{dir,jdbcType=BOOLEAN},
+      #{local,jdbcType=BOOLEAN},
+      #{parentId,jdbcType=BIGINT},
+      #{createBy,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{updateBy,jdbcType=VARCHAR},
+      #{updateTime,jdbcType=TIMESTAMP},
+      #{remark,jdbcType=VARCHAR},
+      #{partCode,jdbcType=VARCHAR},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="fileId != null">
+        file_id = #{fileId,jdbcType=BIGINT},
+      </if>
+      url = #{url,jdbcType=VARCHAR},
+      upload_dir = #{uploadDir,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      suffix = #{suffix,jdbcType=VARCHAR},
+      is_img = #{img,jdbcType=BOOLEAN},
+      `size` = #{size,jdbcType=BIGINT},
+      `type` = #{type,jdbcType=VARCHAR},
+      is_dir = #{dir,jdbcType=BOOLEAN},
+      is_local = #{local,jdbcType=BOOLEAN},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      part_code = #{partCode,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateUpdateSelective" keyColumn="file_id" keyProperty="fileId" parameterType="com.actual.combat.file.domain.FileInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into file_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        file_id,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="uploadDir != null">
+        upload_dir,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="fileName != null">
+        file_name,
+      </if>
+      <if test="suffix != null">
+        suffix,
+      </if>
+      <if test="img != null">
+        is_img,
+      </if>
+      <if test="size != null">
+        `size`,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="dir != null">
+        is_dir,
+      </if>
+      <if test="local != null">
+        is_local,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="partCode != null">
+        part_code,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        #{fileId,jdbcType=BIGINT},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadDir != null">
+        #{uploadDir,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="suffix != null">
+        #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=BOOLEAN},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="dir != null">
+        #{dir,jdbcType=BOOLEAN},
+      </if>
+      <if test="local != null">
+        #{local,jdbcType=BOOLEAN},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="partCode != null">
+        #{partCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="fileId != null">
+        file_id = #{fileId,jdbcType=BIGINT},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadDir != null">
+        upload_dir = #{uploadDir,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="suffix != null">
+        suffix = #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        is_img = #{img,jdbcType=BOOLEAN},
+      </if>
+      <if test="size != null">
+        `size` = #{size,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="dir != null">
+        is_dir = #{dir,jdbcType=BOOLEAN},
+      </if>
+      <if test="local != null">
+        is_local = #{local,jdbcType=BOOLEAN},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="partCode != null">
+        part_code = #{partCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

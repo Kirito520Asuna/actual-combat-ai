@@ -1,0 +1,852 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.actual.combat.user.mapper.SysUserDao">
+    <resultMap id="BaseResultMap" type="com.actual.combat.user.domain.SysUser">
+        <!--@mbg.generated-->
+        <!--@Table sys_user-->
+        <id column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+        <result column="user_type" jdbcType="VARCHAR" property="userType"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber"/>
+        <result column="sex" jdbcType="CHAR" property="sex"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="del_flag" jdbcType="CHAR" property="delFlag"/>
+        <result column="login_ip" jdbcType="VARCHAR" property="loginIp"/>
+        <result column="login_date" jdbcType="TIMESTAMP" property="loginDate"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+
+
+    <resultMap type="com.actual.combat.user.domain.SysUser" id="UserResult">
+        <id property="userId" column="user_id"/>
+<!--        <result property="deptId" column="dept_id"/>-->
+        <result property="userName" column="user_name"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="email" column="email"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="sex" column="sex"/>
+        <result property="avatar" column="avatar"/>
+        <result property="password" column="password"/>
+        <result property="status" column="status"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="loginIp" column="login_ip"/>
+        <result property="loginDate" column="login_date"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+        <association property="dept"  resultMap="deptResult"/>
+        <collection property="roles" javaType="java.util.List" resultMap="RoleResult"/>
+    </resultMap>
+
+    <resultMap id="deptResult" type="com.actual.combat.dept.domain.SysDept">
+        <id property="deptId" column="dept_id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="deptName" column="dept_name"/>
+        <!--        <result property="ancestors" column="ancestors"   />-->
+        <result property="orderNum" column="order_num"/>
+        <result property="leader" column="leader"/>
+        <result property="status" column="dept_status"/>
+    </resultMap>
+
+    <resultMap id="RoleResult" type="com.actual.combat.user.domain.SysRole">
+        <id property="roleId" column="role_id"/>
+        <result property="roleName" column="role_name"/>
+        <result property="roleKey" column="role_key"/>
+        <result property="roleSort" column="role_sort"/>
+        <result property="dataScope" column="data_scope"/>
+        <result property="status" column="role_status"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        `user_id`, user_name, nick_name, user_type, email, phone_number, sex, avatar, `password`,
+        `status`, del_flag, login_ip, login_date, create_by, create_time, update_by, update_time,
+        `remark`
+    </sql>
+    <sql id="Base_Column_User_List">
+        <!--@mbg.generated-->
+        `sys_user`.user_id,`sys_user`.`user_name`,`sys_user`.`nick_name`,`sys_user`.`password`,`sys_user`.`avatar`
+    </sql>
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update `sys_user`
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="user_name = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.userName != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.userName,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="nick_name = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.nickName != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.nickName,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="user_type = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.userType != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.userType,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="email = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.email != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.email,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="phone_number = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.phoneNumber != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.phoneNumber,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="sex = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.sex != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.sex,jdbcType=CHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="avatar = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.avatar != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.avatar,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="`password` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.password != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.password,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="`status` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.status != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.status,jdbcType=CHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="del_flag = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.delFlag != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.delFlag,jdbcType=CHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="login_ip = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.loginIp != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.loginIp,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="login_date = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.loginDate != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.loginDate,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="create_by = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.createBy != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.createBy,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="create_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.createTime != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="update_by = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.updateBy != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.updateBy,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="update_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.updateTime != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="remark = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.remark != null">
+                        when user_id = #{item.userId,jdbcType=BIGINT} then #{item.remark,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where user_id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.userId,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <insert id="batchInsert" keyColumn="user_id" keyProperty="userId" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into `sys_user`
+        (user_name, nick_name, user_type, email, phone_number, sex, avatar, `password`, `status`,
+        del_flag, login_ip, login_date, create_by, create_time, update_by, update_time,
+        remark)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.userName,jdbcType=VARCHAR}, #{item.nickName,jdbcType=VARCHAR}, #{item.userType,jdbcType=VARCHAR},
+            #{item.email,jdbcType=VARCHAR}, #{item.phoneNumber,jdbcType=VARCHAR}, #{item.sex,jdbcType=CHAR},
+            #{item.avatar,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.status,jdbcType=CHAR},
+            #{item.delFlag,jdbcType=CHAR}, #{item.loginIp,jdbcType=VARCHAR}, #{item.loginDate,jdbcType=TIMESTAMP},
+            #{item.createBy,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR},
+            #{item.updateTime,jdbcType=TIMESTAMP}, #{item.remark,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <delete id="deleteByPrimaryKeyIn">
+        <!--@mbg.generated-->
+        delete from sys_user where user_id in
+        <foreach close=")" collection="list" item="userId" open="(" separator=", ">
+            #{userId,jdbcType=BIGINT}
+        </foreach>
+    </delete>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        <foreach collection="list" item="item" separator=";">
+            update `sys_user`
+            <set>
+                <if test="item.userName != null">
+                    user_name = #{item.userName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.nickName != null">
+                    nick_name = #{item.nickName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.userType != null">
+                    user_type = #{item.userType,jdbcType=VARCHAR},
+                </if>
+                <if test="item.email != null">
+                    email = #{item.email,jdbcType=VARCHAR},
+                </if>
+                <if test="item.phoneNumber != null">
+                    phone_number = #{item.phoneNumber,jdbcType=VARCHAR},
+                </if>
+                <if test="item.sex != null">
+                    sex = #{item.sex,jdbcType=CHAR},
+                </if>
+                <if test="item.avatar != null">
+                    avatar = #{item.avatar,jdbcType=VARCHAR},
+                </if>
+                <if test="item.password != null">
+                    `password` = #{item.password,jdbcType=VARCHAR},
+                </if>
+                <if test="item.status != null">
+                    `status` = #{item.status,jdbcType=CHAR},
+                </if>
+                <if test="item.delFlag != null">
+                    del_flag = #{item.delFlag,jdbcType=CHAR},
+                </if>
+                <if test="item.loginIp != null">
+                    login_ip = #{item.loginIp,jdbcType=VARCHAR},
+                </if>
+                <if test="item.loginDate != null">
+                    login_date = #{item.loginDate,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.createBy != null">
+                    create_by = #{item.createBy,jdbcType=VARCHAR},
+                </if>
+                <if test="item.createTime != null">
+                    create_time = #{item.createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.updateBy != null">
+                    update_by = #{item.updateBy,jdbcType=VARCHAR},
+                </if>
+                <if test="item.updateTime != null">
+                    update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.remark != null">
+                    remark = #{item.remark,jdbcType=VARCHAR},
+                </if>
+            </set>
+            where user_id = #{item.userId,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <insert id="batchInsertSelectiveUseDefaultForNull" keyColumn="user_id" keyProperty="userId" parameterType="map"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into `sys_user`
+        (user_name, nick_name, user_type, email, phone_number, sex, avatar, `password`, `status`,
+        del_flag, login_ip, login_date, create_by, create_time, update_by, update_time,
+        remark)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+            <choose>
+                <when test="item.userName != null">
+                    #{item.userName,jdbcType=VARCHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.nickName != null">
+                    #{item.nickName,jdbcType=VARCHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.userType != null">
+                    #{item.userType,jdbcType=VARCHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.email != null">
+                    #{item.email,jdbcType=VARCHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.phoneNumber != null">
+                    #{item.phoneNumber,jdbcType=VARCHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.sex != null">
+                    #{item.sex,jdbcType=CHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.avatar != null">
+                    #{item.avatar,jdbcType=VARCHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.password != null">
+                    #{item.password,jdbcType=VARCHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.status != null">
+                    #{item.status,jdbcType=CHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.delFlag != null">
+                    #{item.delFlag,jdbcType=CHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.loginIp != null">
+                    #{item.loginIp,jdbcType=VARCHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.loginDate != null">
+                    #{item.loginDate,jdbcType=TIMESTAMP},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.createBy != null">
+                    #{item.createBy,jdbcType=VARCHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.createTime != null">
+                    #{item.createTime,jdbcType=TIMESTAMP},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.updateBy != null">
+                    #{item.updateBy,jdbcType=VARCHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.updateTime != null">
+                    #{item.updateTime,jdbcType=TIMESTAMP},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.remark != null">
+                    #{item.remark,jdbcType=VARCHAR}
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT
+                </otherwise>
+            </choose>
+            )
+        </foreach>
+    </insert>
+    <insert id="insertOrUpdate" keyColumn="user_id" keyProperty="userId"
+            parameterType="com.actual.combat.user.domain.SysUser" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into `sys_user`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            user_name,
+            nick_name,
+            user_type,
+            email,
+            phone_number,
+            sex,
+            avatar,
+            `password`,
+            `status`,
+            del_flag,
+            login_ip,
+            login_date,
+            create_by,
+            create_time,
+            update_by,
+            update_time,
+            remark,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            #{userName,jdbcType=VARCHAR},
+            #{nickName,jdbcType=VARCHAR},
+            #{userType,jdbcType=VARCHAR},
+            #{email,jdbcType=VARCHAR},
+            #{phoneNumber,jdbcType=VARCHAR},
+            #{sex,jdbcType=CHAR},
+            #{avatar,jdbcType=VARCHAR},
+            #{password,jdbcType=VARCHAR},
+            #{status,jdbcType=CHAR},
+            #{delFlag,jdbcType=CHAR},
+            #{loginIp,jdbcType=VARCHAR},
+            #{loginDate,jdbcType=TIMESTAMP},
+            #{createBy,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateBy,jdbcType=VARCHAR},
+            #{updateTime,jdbcType=TIMESTAMP},
+            #{remark,jdbcType=VARCHAR},
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            user_name = #{userName,jdbcType=VARCHAR},
+            nick_name = #{nickName,jdbcType=VARCHAR},
+            user_type = #{userType,jdbcType=VARCHAR},
+            email = #{email,jdbcType=VARCHAR},
+            phone_number = #{phoneNumber,jdbcType=VARCHAR},
+            sex = #{sex,jdbcType=CHAR},
+            avatar = #{avatar,jdbcType=VARCHAR},
+            `password` = #{password,jdbcType=VARCHAR},
+            `status` = #{status,jdbcType=CHAR},
+            del_flag = #{delFlag,jdbcType=CHAR},
+            login_ip = #{loginIp,jdbcType=VARCHAR},
+            login_date = #{loginDate,jdbcType=TIMESTAMP},
+            create_by = #{createBy,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_by = #{updateBy,jdbcType=VARCHAR},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            remark = #{remark,jdbcType=VARCHAR},
+        </trim>
+    </insert>
+    <insert id="insertOrUpdateSelective" keyColumn="user_id" keyProperty="userId"
+            parameterType="com.actual.combat.user.domain.SysUser" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into `sys_user`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="nickName != null">
+                nick_name,
+            </if>
+            <if test="userType != null">
+                user_type,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="phoneNumber != null">
+                phone_number,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="avatar != null">
+                avatar,
+            </if>
+            <if test="password != null">
+                `password`,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+            <if test="loginIp != null">
+                login_ip,
+            </if>
+            <if test="loginDate != null">
+                login_date,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="userType != null">
+                #{userType,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNumber != null">
+                #{phoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=CHAR},
+            </if>
+            <if test="avatar != null">
+                #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=CHAR},
+            </if>
+            <if test="loginIp != null">
+                #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="loginDate != null">
+                #{loginDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="userType != null">
+                user_type = #{userType,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNumber != null">
+                phone_number = #{phoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=CHAR},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                `password` = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=CHAR},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=CHAR},
+            </if>
+            <if test="loginIp != null">
+                login_ip = #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="loginDate != null">
+                login_date = #{loginDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getUserVoById" resultType="com.actual.combat.basic.core.vo.user.UserVo">
+        select
+        <include refid="Base_Column_List"/>
+        from `sys_user`
+        where `user_id` = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="getFriends" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `sys_user`
+        where
+        <choose>
+            <when test="!commonDatasource">
+                <choose>
+                    <when test="friendIds != null and friendIds.size() != 0">
+                        <foreach collection="friendIds" item="friendId" open=" `user_id` in (" close=")" separator=",">
+                            #{friendId}
+                        </foreach>
+                    </when>
+                    <otherwise>
+                        false
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>
+                `user_id` in (select f.fid from `friend` f where f.`uid` = #{user.userId})
+            </otherwise>
+        </choose>
+
+        <if test="(user.nickName != null and user.nickName != '') and (user.userName == null or user.userName == '')">
+            and `nick_name` like concat(#{user.nickName}, '%')
+        </if>
+        <if test="(user.userName != null and user.userName != '')and (user.nickName == null or user.nickName == '')">
+            and `user_name` like concat(#{user.userName}, '%')
+        </if>
+        <if test="(user.userName != null and user.userName != '') or (user.nickName != null and user.nickName != '')">
+            and (`user_name` like concat(#{user.userName}, '%')
+            or `nick_name` like concat(#{user.nickName}, '%')
+            )
+        </if>
+    </select>
+
+    <select id="applyList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_User_List"/>,a.id as apply_id
+        from `sys_user`
+        left join `apply` a on a.`uid` = `sys_user`.`user_id`
+        where a.`tid` = #{userId}
+    </select>
+
+    <select id="getUser" resultMap="BaseResultMap">
+        select u.*
+        from `sys_user` u
+        inner join `chat_user` cu on cu.`user_id` = u.`user_id`
+        inner join `chat_window` cw on cu.`chat_id` = cw.`chat_id`
+        where cw.`chat_type` = #{chatType.name}
+        and cu.`chat_type` = #{chatType.name}
+        and cu.`chat_id` = #{chatId}
+        and cu.`user_id` != #{userId}
+    </select>
+
+    <select id="getOneUser" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_User_List"/>
+        ,`sys_user`.`user_id`= #{nowUserId} as is_self
+        , exists(select 1 from `friend` f where f.`uid` = #{nowUserId} and f.`fid` = `sys_user`.`user_id`) as is_friend
+        , exists(select 1 from `apply` a where a.`uid` = #{nowUserId} and a.`tid` = `sys_user`.`user_id`) as is_apply
+        , (select cu.`chat_id` from `chat_user` cu
+        inner join `chat_user` cu1 on cu.`chat_id` = cu1.`chat_id`
+        where cu.`user_id` = #{userId} and cu1.`user_id` = #{nowUserId} and cu.`chat_type` = cu1.`chat_type`and
+        cu1.`chat_type` = 'ONE_ON_ONE_CHAT')
+        as chat_id
+        from `sys_user`
+        where `sys_user`.`user_id` = #{userId}
+    </select>
+
+    <select id="getUsers" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_User_List"/>
+        , exists(select 1 from `friend` f where f.`uid` = #{userId} and f.`fid` = `sys_user`.`user_id`) as isFriend
+        , (`sys_user`.`user_id` = #{userId}) as isSelf
+        ,exists(select 1 from `apply` a where a.`uid` = #{userId} and a.`tid` = `sys_user`.`user_id`) as isApply
+        from `sys_user`
+        <where>
+            `sys_user`.`user_id` != #{userId}
+            <if test="(nickName != null and nickName != '') or (userName != null and userName != '')">
+                and (`sys_user`.`user_name` like concat(#{userName}, '%')
+                or `sys_user`.`nick_name` like concat(#{nickName}, '%')
+                )
+            </if>
+        </where>
+    </select>
+
+    <select id="selectUserList" resultMap="UserResult">
+        select u.user_id,
+        d.dept_id,
+        u.nick_name,
+        u.user_name,
+        u.email,
+        u.avatar,
+        u.phone_number,
+        u.sex,
+        u.status,
+        u.del_flag,
+        u.login_ip,
+        u.login_date,
+        u.create_by,
+        u.create_time,
+        u.remark,
+        d.dept_name,
+        d.leader
+        from sys_user u
+        left join sys_user_dept ud on ud.user_id = u.user_id
+        left join sys_dept d on ud.dept_id = d.dept_id
+        where u.del_flag = '0'
+        <if test="userId != null and userId != 0">
+            AND u.user_id = #{userId}
+        </if>
+        <if test="userName != null and userName != ''">
+            AND u.user_name like concat('%', #{userName}, '%')
+        </if>
+        <if test="status != null and status != ''">
+            AND u.status = #{status}
+        </if>
+        <if test="phoneNumber != null and phoneNumber != ''">
+            AND u.phone_number like concat('%', #{phoneNumber}, '%')
+        </if>
+        <if test="params.beginTime != null and params.beginTime != ''">
+            <!-- 开始时间检索 -->
+            AND date_format(u.create_time,'%Y%m%d') <![CDATA[>=]]> date_format(#{params.beginTime},'%Y%m%d')
+        </if>
+        <if test="params.endTime != null and params.endTime != ''">
+            <!-- 结束时间检索 -->
+            AND date_format(u.create_time,'%Y%m%d') <![CDATA[<=]]> date_format(#{params.endTime},'%Y%m%d')
+        </if>
+        <if test="params.deptId != null and params.deptId != 0">
+            AND (ud.dept_id = #{params.deptId} OR ud.dept_id IN ( SELECT t.dept_id FROM `sys_dept_ancestor` t WHERE
+            t.dept_id=#{params.deptId} ))
+        </if>
+        <if test="params.dataScope != null and params.dataScope != ''">
+            <!-- 数据范围过滤 -->
+            ${params.dataScope}
+        </if>
+    </select>
+</mapper>

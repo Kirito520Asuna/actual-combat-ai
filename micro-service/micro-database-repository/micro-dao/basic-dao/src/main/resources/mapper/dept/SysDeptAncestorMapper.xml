@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.actual.combat.dept.mapper.SysDeptAncestorMapper">
+  <resultMap id="BaseResultMap" type="com.actual.combat.dept.domain.SysDeptAncestor">
+    <!--@mbg.generated-->
+    <!--@Table sys_dept_ancestor-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="dept_id" jdbcType="BIGINT" property="deptId" />
+    <result column="dept_parent_id" jdbcType="BIGINT" property="deptParentId" />
+    <result column="level" jdbcType="BIGINT" property="level" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, dept_id, dept_parent_id, `level`
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update sys_dept_ancestor
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="dept_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.deptId,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="dept_parent_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.deptParentId,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="`level` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.level,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update sys_dept_ancestor
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="dept_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.deptId != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.deptId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="dept_parent_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.deptParentId != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.deptParentId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`level` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.level != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.level,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_dept_ancestor
+    (dept_id, dept_parent_id, `level`)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.deptId,jdbcType=BIGINT}, #{item.deptParentId,jdbcType=BIGINT}, #{item.level,jdbcType=BIGINT}
+        )
+    </foreach>
+  </insert>
+  <update id="updateBatchUseMultiQuery" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    <foreach collection="list" item="item" separator=";">
+      update sys_dept_ancestor
+      <set>
+        <if test="item.deptId != null">
+          dept_id = #{item.deptId,jdbcType=BIGINT},
+        </if>
+        <if test="item.deptParentId != null">
+          dept_parent_id = #{item.deptParentId,jdbcType=BIGINT},
+        </if>
+        <if test="item.level != null">
+          `level` = #{item.level,jdbcType=BIGINT},
+        </if>
+      </set>
+      where id = #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsertSelectiveUseDefaultForNull" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_dept_ancestor
+    (dept_id, dept_parent_id, `level`)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <choose>
+        <when test="item.deptId != null">
+          #{item.deptId,jdbcType=BIGINT},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.deptParentId != null">
+          #{item.deptParentId,jdbcType=BIGINT},
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT,
+        </otherwise>
+      </choose>
+      <choose>
+        <when test="item.level != null">
+          #{item.level,jdbcType=BIGINT}
+        </when>
+        <!--@ignoreSql-->
+        <otherwise>
+          DEFAULT
+        </otherwise>
+      </choose>
+      )
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.actual.combat.dept.domain.SysDeptAncestor" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_dept_ancestor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      dept_id,
+      dept_parent_id,
+      `level`,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      #{deptId,jdbcType=BIGINT},
+      #{deptParentId,jdbcType=BIGINT},
+      #{level,jdbcType=BIGINT},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      dept_id = #{deptId,jdbcType=BIGINT},
+      dept_parent_id = #{deptParentId,jdbcType=BIGINT},
+      `level` = #{level,jdbcType=BIGINT},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.actual.combat.dept.domain.SysDeptAncestor" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_dept_ancestor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="deptId != null">
+        dept_id,
+      </if>
+      <if test="deptParentId != null">
+        dept_parent_id,
+      </if>
+      <if test="level != null">
+        `level`,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="deptId != null">
+        #{deptId,jdbcType=BIGINT},
+      </if>
+      <if test="deptParentId != null">
+        #{deptParentId,jdbcType=BIGINT},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=BIGINT},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="deptId != null">
+        dept_id = #{deptId,jdbcType=BIGINT},
+      </if>
+      <if test="deptParentId != null">
+        dept_parent_id = #{deptParentId,jdbcType=BIGINT},
+      </if>
+      <if test="level != null">
+        `level` = #{level,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

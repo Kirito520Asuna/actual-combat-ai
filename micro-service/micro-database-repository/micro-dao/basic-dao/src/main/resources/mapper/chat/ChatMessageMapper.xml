@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.actual.combat.im.mapper.chat.ChatMessageMapper">
+  <resultMap id="BaseResultMap" type="com.actual.combat.im.domain.chat.ChatMessage">
+    <!--@mbg.generated-->
+    <!--@Table `chat_message`-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="chat_id" jdbcType="BIGINT" property="chatId" />
+    <result column="message_id" jdbcType="BIGINT" property="messageId" />
+  </resultMap>
+
+  <resultMap id="ChatBaseResultMap" type="com.actual.combat.im.domain.chat.ChatMessage">
+    <!--@mbg.generated-->
+    <!--@Table `chat_message`-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="chat_id" jdbcType="BIGINT" property="chatId" />
+    <result column="message_id" jdbcType="BIGINT" property="messageId" />
+    <result column="from" jdbcType="BIGINT" property="sendUserId"/>
+    <result column="content" jdbcType="VARCHAR" property="content"/>
+    <result column="time" jdbcType="TIMESTAMP"  property="time"/>
+    <result column="type" jdbcType="VARCHAR" property="type"/>
+    <association column="from" property="sendUser" javaType="com.actual.combat.basic.core.vo.user.UserVo"
+                 select="com.actual.combat.user.mapper.SysUserDao.getUserVoById"/>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    `id`, `chat_id`, `message_id`
+  </sql>
+
+  <sql id="cm">
+    <!--@mbg.generated-->
+    <!--@sql select -->
+    cm.`id`, cm.`chat_id`, cm.`message_id`
+    <!--@sql from chat_message cm-->
+  </sql>
+
+  <select id="getList" resultMap="ChatBaseResultMap">
+    select
+    <include refid="cm"/> , m.`from`,m.`content`,m.`type`,m.`time`
+    from `chat_message` cm
+    left join `message` m on m.`id` = cm.`message_id`
+    where cm.`chat_id` =#{chatId}
+  </select>
+</mapper>

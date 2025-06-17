@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.actual.combat.job.mapper.SysJobLogMapper">
+    <resultMap id="BaseResultMap" type="com.actual.combat.job.domain.SysJobLog">
+        <!--@mbg.generated-->
+        <!--@Table sys_job_log-->
+        <id column="job_log_id" jdbcType="BIGINT" property="jobLogId"/>
+        <result column="job_name" jdbcType="VARCHAR" property="jobName"/>
+        <result column="job_group" jdbcType="VARCHAR" property="jobGroup"/>
+        <result column="invoke_target" jdbcType="VARCHAR" property="invokeTarget"/>
+        <result column="job_message" jdbcType="VARCHAR" property="jobMessage"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="exception_info" jdbcType="VARCHAR" property="exceptionInfo"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        job_log_id, job_name, job_group, invoke_target, job_message, `status`, exception_info,
+        create_time
+    </sql>
+
+    <select id="selectJobLogList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_job_log
+        <where>
+            <if test="jobName != null and jobName != ''">
+                and job_name like concat('%', #{jobName}, '%')
+            </if>
+            <if test="jobGroup != null and jobGroup != ''">
+                and job_group = #{jobGroup}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="invokeTarget != null and invokeTarget != ''">
+                and invoke_target like concat('%', #{invokeTarget}, '%')
+            </if>
+            <if test="params.beginTime != null and params.beginTime != ''">
+                <!-- 开始时间检索 -->
+                and date_format(create_time,'%Y-%m-%d') <![CDATA[>=]]>date_format(#{params.beginTime},'%Y-%m-%d')
+            </if>
+            <if test="params.endTime != null and params.endTime != ''">
+                <!-- 结束时间检索 -->
+                and date_format(create_time,'%Y-%m-%d') <![CDATA[<=]]> date_format(#{params.endTime},'%Y-%m-%d')
+            </if>
+        </where>
+    </select>
+
+    <update id="cleanJobLog">
+        truncate table sys_job_log
+    </update>
+</mapper>

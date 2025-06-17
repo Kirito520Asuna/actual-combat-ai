@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.actual.combat.im.mapper.im.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.actual.combat.im.domain.im.Message">
+    <!--@mbg.generated-->
+    <!--@Table `message`-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="from" jdbcType="BIGINT" property="from" />
+    <result column="to" jdbcType="BIGINT" property="to" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    `id`, `from`, `to`, `type`, `content`, `time`
+  </sql>
+</mapper>

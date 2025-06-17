@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.actual-combat</groupId>
+        <groupId>com.actual.combat</groupId>
         <artifactId>micro-gateway</artifactId>
         <version>${revision}</version>
     </parent>
@@ -28,17 +28,17 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>com.actual-combat</groupId>
+                <groupId>com.actual.combat</groupId>
                 <artifactId>basic-gateway-core</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.actual-combat</groupId>
+                <groupId>com.actual.combat</groupId>
                 <artifactId>framework-knife4j</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.actual-combat</groupId>
+                <groupId>com.actual.combat</groupId>
                 <artifactId>framework-nacos</artifactId>
                 <version>${revision}</version>
             </dependency>
@@ -66,12 +66,12 @@
         </dependency>
 
         <dependency>
-            <groupId>com.actual-combat</groupId>
+            <groupId>com.actual.combat</groupId>
             <artifactId>basic-gateway-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.actual-combat</groupId>
+            <groupId>com.actual.combat</groupId>
             <artifactId>framework-knife4j</artifactId>
             <exclusions>
                 <exclusion>
@@ -82,7 +82,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.actual-combat</groupId>
+            <groupId>com.actual.combat</groupId>
             <artifactId>framework-nacos</artifactId>
         </dependency>
     </dependencies>

@@ -11,7 +11,9 @@
 
     <artifactId>micro-database-repository</artifactId>
     <packaging>pom</packaging>
-
+    <modules>
+        <module>micro-dao</module>
+    </modules>
 
 
     <build>

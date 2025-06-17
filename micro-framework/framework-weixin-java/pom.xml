@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.actual-combat</groupId>
+        <artifactId>micro-framework</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>framework-weixin-java</artifactId>
+
+    <properties>
+        <WxJava.version>4.6.0</WxJava.version>
+    </properties>
+    <dependencies>
+<!--        https://github.com/Wechat-Group/WxJava-->
+<!--        微信小程序：weixin-java-miniapp-->
+<!--        微信支付：weixin-java-pay-->
+<!--        微信开放平台：weixin-java-open-->
+<!--        公众号（包括订阅号和服务号）：weixin-java-mp-->
+<!--        企业号/企业微信：weixin-java-cp-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-miniapp</artifactId>
+            <version>${WxJava.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-pay</artifactId>
+            <version>${WxJava.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-open</artifactId>
+            <version>${WxJava.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-mp</artifactId>
+            <version>${WxJava.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-cp</artifactId>
+            <version>${WxJava.version}</version>
+        </dependency>
+    </dependencies>
+</project>

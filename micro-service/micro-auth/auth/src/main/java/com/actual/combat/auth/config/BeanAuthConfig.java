@@ -1,6 +1,6 @@
 package com.actual.combat.auth.config;
 
-import com.actual_combat.aop.abs.bean.AbsBean;
+import com.actual.combat.aop.abs.bean.AbsBean;
 import com.actual.combat.auth.security.abs.AbsAuthorizationSecurity;
 import com.actual.combat.auth.service.AuthUserService;
 import com.actual.combat.auth.service.impl.SecurityAuthUserService;

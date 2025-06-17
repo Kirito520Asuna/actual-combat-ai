@@ -73,9 +73,15 @@ public interface AbsAuthorizationShiro extends AbsAuthorization {
     default boolean checkToken(HttpServletRequest request, HttpServletResponse response) {
 
         JwtUtils bean = SpringUtil.getBean(JwtUtils.class);
-        JwtConfig jwtConfig = SpringUtil.getBean(JwtConfig.class);
+        JwtConfig jwtConfig = null;
+        try {
+            jwtConfig = SpringUtil.getBean(JwtConfig.class);
+        } catch (Exception e) {
+            log().warn("未找到JwtConfig配置");
+        }
         log().debug("jwtConfig=>{}", jwtConfig);
-        String tokenName = ObjectUtils.defaultIfEmpty(jwtConfig.getTokenName(), JwtUtils.HEADER_AS_TOKEN);
+        String tokenName = jwtConfig == null ? null : jwtConfig.getTokenName();
+        tokenName = ObjectUtils.defaultIfEmpty(tokenName, JwtUtils.HEADER_AS_TOKEN);
         String userId = null;
         //获取token
         String token = request.getHeader(tokenName);
@@ -88,8 +94,11 @@ public interface AbsAuthorizationShiro extends AbsAuthorization {
             if (StringUtils.hasText(token)) {
                 //解析token
                 String secret = bean.getSecret();
-                boolean enableTwoToken = ObjectUtils.defaultIfEmpty(jwtConfig.getEnableTwoToken(), false);
-                String refreshTokenName = ObjectUtil.defaultIfEmpty(jwtConfig.getRefreshTokenName(), JwtUtils.REFRESH_TOKEN_KEY);
+                boolean enableTwoToken = jwtConfig == null ? false : jwtConfig.getEnableTwoToken();
+                String refreshTokenName = jwtConfig == null ? null : jwtConfig.getRefreshTokenName();
+
+                enableTwoToken = ObjectUtils.defaultIfEmpty(enableTwoToken, false);
+                refreshTokenName = ObjectUtil.defaultIfEmpty(refreshTokenName, JwtUtils.REFRESH_TOKEN_KEY);
                 userId = getUserIdByToken(enableTwoToken, secret, tokenName, refreshTokenName, request, response);
             }
 

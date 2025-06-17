@@ -1,13 +1,13 @@
-package com.actual_combat;
+package com.actual_combat.basic.ollama_ai;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class OllamaAiApplication {
+public class BasicOllamaAiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(OllamaAiApplication.class, args);
+        SpringApplication.run(BasicOllamaAiApplication.class, args);
     }
 
 }

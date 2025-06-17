@@ -14,7 +14,7 @@ import reactor.core.publisher.Flux;
  */
 @Slf4j
 @SpringBootTest
-public class OllamaAiApplicationTest {
+public class BasicOllamaAiApplicationTest {
     @Test
     void test(){
         ChatClient chatClient = SpringUtil.getBean(ChatClient.class);

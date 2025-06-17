@@ -9,7 +9,7 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>ollama-ai</artifactId>
+    <artifactId>basic-ollama-ai</artifactId>
 
     <dependencies>
         <dependency>

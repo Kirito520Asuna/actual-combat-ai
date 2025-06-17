@@ -12,7 +12,7 @@
     <artifactId>micro-ai</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>ollama-ai</module>
+        <module>basic-ollama-ai</module>
     </modules>
 
     <properties>

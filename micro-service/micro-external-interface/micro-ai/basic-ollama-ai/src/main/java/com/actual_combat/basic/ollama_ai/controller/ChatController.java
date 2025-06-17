@@ -1,4 +1,4 @@
-package com.actual_combat.controller;
+package com.actual_combat.basic.ollama_ai.controller;
 
 import cn.hutool.extra.spring.SpringUtil;
 import io.swagger.v3.oas.annotations.Operation;

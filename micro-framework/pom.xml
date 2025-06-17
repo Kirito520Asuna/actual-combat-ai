@@ -19,6 +19,7 @@
         <module>framework-dynamic-datasource</module>
         <module>framework-kafka</module>
         <module>framework-mybatis-plus</module>
+        <module>framework-jpa</module>
         <module>framework-sharding-sphere</module>
         <module>framework-redis</module>
         <module>framework-basic-core</module>

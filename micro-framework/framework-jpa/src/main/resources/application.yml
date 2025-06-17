@@ -1,0 +1,24 @@
+#实列
+spring:
+  datasource:
+    # 配置单数据源
+    url: jdbc:mysql://localhost:3306/test?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    # 配置多数据源
+    test:
+      url: jdbc:mysql://localhost:3306/test?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      username: root
+      password: root
+    test2:
+      url: jdbc:mysql://localhost:3306/test?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      username: root
+      password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: update # 自动建表
+    show-sql: true # 显示SQL语句
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect

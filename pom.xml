@@ -40,7 +40,7 @@
     <modules>
         <module>micro-framework</module>
         <module>micro-service</module>
-        <module>micro-service/micro-cores</module>
+        <module>micro-cores</module>
     </modules>
 
     <dependencyManagement>

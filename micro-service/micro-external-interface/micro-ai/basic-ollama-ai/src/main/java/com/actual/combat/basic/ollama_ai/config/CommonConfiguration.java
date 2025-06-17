@@ -15,6 +15,6 @@ import org.springframework.context.annotation.Configuration;
 public  class CommonConfiguration implements AbstractAiConfiguration {
     @Bean
     public ChatClient chatClient(OllamaChatModel model) {
-        return buildDefaultChatClient((ChatClient) model);
+        return buildDefaultChatClient(model);
     }
 }

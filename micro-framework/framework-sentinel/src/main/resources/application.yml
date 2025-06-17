@@ -1,0 +1,33 @@
+
+spring:
+  cloud:
+    sentinel:
+      transport:
+        #在端口上启动一个 HttpServer 与 sentinel控制台交互
+        port: 8719
+        dashboard: 127.0.0.1:8858
+      datasource:
+        flow-rules:
+          nacos:
+            server-addr: localhost:8848
+            data-id: sentinel-provider-flow-rule
+            group-id: SENTINEL_GROUP
+            data-type: json
+            rule-type: flow
+            #[
+            #  {
+            #    "resource": "/provider/hello/{name}",
+            #    "controlBehavior": 0,
+            #    "count": 1,
+            #    "grade": 1,
+            #    "limitApp": "default",
+            #    "strategy": 0
+            #  }
+            #]
+
+management:
+  endpoint:
+    web:
+      exposure:
+        # 把包含的节点全部暴露给监控
+        include: "*"

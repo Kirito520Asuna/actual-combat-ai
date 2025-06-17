@@ -25,6 +25,7 @@
         <module>framework-basic-core</module>
         <module>framework-nacos</module>
         <module>framework-seata</module>
+        <module>framework-sentinel</module>
     </modules>
 
 

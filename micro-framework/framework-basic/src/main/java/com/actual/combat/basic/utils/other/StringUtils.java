@@ -2,8 +2,8 @@ package com.actual.combat.basic.utils.other;
 
 
 import cn.hutool.core.util.StrUtil;
+import com.actual.combat.basic.constant.Constants;
 import com.actual.combat.basic.utils.other.text.StrFormatter;
-import com.minimalism.base.constant.Constants;
 import org.springframework.util.AntPathMatcher;
 
 import javax.annotation.Nonnull;

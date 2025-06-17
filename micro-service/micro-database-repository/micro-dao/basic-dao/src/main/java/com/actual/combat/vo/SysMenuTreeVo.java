@@ -2,11 +2,11 @@ package com.actual.combat.vo;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.json.JSONUtil;
-import com.minimalism.aop.abs.bean.AbsBean;
-import com.minimalism.aop.all.tree.Tree;
-import com.minimalism.aop.all.tree.TreeMap;
-import com.minimalism.mp.pojo.BaseEntity;
-import com.minimalism.aop.utils.tree.TreeUtils;
+import com.actual.combat.aop.abs.bean.AbsBean;
+import com.actual.combat.aop.all.tree.Tree;
+import com.actual.combat.aop.all.tree.TreeMap;
+import com.actual.combat.aop.utils.tree.TreeUtils;
+import com.actual.combat.mp.pojo.BaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;

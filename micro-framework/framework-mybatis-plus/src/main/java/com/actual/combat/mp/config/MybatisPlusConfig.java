@@ -1,9 +1,15 @@
 package com.actual.combat.mp.config;
 
 import com.actual.combat.mp.abs.config.AbsMybatisPlusConfig;
+import com.actual.combat.mp.abs.handler.AbsEntityHandler;
+import com.actual.combat.mp.abs.service.DataScopeService;
+import com.actual.combat.mp.abs.service.MpUserService;
+import com.actual.combat.mp.abs.service.impl.DataScopeDefaultServiceImpl;
+import com.actual.combat.mp.abs.service.impl.MpUserServiceImpl;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -65,5 +71,18 @@ public class MybatisPlusConfig implements AbsMybatisPlusConfig {
     @Override
     public MybatisPlusInterceptor optimisticLockerInterceptor() {
         return AbsMybatisPlusConfig.super.optimisticLockerInterceptor();
+    }
+
+    @Bean
+    @ConditionalOnBean(AbsEntityHandler.class)
+    @ConditionalOnMissingBean(MpUserService.class)
+    public MpUserService mpUserService() {
+        return new MpUserServiceImpl();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(DataScopeService.class)
+    public DataScopeService dataScopeService() {
+        return new DataScopeDefaultServiceImpl();
     }
 }

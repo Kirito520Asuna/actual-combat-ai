@@ -15,6 +15,7 @@
     <modules>
         <module>micro-ai</module>
         <module>micro-gateway</module>
+        <module>micro-task</module>
     </modules>
 
     <build>

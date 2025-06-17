@@ -11,8 +11,19 @@
 
     <artifactId>basic-core</artifactId>
 
+    <properties>
+        <velocity.version>2.3</velocity.version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
+            <!-- Apache Velocity -->
+            <!-- 代码生成使用模板 -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.actual.combat</groupId>
                 <artifactId>framework-basic</artifactId>
@@ -32,6 +43,10 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.actual.combat</groupId>
             <artifactId>framework-basic</artifactId>

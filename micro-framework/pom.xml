@@ -17,6 +17,7 @@
         <module>framework-basic</module>
         <module>framework-basic-core</module>
         <module>framework-dynamic-datasource</module>
+        <module>framework-easy-elasticsearch</module>
         <module>framework-elasticsearch</module>
         <module>framework-jpa</module>
         <module>framework-kafka</module>

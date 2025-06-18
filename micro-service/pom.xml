@@ -12,10 +12,10 @@
     <artifactId>micro-service</artifactId>
     <packaging>pom</packaging>
     <modules>
-<!--        <module>micro-external-interface</module>-->
         <module>micro-ai</module>
         <module>micro-gateway</module>
         <module>micro-task</module>
+        <module>micro-business</module>
     </modules>
 
     <dependencyManagement>

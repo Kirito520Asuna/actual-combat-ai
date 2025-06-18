@@ -9,7 +9,7 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>micro-sub-service</artifactId>
+    <artifactId>micro-sub-cores</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>micro-gateway-core</module>

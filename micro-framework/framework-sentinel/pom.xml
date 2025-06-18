@@ -36,7 +36,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.actual-combat</groupId>
+            <groupId>com.actual.combat</groupId>
             <artifactId>framework-nacos</artifactId>
             <version>${revision}</version>
             <exclusions>

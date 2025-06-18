@@ -150,7 +150,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.actual-combat</groupId>
+            <groupId>com.actual.combat</groupId>
             <artifactId>framework-dynamic-datasource</artifactId>
             <version>${revision}</version>
             <exclusions>

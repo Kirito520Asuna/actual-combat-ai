@@ -17,6 +17,7 @@
         <guava.version>30.0-jre</guava.version>
         <fastjson.version>2.0.32</fastjson.version>
         <jwt.version>0.9.1</jwt.version>
+        <alibaba-ttl.version>2.14.4</alibaba-ttl.version>
     </properties>
 
     <dependencyManagement>
@@ -53,6 +54,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${alibaba-ttl.version}</version>
             </dependency>
 
             <!--jwt-->
@@ -101,6 +108,11 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId>
         </dependency>
 
         <dependency>

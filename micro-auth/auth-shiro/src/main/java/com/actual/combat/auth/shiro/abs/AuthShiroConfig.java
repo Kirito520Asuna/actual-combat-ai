@@ -127,23 +127,25 @@ public interface AuthShiroConfig extends AbsAuthShiroConfig {
     }
 
     default ApiConfig fetchApiConfig() {
+        ApiConfig apiConfig = new ApiConfig();
         try {
-            return SpringUtil.getBean(ApiConfig.class);
+            apiConfig = SpringUtil.getBean(ApiConfig.class);
         } catch (Exception e) {
             log().warn("获取apiConfig失败", e);
-            log().error("class:{},error:{}", getAClassName(), e.getMessage());
-            return null;
+            log().warn("class:{},error:{}", getAClassName(), e.getMessage());
         }
+        return apiConfig;
     }
 
     default JwtConfig fetchJwtConfig() {
+        JwtConfig jwtConfig = new JwtConfig();
         try {
-            return SpringUtil.getBean(JwtConfig.class);
+            jwtConfig = SpringUtil.getBean(JwtConfig.class);
         } catch (Exception e) {
             log().warn("获取jwtConfig失败", e);
             log().error("class:{},error:{}", getAClassName(), e.getMessage());
-            return null;
         }
+        return jwtConfig;
     }
 
     default Boolean fetchOpenFilter() {
@@ -190,19 +192,19 @@ public interface AuthShiroConfig extends AbsAuthShiroConfig {
     default Map<String, String> getFilterChainDefinitionMap() {
         //要拦截的路径放在map里面
         Map<String, String> filterMap = new LinkedHashMap<String, String>();
-        Environment env = SpringUtil.getBean(Environment.class);
-        Boolean openCorsFilter = ObjectUtils.defaultIfNull(env.getProperty("config.cors.filter", Boolean.class), true);
-
-        if (openCorsFilter) {
-            CorsProperties cors = new CorsProperties();
-            try {
-                cors = SpringUtil.getBean(CorsProperties.class);
-            } catch (Exception e) {
-                log().warn("获取cors失败", e);
-            }
-            String pattern = ObjectUtils.defaultIfEmpty(cors.getPattern(), "/**");
-            filterMap.put(pattern, cors.getClass().getName());
-        }
+        //Environment env = SpringUtil.getBean(Environment.class);
+        //Boolean openCorsFilter = ObjectUtils.defaultIfNull(env.getProperty("config.cors.filter", Boolean.class), true);
+        //
+        //if (openCorsFilter) {
+        //    CorsProperties cors = new CorsProperties();
+        //    try {
+        //        cors = SpringUtil.getBean(CorsProperties.class);
+        //    } catch (Exception e) {
+        //        log().warn("获取cors失败", e);
+        //    }
+        //    String pattern = ObjectUtils.defaultIfEmpty(cors.getPattern(), "/**");
+        //    filterMap.put(pattern, cors.getClass().getName());
+        //}
         filterMap.put("/login", "anon");  //放行login接口
         filterMap.put("/logout", "anon");    //放行logout接口
         filterMap.put("/v3/api-docs/**", "anon");    //放行/v3/api-docs/**接口

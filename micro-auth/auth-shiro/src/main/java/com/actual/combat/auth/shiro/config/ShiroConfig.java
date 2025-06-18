@@ -11,6 +11,8 @@ import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
+import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.mgt.WebSecurityManager;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -105,7 +107,15 @@ public class ShiroConfig implements AuthShiroConfig {
         log().debug("init shiroFilterFactoryBean()");
         return AuthShiroConfig.super.shiroFilterFactoryBean(webSecurityManager);
     }
-
+    @Bean
+    @ConditionalOnMissingBean(ShiroFilterChainDefinition.class)
+    public ShiroFilterChainDefinition shiroFilterChainDefinition() {
+        log().debug("init shiroFilterChainDefinition()");
+        DefaultShiroFilterChainDefinition chainDefinition = new DefaultShiroFilterChainDefinition();
+        Map<String, String> filterChainMap = getFilterChainDefinitionMap();
+        filterChainMap.forEach(chainDefinition::addPathDefinition);
+        return chainDefinition;
+    }
 
     @Override
     public Map<String, Filter> getFilters() {

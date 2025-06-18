@@ -22,6 +22,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BeanShiroConfig implements AbstractShiroBean {
 
+
     @Bean
     @ConditionalOnBean(AbsAuthService.class)
     @ConditionalOnExpression("${config.auth.shiro.enable:true}")

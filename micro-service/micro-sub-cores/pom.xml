@@ -12,7 +12,7 @@
     <artifactId>micro-sub-cores</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>micro-gateway-core</module>
+        <module>micro-gateway-cores</module>
     </modules>
 
 </project>

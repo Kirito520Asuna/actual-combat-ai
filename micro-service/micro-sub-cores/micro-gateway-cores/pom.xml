@@ -9,7 +9,7 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>micro-gateway-core</artifactId>
+    <artifactId>micro-gateway-cores</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>basic-gateway-core</module>

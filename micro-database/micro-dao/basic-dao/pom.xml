@@ -11,11 +11,11 @@
     <artifactId>basic-dao</artifactId>
 
     <properties>
-        <mybatis-plus-spring-boot-starter.version>3.5.3</mybatis-plus-spring-boot-starter.version>
+        <mybatis-plus-spring-boot-starter.version>3.5.4</mybatis-plus-spring-boot-starter.version>
         <pagehelper-spring-boot-starter.version>1.2.13</pagehelper-spring-boot-starter.version>
         <alibaba-druid.version>1.1.21</alibaba-druid.version>
         <com.alibaba.fastjson.version>2.0.32</com.alibaba.fastjson.version>
-        <dynamic-datasource.version>3.3.2</dynamic-datasource.version>
+        <dynamic-datasource.version>4.3.1</dynamic-datasource.version>
         <mysql.version>8.0.28</mysql.version>
     </properties>
 
@@ -34,25 +34,6 @@
                 <groupId>com.actual.combat</groupId>
                 <artifactId>framework-mybatis-plus</artifactId>
                 <version>${revision}</version>
-            </dependency>
-
-            <!--mybatis/mybatis-plus支持（实体注解/MybatisPlusInterceptor分页拦截器/枚举/字段自动填充/查询注解/BaseMapper等）-->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus-spring-boot-starter.version}</version>
-            </dependency>
-            <!--mybatis-plus基础框架-->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus</artifactId>
-                <version>${mybatis-plus-spring-boot-starter.version}</version>
-            </dependency>
-            <!--多数据源-->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
-                <version>${dynamic-datasource.version}</version>
             </dependency>
             <!--fastjson-->
             <dependency>
@@ -94,14 +75,6 @@
                     <artifactId>mybatis-plus-join-boot-starter</artifactId>
                 </exclusion>
                 <exclusion>
-                    <groupId>com.baomidou</groupId>
-                    <artifactId>mybatis-plus-boot-starter</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.baomidou</groupId>
-                    <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
-                </exclusion>
-                <exclusion>
                     <groupId>com.alibaba</groupId>
                     <artifactId>fastjson</artifactId>
                 </exclusion>
@@ -114,22 +87,6 @@
                     <artifactId>mysql-connector-java</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-
-        <!--mybatis/mybatis-plus支持（实体注解/MybatisPlusInterceptor分页拦截器/枚举/字段自动填充/查询注解/BaseMapper等）-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-        </dependency>
-        <!--mybatis-plus基础框架-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus</artifactId>
-        </dependency>
-        <!--多数据源-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
         </dependency>
         <!--fastjson-->
         <dependency>

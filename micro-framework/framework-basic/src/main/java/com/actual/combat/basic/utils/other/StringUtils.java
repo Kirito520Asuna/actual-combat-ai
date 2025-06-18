@@ -327,16 +327,6 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         }
     }
 
-    public static void main(String[] args) {
-        String javaField = StrUtil.toCamelCase("javaField");
-        String substring = javaField.substring(0, 1);
-        System.out.printf(substring);
-        System.out.printf(javaField);
-        System.out.printf(substring.toUpperCase() + javaField.substring(1, javaField.length()));
-        new StringBuffer(javaField.substring(0, 1).toUpperCase())
-                .append(javaField.substring(1, javaField.length())).toString();
-    }
-
     /**
      * 驼峰转下划线命名后首字母大写
      *

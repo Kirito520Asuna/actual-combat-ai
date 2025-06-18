@@ -1,7 +1,7 @@
 package com.actual.combat.auth.service;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.actual_combat.aop.abs.bean.AbsBean;
+import com.actual.combat.aop.abs.bean.AbsBean;
 import com.actual.combat.basic.core.abs.auth.service.AbstractUserService;
 import com.actual.combat.basic.core.config.auth.AuthorizationConfig;
 import com.actual.combat.basic.core.constant.Roles;

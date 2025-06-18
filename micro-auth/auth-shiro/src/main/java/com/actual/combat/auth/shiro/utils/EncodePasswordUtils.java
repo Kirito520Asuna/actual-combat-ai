@@ -1,7 +1,7 @@
 package com.actual.combat.auth.shiro.utils;
 
-import com.actual_combat.basic.exceptions.ErrorInfo;
-import com.actual_combat.basic.exceptions.GlobalCustomException;
+import com.actual.combat.basic.exceptions.ErrorInfo;
+import com.actual.combat.basic.exceptions.GlobalCustomException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

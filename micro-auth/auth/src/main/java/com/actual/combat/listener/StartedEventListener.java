@@ -1,6 +1,6 @@
 package com.actual.combat.listener;
 
-import com.actual_combat.aop.abs.bean.AbsBean;
+import com.actual.combat.aop.abs.bean.AbsBean;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;
 

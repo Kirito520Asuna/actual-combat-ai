@@ -2,10 +2,10 @@ package com.actual.combat.basic.core.abs.auth.core;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.extra.spring.SpringUtil;
-import com.actual_combat.aop.abs.bean.AbsBean;
+import com.actual.combat.aop.abs.bean.AbsBean;
 import com.actual.combat.basic.core.config.auth.AuthorizationConfig;
 import com.actual.combat.basic.core.constant.Roles;
-import com.actual_combat.basic.utils.object.ObjectUtils;
+import com.actual.combat.basic.utils.object.ObjectUtils;
 import jakarta.annotation.PostConstruct;
 
 import java.util.ArrayList;

@@ -14,10 +14,16 @@
     <properties>
         <shiro.version>2.0.1</shiro.version>
         <security-crypto.version>5.3.9.RELEASE</security-crypto.version>
+        <commons-jexl3.version>3.3</commons-jexl3.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-jexl3</artifactId>
+                <version>${commons-jexl3.version}</version> <!-- 推荐版本，与 Spring Boot 3.1.0 和 Shiro 兼容 -->
+            </dependency>
             <!-- Shiro -->
             <dependency>
                 <groupId>org.apache.shiro</groupId>
@@ -79,6 +85,16 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-jexl3</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring-boot-starter</artifactId>

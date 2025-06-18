@@ -1,6 +1,6 @@
 package com.actual.combat.basic.core.pojo.auth;
 
-import com.actual_combat.basic.utils.object.ObjectUtils;
+import com.actual.combat.basic.utils.object.ObjectUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

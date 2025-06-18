@@ -1,7 +1,7 @@
 package com.actual.combat.basic.core.config.jwt;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.actual_combat.aop.abs.bean.AbsBean;
+import com.actual.combat.aop.abs.bean.AbsBean;
 import com.actual.combat.basic.core.constant.ExpressionConstants;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
@@ -55,9 +55,9 @@ public class JwtConfig implements AbsBean {
     @PostConstruct
     public void init() {
         log().debug("[init]-[Config]-[Jwt]::[{}]: ", getAClassName());
-        Environment env = SpringUtil.getBean(Environment.class);
-        Boolean openFilter = env.getProperty("common.openFilter", Boolean.class, true);
-        this.openInterceptor = !openFilter;
+        //Environment env = SpringUtil.getBean(Environment.class);
+        //Boolean openFilter = env.getProperty("common.openFilter", Boolean.class, true);
+        //this.openInterceptor = !openFilter;
     }
 
 

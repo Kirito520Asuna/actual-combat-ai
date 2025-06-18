@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.actual.combat.basic.core.abs.auth.AbsAuthFilter;
 import com.actual.combat.basic.core.config.jwt.JwtConfig;
-import com.actual_combat.basic.utils.jwt.JwtUtils;
+import com.actual.combat.basic.utils.jwt.JwtUtils;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;

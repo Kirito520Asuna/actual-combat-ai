@@ -1,8 +1,8 @@
 package com.actual.combat.basic.core.abs.handler;
 
 import cn.hutool.core.util.StrUtil;
-import com.actual_combat.aop.abs.bean.AbsBean;
-import com.actual_combat.aop.utils.thread.AopThreadMdcUtil;
+import com.actual.combat.aop.abs.bean.AbsBean;
+import com.actual.combat.aop.utils.thread.AopThreadMdcUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;

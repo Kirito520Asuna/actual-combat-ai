@@ -1,6 +1,6 @@
 package com.actual.combat.basic.openfeign.interfaces;
 
-import com.actual_combat.aop.abs.bean.AbsBean;
+import com.actual.combat.aop.abs.bean.AbsBean;
 import com.google.common.collect.Maps;
 import com.actual.combat.basic.openfeign.factory.AbsEnum;
 import feign.Target;

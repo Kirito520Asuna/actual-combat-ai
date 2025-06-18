@@ -28,12 +28,12 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>com.actual-combat</groupId>
+                <groupId>com.actual.combat</groupId>
                 <artifactId>framework-basic</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.actual-combat</groupId>
+                <groupId>com.actual.combat</groupId>
                 <artifactId>framework-aop</artifactId>
                 <version>${revision}</version>
             </dependency>
@@ -62,11 +62,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.actual-combat</groupId>
+            <groupId>com.actual.combat</groupId>
             <artifactId>framework-basic</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.actual-combat</groupId>
+            <groupId>com.actual.combat</groupId>
             <artifactId>framework-aop</artifactId>
         </dependency>
         <dependency>

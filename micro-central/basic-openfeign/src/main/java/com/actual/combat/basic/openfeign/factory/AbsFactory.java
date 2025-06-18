@@ -1,7 +1,7 @@
 package com.actual.combat.basic.openfeign.factory;
 
 import cn.hutool.core.collection.CollUtil;
-import com.actual_combat.aop.abs.bean.AbsBean;
+import com.actual.combat.aop.abs.bean.AbsBean;
 import com.actual.combat.basic.openfeign.factory.interfaces.AbsClient;
 import lombok.NonNull;
 import org.springframework.beans.BeansException;

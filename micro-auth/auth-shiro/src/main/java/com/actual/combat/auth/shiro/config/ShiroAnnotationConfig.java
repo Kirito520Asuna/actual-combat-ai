@@ -1,6 +1,6 @@
 package com.actual.combat.auth.shiro.config;
 
-import com.actual_combat.aop.abs.bean.AbsBean;
+import com.actual.combat.aop.abs.bean.AbsBean;
 import com.actual.combat.auth.shiro.aop.ShiroPermissions;
 import com.actual.combat.auth.shiro.aop.ShiroRoles;
 import com.actual.combat.auth.shiro.aop.aspect.ShiroAopAspect;

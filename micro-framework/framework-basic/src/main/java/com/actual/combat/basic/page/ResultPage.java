@@ -20,7 +20,8 @@ import java.util.List;
 @Schema(description = "通用分页")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor @Accessors(chain = true)
+@AllArgsConstructor
+@Accessors(chain = true)
 @JsonView(BaseJsonView.BaseView.class)
 public class ResultPage<T> implements Serializable, AbsPage {
     private static final long serialVersionUID = 5716478706296860374L;

@@ -1,8 +1,8 @@
 package com.actual.combat.basic.core.abs.auth.service;
 
 
-import com.actual_combat.basic.exceptions.ErrorInfo;
-import com.actual_combat.basic.exceptions.GlobalConfigException;
+import com.actual.combat.basic.exceptions.ErrorInfo;
+import com.actual.combat.basic.exceptions.GlobalConfigException;
 
 /**
  * @Author yan

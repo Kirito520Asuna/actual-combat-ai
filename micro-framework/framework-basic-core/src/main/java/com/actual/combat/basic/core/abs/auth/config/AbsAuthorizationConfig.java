@@ -1,6 +1,6 @@
 package com.actual.combat.basic.core.abs.auth.config;
 
-import com.actual_combat.aop.abs.bean.AbsBean;
+import com.actual.combat.aop.abs.bean.AbsBean;
 import jakarta.annotation.PostConstruct;
 
 

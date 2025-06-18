@@ -2,9 +2,9 @@ package com.actual.combat.basic.core.filter;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
-import com.actual_combat.aop.abs.bean.AbsBean;
+import com.actual.combat.aop.abs.bean.AbsBean;
 import com.actual.combat.basic.core.properties.cors.CorsProperties;
-import com.actual_combat.basic.utils.object.ObjectUtils;
+import com.actual.combat.basic.utils.object.ObjectUtils;
 import com.google.common.collect.Maps;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

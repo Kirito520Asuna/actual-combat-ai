@@ -12,7 +12,7 @@ import com.actual.combat.basic.core.config.jwt.JwtConfig;
 import com.actual.combat.basic.core.constant.ExpressionConstants;
 import com.actual.combat.basic.core.filter.CorsRequestFilter;
 import com.actual.combat.basic.core.properties.cors.CorsProperties;
-import com.actual_combat.basic.utils.object.ObjectUtils;
+import com.actual.combat.basic.utils.object.ObjectUtils;
 import com.google.common.collect.Maps;
 import jakarta.servlet.Filter;
 import org.apache.shiro.SecurityUtils;
@@ -73,7 +73,7 @@ public interface AuthShiroConfig extends AbsAuthShiroConfig {
     }
 
     //配置securityManager的实现类，变向的配置了securityManager
-    default WebSecurityManager securityManager(Realm authRealm) {
+    default WebSecurityManager securityManager(Realm authRealm, SessionManager sessionManager) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         //关联realm
         securityManager.setRealm(authRealm);
@@ -85,7 +85,10 @@ public interface AuthShiroConfig extends AbsAuthShiroConfig {
         sessionStorageEvaluator.setSessionStorageEnabled(false);
         subjectDAO.setSessionStorageEvaluator(sessionStorageEvaluator);
         securityManager.setSubjectDAO(subjectDAO);
-        SessionManager sessionManager = SpringUtil.getBean(SessionManager.class);
+        if (sessionManager == null) {
+            log().error("sessionManager is null");
+            sessionManager = SpringUtil.getBean(SessionManager.class);
+        }
         securityManager.setSessionManager(sessionManager);
 
         // 绑定 SecurityManager 到 SecurityUtils
@@ -159,13 +162,13 @@ public interface AuthShiroConfig extends AbsAuthShiroConfig {
      */
     default Map<String, Filter> getFilters() {
         Map<String, Filter> filters = Maps.newLinkedHashMap();
-        Environment env = SpringUtil.getBean(Environment.class);
-        Boolean openCorsFilter = ObjectUtils.defaultIfNull(env.getProperty(ExpressionConstants.corsFilte, Boolean.class), true);
-
-        if (openCorsFilter) {
-            CorsProperties cors = SpringUtil.getBean(CorsProperties.class);
-            filters.put(cors.getClass().getName(), SpringUtil.getBean(CorsRequestFilter.class));
-        }
+        //Environment env = SpringUtil.getBean(Environment.class);
+        //Boolean openCorsFilter = ObjectUtils.defaultIfNull(env.getProperty(ExpressionConstants.corsFilte, Boolean.class), true);
+        //
+        //if (openCorsFilter) {
+        //    CorsProperties cors = SpringUtil.getBean(CorsProperties.class);
+        //    filters.put(cors.getClass().getName(), SpringUtil.getBean(CorsRequestFilter.class));
+        //}
 
         Boolean openFilter = fetchOpenFilter();
 

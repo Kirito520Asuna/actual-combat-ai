@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.actual.combat.basic.core.properties.bean.BeanProperties;
 import com.actual.combat.basic.core.properties.PropertiesConstants;
-import com.actual_combat.basic.utils.object.ObjectUtils;
+import com.actual.combat.basic.utils.object.ObjectUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

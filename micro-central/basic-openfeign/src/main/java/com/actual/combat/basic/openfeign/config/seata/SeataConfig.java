@@ -1,6 +1,6 @@
 package com.actual.combat.basic.openfeign.config.seata;
 
-import com.actual_combat.aop.abs.bean.AbsBean;
+import com.actual.combat.aop.abs.bean.AbsBean;
 import io.seata.config.springcloud.EnableSeataSpringConfig;
 import org.springframework.context.annotation.Configuration;
 

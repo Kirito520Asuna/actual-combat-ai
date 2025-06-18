@@ -1,6 +1,7 @@
 package com.actual.combat.basic.core.config.bean;
 
 import cn.hutool.extra.spring.SpringUtil;
+import com.actual.combat.aop.abs.bean.AbsBean;
 import com.actual.combat.basic.core.abs.api.AbsApiFiler;
 import com.actual.combat.basic.core.abs.api.AbsApiInterceptor;
 import com.actual.combat.basic.core.abs.auth.AbsAuthFilter;
@@ -15,13 +16,15 @@ import com.actual.combat.basic.core.filter.ApiFilter;
 import com.actual.combat.basic.core.filter.CorsRequestFilter;
 import com.actual.combat.basic.core.interceptor.ApiInterceptor;
 import com.actual.combat.basic.core.properties.cors.CorsProperties;
+
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 
 /**
@@ -30,11 +33,18 @@ import org.springframework.context.annotation.Configuration;
  * @Description
  */
 @Slf4j
-@Configuration
+@AutoConfiguration
 @ConditionalOnMissingBean({AbstractBean.class, AbstractGatewayBean.class})
-public class BeanConfig implements AbstractBean {
+public class BeanConfig implements AbstractBean , AbsBean {
+    @Override
+    @PostConstruct
+    public void init() {
+        AbsBean.super.init();
+    }
+
     @Bean
     @ConditionalOnExpression("${config.api.enable:true}")
+    @ConditionalOnMissingBean(ApiConfig.class)
     public ApiConfig apiConfig() {
         log.debug("ApiConfig已配置");
         return new ApiConfig();
@@ -42,6 +52,7 @@ public class BeanConfig implements AbstractBean {
 
     @Bean
     @ConditionalOnExpression("${config.jwt.enable:true}")
+    @ConditionalOnMissingBean(JwtConfig.class)
     public JwtConfig jwtConfig() {
         log.debug("JwtConfig已配置");
         return new JwtConfig();
@@ -56,12 +67,13 @@ public class BeanConfig implements AbstractBean {
 
     @Bean
     @ConditionalOnExpression(ExpressionConstants.filterExpression)
+    @ConditionalOnMissingBean({BeanFilter.class})
     public BeanFilter beanFilter() {
         return new BeanFilter();
     }
 
     @Bean
-    @ConditionalOnMissingBean(BeanFilter.class)
+    @ConditionalOnMissingBean({BeanFilter.class,BeanInterceptor.class})
     public BeanInterceptor beanInterceptor() {
         return new BeanInterceptor();
     }

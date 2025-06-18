@@ -1,6 +1,6 @@
 package com.actual.combat.basic.core.config.bean;
 
-import com.actual_combat.aop.abs.bean.AbsBean;
+import com.actual.combat.aop.abs.bean.AbsBean;
 
 /**
  * @Author yan

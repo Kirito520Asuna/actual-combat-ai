@@ -11,8 +11,21 @@
 
     <artifactId>micro-sub-cores</artifactId>
     <packaging>pom</packaging>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <modules>
-        <module>micro-gateway-cores</module>
+        <module>basic-gateway-core</module>
     </modules>
 
 </project>

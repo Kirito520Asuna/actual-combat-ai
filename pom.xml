@@ -42,6 +42,7 @@
         <module>micro-service</module>
         <module>micro-cores</module>
         <module>micro-central</module>
+        <module>micro-auth</module>
     </modules>
 
     <dependencyManagement>

@@ -9,12 +9,13 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>micro-service</artifactId>
+    <artifactId>micro-auth</artifactId>
     <packaging>pom</packaging>
+
     <modules>
-        <module>micro-external-interface</module>
-        <module>micro-sub-service</module>
-        <module>micro-database-repository</module>
+        <module>auth</module>
+        <module>auth-security</module>
+        <module>auth-shiro</module>
     </modules>
 
     <dependencyManagement>

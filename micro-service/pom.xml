@@ -14,7 +14,7 @@
     <modules>
         <module>micro-external-interface</module>
         <module>micro-sub-cores</module>
-        <module>micro-database-repository</module>
+        <module>micro-database</module>
     </modules>
 
     <dependencyManagement>

@@ -9,7 +9,7 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>micro-database-repository</artifactId>
+    <artifactId>micro-database</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>micro-dao</module>

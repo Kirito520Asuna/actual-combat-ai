@@ -26,6 +26,7 @@
 
     <modules>
         <module>basic-gateway-core</module>
+        <module>basic-job-core</module>
     </modules>
 
 </project>

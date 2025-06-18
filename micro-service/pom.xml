@@ -13,7 +13,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>micro-auth</module>
-        <module>micro-central</module>
         <module>micro-external-interface</module>
         <module>micro-sub-service</module>
         <module>micro-database-repository</module>

@@ -57,11 +57,18 @@ public class BeanConfig implements AbstractBean , AbsBean {
         log.debug("JwtConfig已配置");
         return new JwtConfig();
     }
+    @Bean
+    @ConditionalOnMissingBean(CorsProperties.class)
+    public CorsProperties corsProperties() {
+        log.debug("CorsProperties已配置");
+        return new CorsProperties();
+    }
 
     @Bean
     @ConditionalOnBean(CorsProperties.class)
     @ConditionalOnMissingBean(CorsRequestFilter.class)
     public CorsRequestFilter corsRequestFilter() {
+        log.debug("CorsRequestFilter已配置");
         return new CorsRequestFilter();
     }
 

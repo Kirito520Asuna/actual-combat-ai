@@ -191,10 +191,15 @@ public interface AuthShiroConfig extends AbsAuthShiroConfig {
         //要拦截的路径放在map里面
         Map<String, String> filterMap = new LinkedHashMap<String, String>();
         Environment env = SpringUtil.getBean(Environment.class);
-        Boolean openCorsFilter = ObjectUtils.defaultIfNull(env.getProperty("cors.filter", Boolean.class), true);
+        Boolean openCorsFilter = ObjectUtils.defaultIfNull(env.getProperty("config.cors.filter", Boolean.class), true);
 
         if (openCorsFilter) {
-            CorsProperties cors = SpringUtil.getBean(CorsProperties.class);
+            CorsProperties cors = new CorsProperties();
+            try {
+                cors = SpringUtil.getBean(CorsProperties.class);
+            } catch (Exception e) {
+                log().warn("获取cors失败", e);
+            }
             String pattern = ObjectUtils.defaultIfEmpty(cors.getPattern(), "/**");
             filterMap.put(pattern, cors.getClass().getName());
         }

@@ -9,6 +9,7 @@ import com.actual.combat.aop.utils.response.ResponseUtils;
 import com.actual.combat.auth.shiro.pojo.UserBase;
 import com.actual.combat.auth.shiro.utils.AuthShiroContextUtil;
 import com.actual.combat.basic.core.abs.auth.core.AbsAuthorization;
+import com.actual.combat.basic.core.abs.auth.core.AbsShiroAuth;
 import com.actual.combat.basic.core.abs.auth.service.AbstractUserDetailsService;
 import com.actual.combat.basic.core.config.jwt.JwtConfig;
 import com.actual.combat.basic.enums.ApiCode;
@@ -30,28 +31,7 @@ import java.util.Map;
  * @Date 2024/10/20 上午5:01:59
  * @Description
  */
-public interface AbsAuthorizationShiro extends AbsAuthorization {
-
-    @Override
-    default String getTokenBySubstring(String token) {
-        return AbsAuthorization.super.getTokenBySubstring(token);
-    }
-
-    @Override
-    default Map<String, String> pushTwoToken(String userId, String tokenName, String refreshTokenName, HttpServletResponse response) {
-        return AbsAuthorization.super.pushTwoToken(userId, tokenName, refreshTokenName, response);
-    }
-
-    @Override
-    default String getUserIdByRefreshToken(String secret, String tokenName, String refreshTokenName, HttpServletRequest request, HttpServletResponse response) {
-        return AbsAuthorization.super.getUserIdByRefreshToken(secret, tokenName, refreshTokenName, request, response);
-    }
-
-    @Override
-    default String getUserIdByToken(boolean enableTwoToken, String secret, String tokenName, String refreshTokenName, HttpServletRequest request, HttpServletResponse response) {
-        return AbsAuthorization.super.getUserIdByToken(enableTwoToken, secret, tokenName, refreshTokenName, request, response);
-    }
-
+public interface AbsAuthorizationShiro extends AbsShiroAuth {
     /**
      * 获取用户信息
      *

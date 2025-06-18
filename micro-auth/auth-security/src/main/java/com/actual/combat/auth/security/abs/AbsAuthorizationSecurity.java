@@ -7,6 +7,7 @@ import com.actual.combat.auth.security.pojo.UserBase;
 import com.actual.combat.auth.security.service.AbsUserDetailsService;
 import com.actual.combat.auth.security.utils.AuthSecurityContextUtil;
 import com.actual.combat.basic.core.abs.auth.core.AbsAuthorization;
+import com.actual.combat.basic.core.abs.auth.core.AbsSecurityAuth;
 import com.actual.combat.basic.core.config.jwt.JwtConfig;
 import com.actual.combat.basic.core.pojo.auth.UserInfo;
 import com.actual.combat.basic.enums.ApiCode;
@@ -21,33 +22,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.util.StringUtils;
 
 import java.util.Collection;
-import java.util.Map;
 
 /**
  * @Author yan
  * @Date 2024/10/14 上午2:06:15
  * @Description
  */
-public interface AbsAuthorizationSecurity extends AbsAuthorization {
-    @Override
-    default String getTokenBySubstring(String token) {
-        return AbsAuthorization.super.getTokenBySubstring(token);
-    }
-
-    @Override
-    default Map<String, String> pushTwoToken(String userId, String tokenName, String refreshTokenName, HttpServletResponse response) {
-       return AbsAuthorization.super.pushTwoToken(userId, tokenName, refreshTokenName, response);
-    }
-
-    @Override
-    default String getUserIdByRefreshToken(String secret, String tokenName, String refreshTokenName, HttpServletRequest request, HttpServletResponse response) {
-        return AbsAuthorization.super.getUserIdByRefreshToken(secret, tokenName, refreshTokenName, request, response);
-    }
-
-    @Override
-    default String getUserIdByToken(boolean enableTwoToken, String secret, String tokenName, String refreshTokenName, HttpServletRequest request, HttpServletResponse response) {
-        return AbsAuthorization.super.getUserIdByToken(enableTwoToken, secret, tokenName, refreshTokenName, request, response);
-    }
+public interface AbsAuthorizationSecurity extends AbsSecurityAuth {
 
     /**
      * 通过用户ID生成认证信息

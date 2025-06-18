@@ -1,7 +1,7 @@
 package com.actual.combat.basic.gateway.core.abs;
 
-import com.actual_combat.aop.abs.bean.AbsBean;
-import com.actual_combat.basic.result.Result;
+import com.actual.combat.aop.abs.bean.AbsBean;
+import com.actual.combat.basic.result.Result;
 import lombok.Data;
 import org.springframework.cloud.gateway.route.Route;
 import org.springframework.cloud.gateway.route.RouteLocator;

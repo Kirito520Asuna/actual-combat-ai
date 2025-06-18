@@ -3,7 +3,7 @@ package com.actual.combat.auth.security.abs;
 import cn.hutool.extra.spring.SpringUtil;
 import com.actual.combat.basic.core.abs.auth.AbsAuthFilter;
 import com.actual.combat.basic.core.abs.auth.config.AbsAuthorizationConfig;
-import com.actual_combat.basic.exceptions.ErrorInfo;
+import com.actual.combat.basic.exceptions.ErrorInfo;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 

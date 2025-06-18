@@ -2,10 +2,10 @@ package com.actual.combat.basic.gateway.core.abs;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
-import com.actual_combat.aop.abs.bean.AbsBean;
-import com.actual_combat.aop.utils.gateway.GatewayConstants;
+import com.actual.combat.aop.abs.bean.AbsBean;
+import com.actual.combat.aop.utils.gateway.GatewayConstants;
 import com.actual.combat.basic.core.constant.ConfigConstant;
-import com.actual_combat.basic.utils.object.ObjectUtils;
+import com.actual.combat.basic.utils.object.ObjectUtils;
 import com.google.common.collect.Maps;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;

@@ -4,9 +4,10 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.baomidou.dynamic.datasource.DynamicRoutingDataSource;
+import com.baomidou.dynamic.datasource.creator.DataSourceProperty;
+import com.baomidou.dynamic.datasource.creator.DefaultDataSourceCreator;
 import com.baomidou.dynamic.datasource.provider.AbstractDataSourceProvider;
 import com.baomidou.dynamic.datasource.provider.DynamicDataSourceProvider;
-import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DataSourceProperty;
 import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceProperties;
 import org.slf4j.LoggerFactory;
 
@@ -94,7 +95,7 @@ public interface AbsDynamicDataSource {
         dataSource.setPrimary(dynamicDataSourceProperties.getPrimary());
         dataSource.setStrict(dynamicDataSourceProperties.getStrict());
         dataSource.setStrategy(dynamicDataSourceProperties.getStrategy());
-        dataSource.setProvider(dynamicDataSourceProvider);
+        //dataSource.setProvider(dynamicDataSourceProvider);
         dataSource.setP6spy(dynamicDataSourceProperties.getP6spy());
         dataSource.setSeata(dynamicDataSourceProperties.getSeata());
         return dataSource;
@@ -105,9 +106,9 @@ public interface AbsDynamicDataSource {
      * 将shardingDataSource放到了多数据源（dataSourceMap）中
      * 注意有个版本的bug，3.1.1版本 不会进入loadDataSources 方法，这样就一直造成数据源注册失败
      */
-    default DynamicDataSourceProvider dynamicDataSourceProvider() throws Exception {
+    default DynamicDataSourceProvider dynamicDataSourceProvider(DefaultDataSourceCreator defaultDataSourceCreator) throws Exception {
         Map<String, DataSourceProperty> datasourceMap = getDynamicDataSourceProperties().getDatasource();
-        return new AbstractDataSourceProvider() {
+        return new AbstractDataSourceProvider(defaultDataSourceCreator) {
             @Override
             public Map<String, DataSource> loadDataSources() {
                 Map<String, DataSource> dataSourceMap = createDataSourceMap(datasourceMap);

@@ -1,6 +1,6 @@
 package com.actual.combat.sharding_sphere.dynamic.Impl;
 
-import com.actual_combat.dynamic_datasource.abs.AbsDynamicDataSource;
+import com.actual.combat.dynamic_datasource.abs.AbsDynamicDataSource;
 import org.springframework.stereotype.Service;
 
 /**

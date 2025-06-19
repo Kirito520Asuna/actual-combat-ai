@@ -52,6 +52,7 @@ public interface AuthShiroFilter extends AbsAuthFilter, AbsAuthorizationShiro {
     }
     // 判断是否允许访问
     default boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+        executeLog();
         return executeLogin(request, response);
     }
 

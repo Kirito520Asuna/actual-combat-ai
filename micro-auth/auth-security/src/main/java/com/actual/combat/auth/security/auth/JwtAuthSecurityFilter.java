@@ -18,10 +18,6 @@ public class JwtAuthSecurityFilter extends OncePerRequestFilter implements AuthS
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        checkToken(request, response);
-        //放行
-        filterChain.doFilter(request, response);
+        AuthSecurityFilter.super.doFilter(request, response, filterChain);
     }
-
-
 }

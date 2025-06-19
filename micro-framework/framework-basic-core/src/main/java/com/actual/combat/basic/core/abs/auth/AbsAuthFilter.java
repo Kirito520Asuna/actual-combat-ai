@@ -15,6 +15,10 @@ public interface AbsAuthFilter extends AbsAuthorization, AbsCommonFilter {
         log().debug("[Bean]-[Authorization]-[Filter]-[init]::[{}]: ", getAClassName());
     }
 
+    default void executeLog() {
+        log().debug("class:{}, execute",getAClassName());
+    }
+
     @Override
     default int getOrder() {
         return FilterOrderConstants.JwtOrder;

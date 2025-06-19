@@ -20,6 +20,7 @@ import java.io.IOException;
 public class ApiFilter extends OncePerRequestFilter implements AbsApiFiler {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        executeLog();
         // 从包装器读取请求体
         CachedBodyHttpServletRequest cachedBodyHttpServletRequest = new CachedBodyHttpServletRequest(request);
         checkApi(request, cachedBodyHttpServletRequest);

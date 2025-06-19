@@ -26,8 +26,13 @@ public interface AbsApiFiler extends AbsApiSign, AbsCommonFilter {
        log().debug("[Bean]-[ApiFiler]-[init]::[{}]",getAClassName());
     }
 
+    default void executeLog() {
+        log().debug("class:{}, execute",getAClassName());
+    }
+
     @Override
     default void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        executeLog();
         AbsCommonFilter.super.doFilter(servletRequest, servletResponse, filterChain);
     }
 }

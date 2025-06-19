@@ -10,16 +10,4 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
  * @Description
  */
 public class SimpleSecurityConfig implements AbsSecurityConfig {
-    @Override
-    public void addFilterBeforeList(HttpSecurity http) {
-        AuthSecurityFilter authFilter = new JwtAuthSecurityFilter();
-        try {
-            authFilter = SpringUtil.getBean(AuthSecurityFilter.class);
-        }catch (Exception e){
-            log().error("class:{},err:{}",getAClassName(),e.getMessage());
-        }
-        if (authFilter == null) {
-            log().warn("JwtFilter is null, please make sure it's a Spring Bean");
-        }
-    }
 }

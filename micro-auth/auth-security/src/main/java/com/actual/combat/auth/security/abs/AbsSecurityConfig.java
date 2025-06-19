@@ -1,6 +1,7 @@
 package com.actual.combat.auth.security.abs;
 
 import cn.hutool.extra.spring.SpringUtil;
+import com.actual.combat.basic.core.abs.api.AbsApiFiler;
 import com.actual.combat.basic.core.abs.auth.AbsAuthFilter;
 import com.actual.combat.basic.core.abs.auth.config.AbsAuthorizationConfig;
 import com.actual.combat.basic.exceptions.ErrorInfo;
@@ -27,6 +28,8 @@ public interface AbsSecurityConfig extends AbsAuthorizationConfig {
                     .toJson();
             throw new IllegalStateException(errorJson);
         }
+        //AbsApiFiler apiFiler = SpringUtil.getBean(AbsApiFiler.class);
+        //http.addFilterBefore(apiFiler, AbsAuthFilter.class);
         http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

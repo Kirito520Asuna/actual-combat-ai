@@ -6,6 +6,7 @@ import com.actual.combat.auth.security.auth.SecurityExpressionRoot;
 import com.actual.combat.auth.security.config.SecurityConfig;
 import com.actual.combat.auth.security.service.impl.SimpleAuthSecurityService;
 import com.actual.combat.auth.security.service.impl.SimpleLoginSecurityService;
+import com.actual.combat.auth.security.service.impl.SimpleUserDetailsSecurityService;
 import com.actual.combat.basic.core.abs.auth.core.AbsSecurityExpressionRoot;
 import com.actual.combat.basic.core.abs.auth.service.AbsAuthService;
 import com.actual.combat.basic.core.abs.auth.service.AbstractLoginService;
@@ -61,13 +62,6 @@ public class BeanSecurityConfig implements AbstractSecurityBean {
 
     @Bean
     @ConditionalOnBean(SecurityConfig.class)
-    @ConditionalOnMissingBean(AbsAuthService.class)
-    public AbsAuthService authService() {
-        return new SimpleAuthSecurityService();
-    }
-
-    @Bean
-    @ConditionalOnBean(SecurityConfig.class)
     @ConditionalOnMissingBean(AbstractLoginService.class)
     public AbstractLoginService authLoginService() {
         return new SimpleLoginSecurityService();
@@ -77,7 +71,7 @@ public class BeanSecurityConfig implements AbstractSecurityBean {
     @ConditionalOnBean(SecurityConfig.class)
     @ConditionalOnMissingBean(AbstractUserDetailsService.class)
     public AbstractUserDetailsService authUserDetailsService() {
-        return new SimpleUserDetailsService();
+        return new SimpleUserDetailsSecurityService();
     }
 
 }

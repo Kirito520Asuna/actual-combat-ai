@@ -7,6 +7,7 @@ import cn.hutool.extra.spring.SpringUtil;
 import com.actual.combat.auth.service.AuthUserService;
 import com.actual.combat.basic.core.abs.auth.service.AbsAuthService;
 import com.actual.combat.basic.core.constant.Redis;
+import com.actual.combat.basic.core.constant.datasource.DataSourceName;
 import com.actual.combat.basic.core.enums.im.ChatType;
 import com.actual.combat.basic.core.enums.user.SysUserStatus;
 import com.actual.combat.basic.core.pojo.auth.User;

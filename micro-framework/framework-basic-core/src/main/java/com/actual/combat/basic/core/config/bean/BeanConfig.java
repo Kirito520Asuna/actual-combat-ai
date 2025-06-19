@@ -35,11 +35,11 @@ import org.springframework.context.annotation.Bean;
 @Slf4j
 @AutoConfiguration
 @ConditionalOnMissingBean({AbstractBean.class, AbstractGatewayBean.class})
-public class BeanConfig implements AbstractBean , AbsBean {
+public class BeanConfig implements AbstractBean {
     @Override
     @PostConstruct
     public void init() {
-        AbsBean.super.init();
+        AbstractBean.super.init();
     }
 
     @Bean

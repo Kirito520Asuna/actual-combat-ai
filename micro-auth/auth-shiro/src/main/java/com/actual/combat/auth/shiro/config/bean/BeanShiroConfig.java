@@ -5,6 +5,7 @@ import com.actual.combat.basic.core.abs.auth.service.AbsAuthService;
 import com.actual.combat.basic.core.abs.bean.AbstractBean;
 import com.actual.combat.basic.core.abs.bean.AbstractShiroBean;
 import com.actual.combat.basic.core.config.bean.BeanConfig;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -18,10 +19,13 @@ import org.springframework.context.annotation.Configuration;
  * @Description
  */
 @Slf4j
-@AutoConfigureAfter({BeanBeforeShiroConfig.class, BeanConfig.class})
+@AutoConfigureAfter(BeanBeforeShiroConfig.class)
 @Configuration
 public class BeanShiroConfig implements AbstractShiroBean {
-
+    @PostConstruct
+    public void init() {
+        log().info("==> Shiro <== class:{}", getAClassName());
+    }
 
     @Bean
     @ConditionalOnBean(AbsAuthService.class)

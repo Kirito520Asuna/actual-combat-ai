@@ -29,11 +29,11 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @AutoConfigureBefore({AbstractSecurityBean.class,AbstractShiroBean.class,AbstractBean.class})
-public class BeanAuthConfig implements AbsBean, AbstractAuthBean {
+public class BeanAuthConfig implements AbstractAuthBean {
     @Override
     @PostConstruct
     public void init() {
-        AbsBean.super.init();
+        AbstractAuthBean.super.init();
     }
 
     @Bean

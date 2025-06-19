@@ -1,6 +1,6 @@
-package com.actual.combat.auth.shiro.config.bean;
+package com.actual.combat.auth.security.config.bean;
 
-import com.actual.combat.auth.shiro.service.impl.SimpleAuthShiroService;
+import com.actual.combat.auth.security.service.impl.SimpleAuthSecurityService;
 import com.actual.combat.basic.core.abs.auth.service.AbsAuthService;
 import com.actual.combat.basic.core.config.bean.BeanConfig;
 import jakarta.annotation.PostConstruct;
@@ -17,20 +17,19 @@ import org.springframework.context.annotation.Configuration;
  */
 @Slf4j
 @Configuration
-@AutoConfigureBefore(BeanShiroConfig.class)
-public class BeanBeforeShiroConfig extends BeanConfig{
-
+@AutoConfigureBefore(BeanSecurityConfig.class)
+public class BeanBeforeSecurityConfig extends BeanConfig {
 
     @PostConstruct
     public void init() {
-        log().info("==> Shiro <== class:{}", getAClassName());
+        log().info("==> Security <== class:{}", getAClassName());
     }
 
     @Bean
     @Override
     @ConditionalOnMissingBean(AbsAuthService.class)
     public AbsAuthService authService() {
-        return new SimpleAuthShiroService();
+        return new SimpleAuthSecurityService();
     }
 
 }

@@ -8,4 +8,8 @@ import com.actual.combat.aop.abs.bean.AbsBean;
  * @Description
  */
 public interface AbstractSecurityBean extends AbsBean {
+    @Override
+    default void init() {
+        AbsBean.super.init();
+    }
 }

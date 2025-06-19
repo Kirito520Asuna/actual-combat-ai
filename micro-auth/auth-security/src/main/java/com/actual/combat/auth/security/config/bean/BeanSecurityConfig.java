@@ -13,7 +13,10 @@ import com.actual.combat.basic.core.abs.auth.service.AbstractUserDetailsService;
 import com.actual.combat.basic.core.abs.auth.service.SimpleUserDetailsService;
 import com.actual.combat.basic.core.abs.bean.AbstractBean;
 import com.actual.combat.basic.core.abs.bean.AbstractSecurityBean;
+import com.actual.combat.basic.core.config.bean.BeanConfig;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
@@ -28,9 +31,14 @@ import org.springframework.context.annotation.Configuration;
  * @Description
  */
 @Slf4j
-@AutoConfigureBefore(AbstractBean.class)
+@AutoConfigureAfter(BeanBeforeSecurityConfig.class)
 @Configuration
 public class BeanSecurityConfig implements AbstractSecurityBean {
+
+    @PostConstruct
+    public void init() {
+        log().info("==> Security <== class:{}",getAClassName());
+    }
 
     @Bean
     @ConditionalOnMissingBean(AbsSecurityConfig.class)

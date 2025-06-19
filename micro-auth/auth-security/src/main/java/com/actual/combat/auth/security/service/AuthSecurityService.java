@@ -2,6 +2,7 @@ package com.actual.combat.auth.security.service;
 
 import com.actual.combat.auth.security.auth.AuthSecurityInterceptor;
 import com.actual.combat.auth.security.auth.JwtAuthSecurityFilter;
+import com.actual.combat.auth.security.utils.EncodePasswordUtils;
 import com.actual.combat.basic.core.abs.auth.AbsAuthFilter;
 import com.actual.combat.basic.core.abs.auth.AbsAuthInterceptor;
 import com.actual.combat.basic.core.abs.auth.service.AbsAuthService;
@@ -20,5 +21,10 @@ public interface AuthSecurityService extends AbsAuthService {
     @Override
     default AbsAuthFilter getAuthFiler() {
         return new JwtAuthSecurityFilter();
+    }
+
+    @Override
+    default boolean matchPassword(String plainPassword, String encodedPassword) {
+        return EncodePasswordUtils.matchPassword(plainPassword, encodedPassword);
     }
 }

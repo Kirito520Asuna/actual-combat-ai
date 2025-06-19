@@ -4,6 +4,7 @@ import com.actual.combat.basic.core.abs.auth.AbsAuthFilter;
 import com.actual.combat.basic.core.abs.auth.AbsAuthInterceptor;
 import com.actual.combat.basic.core.filter.SimpleAuthFilter;
 import com.actual.combat.basic.core.interceptor.SimpleAuthInterceptor;
+import com.actual.combat.basic.exceptions.GlobalConfigException;
 
 /**
  * @Author yan
@@ -28,4 +29,10 @@ public interface AbsAuthService {
     default AbsAuthFilter getAuthFiler() {
         return new SimpleAuthFilter();
     }
+
+
+    default boolean matchPassword(String plainPassword, String encodedPassword){
+        throw new GlobalConfigException("not implement");
+    }
+
 }

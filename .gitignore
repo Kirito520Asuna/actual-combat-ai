@@ -40,3 +40,4 @@ build/
 
 **/.flattened-pom.xml
 var
+out

@@ -32,6 +32,7 @@
         <module>basic-gen-core</module>
         <module>basic-job-core</module>
         <module>basic-quartz-core</module>
+        <module>basic-validate-core</module>
     </modules>
 
 </project>

@@ -1,16 +1,16 @@
 package com.actual.combat.basic.file.core.storage.platform;
 
 import cn.hutool.core.util.StrUtil;
-import com.minimalism.common_code.config.OSConfig;
-import com.minimalism.base.constant.Constants;
-import com.minimalism.base.enums.OSType;
-import com.minimalism.base.exception.GlobalConfigException;
-import com.minimalism.file.domain.FileInfo;
-import com.minimalism.file.domain.FilePart;
+import com.actual.combat.basic.constant.Constants;
+import com.actual.combat.basic.core.config.os.OSConfig;
+import com.actual.combat.basic.core.utils.io.IoUtils;
+import com.actual.combat.basic.enums.OSType;
+import com.actual.combat.basic.exceptions.GlobalConfigException;
 import com.actual.combat.basic.file.core.properties.FileProperties;
 import com.actual.combat.basic.file.core.storage.StorageType;
-import com.minimalism.common_code.utils.io.IoUtils;
 import com.actual.combat.basic.file.core.utils.oss.MinioOSSUtils;
+import com.actual.combat.file.domain.FileInfo;
+import com.actual.combat.file.domain.FilePart;
 import io.minio.ListObjectsArgs;
 import io.minio.MinioClient;
 import io.minio.Result;

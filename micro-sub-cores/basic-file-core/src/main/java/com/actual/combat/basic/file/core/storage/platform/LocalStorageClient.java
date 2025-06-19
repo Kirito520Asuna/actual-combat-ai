@@ -3,16 +3,16 @@ package com.actual.combat.basic.file.core.storage.platform;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
-import com.minimalism.common_code.config.OSConfig;
-import com.minimalism.base.exception.BusinessException;
-import com.minimalism.base.exception.GlobalConfigException;
-import com.minimalism.file.domain.FileInfo;
-import com.minimalism.file.domain.FilePart;
+import com.actual.combat.basic.core.config.os.OSConfig;
+import com.actual.combat.basic.exceptions.BusinessException;
+import com.actual.combat.basic.exceptions.GlobalConfigException;
 import com.actual.combat.basic.file.core.properties.FileProperties;
 import com.actual.combat.basic.file.core.storage.StorageType;
 import com.actual.combat.basic.file.core.storage.clientAbs.LocalClient;
-import com.minimalism.base.utils.object.ObjectUtils;
 import com.actual.combat.basic.file.core.utils.oss.LocalOSSUtils;
+import com.actual.combat.basic.utils.object.ObjectUtils;
+import com.actual.combat.file.domain.FileInfo;
+import com.actual.combat.file.domain.FilePart;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
@@ -58,7 +58,7 @@ public class LocalStorageClient implements LocalClient {
             this.nginxDir = nginxDir;
             this.uploadDir = uploadDir;
         } catch (Exception e) {
-            error("[Local] LocalStorage build failed: {}", e.getMessage());
+            log().error("[Local] LocalStorage build failed: {}", e.getMessage());
             throw new GlobalConfigException("请检查本地存储配置是否正确");
         }
     }
@@ -89,7 +89,7 @@ public class LocalStorageClient implements LocalClient {
                 FileUtil.newFile(bucket).mkdirs();
             }
         } catch (Exception e) {
-            error("[Local] makeBucket Exception:{}", e.getMessage());
+            log().error("[Local] makeBucket Exception:{}", e.getMessage());
             throw new GlobalConfigException("创建存储桶失败");
         }
     }
@@ -104,7 +104,7 @@ public class LocalStorageClient implements LocalClient {
             Path file = Paths.get(getUploadDir()).resolve(Paths.get(objectName));
             FileUtil.del(file);
         } catch (Exception e) {
-            error("[Local] file delete failed: {}", e.getMessage());
+            log().error("[Local] file delete failed: {}", e.getMessage());
             throw new BusinessException("文件删除失败");
         }
     }

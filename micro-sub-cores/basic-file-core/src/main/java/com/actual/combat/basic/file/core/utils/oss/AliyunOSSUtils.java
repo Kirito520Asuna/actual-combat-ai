@@ -1,13 +1,13 @@
 package com.actual.combat.basic.file.core.utils.oss;
 
 import cn.hutool.core.collection.CollUtil;
+import com.actual.combat.basic.core.utils.io.IoUtils;
+import com.actual.combat.basic.utils.object.ObjectUtils;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.OSSErrorCode;
 import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.*;
-import com.minimalism.common_code.utils.io.IoUtils;
-import com.minimalism.base.utils.object.ObjectUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

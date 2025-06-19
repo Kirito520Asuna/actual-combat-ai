@@ -3,7 +3,9 @@ package com.actual.combat.basic.file.core.storage.clientAbs;
 import cn.hutool.core.collection.CollUtil;
 import com.actual.combat.basic.file.core.storage.IFileStorageClient;
 import com.actual.combat.basic.file.core.storage.StorageType;
+import lombok.SneakyThrows;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -18,4 +20,7 @@ public interface MinioClient extends IFileStorageClient {
     default boolean support(StorageType storageType) {
         return minioClientList.contains(storageType);
     }
+
+    @SneakyThrows
+    void download(String bucketName, String objectName, HttpServletResponse response);
 }

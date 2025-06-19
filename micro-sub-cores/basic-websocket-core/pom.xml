@@ -11,6 +11,8 @@
 	<artifactId>basic-websocket-core</artifactId>
 
 	<properties>
+		<commons-jexl3.version>3.3</commons-jexl3.version>
+
 		<hutool.version>5.8.20</hutool.version>
 		<fastjson.version>2.0.32</fastjson.version>
 		<logstash.version>5.3</logstash.version>
@@ -33,10 +35,19 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-jexl3</artifactId>
+				<version>${commons-jexl3.version}</version> <!-- 推荐版本，与 Spring Boot 3.1.0 和 Shiro 兼容 -->
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-jexl3</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>

@@ -26,5 +26,6 @@
 
     <modules>
         <module>basic-gen</module>
+        <module>basic-websocket</module>
     </modules>
 </project>

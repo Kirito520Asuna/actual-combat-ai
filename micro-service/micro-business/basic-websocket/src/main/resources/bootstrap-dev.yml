@@ -1,0 +1,14 @@
+nacos:
+  server-addr: 192.168.3.22:8848
+  username: nacos
+  password: nacos
+
+spring:
+  data:
+    redis:
+      host: 192.168.3.22
+
+springdoc:
+  open:
+    default-group-configs:
+      enable: true

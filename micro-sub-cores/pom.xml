@@ -34,6 +34,7 @@
         <module>basic-quartz-core</module>
         <module>basic-user-core</module>
         <module>basic-validate-core</module>
+        <module>basic-websocket-core</module>
     </modules>
 
 </project>

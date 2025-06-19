@@ -1,5 +1,6 @@
 package com.actual.combat.aop.abs.aspect;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
@@ -10,6 +11,7 @@ import cn.hutool.json.JSONUtil;
 import com.actual.combat.aop.abs.aop.AbsAop;
 import com.actual.combat.aop.abs.aop.AopConstants;
 import com.actual.combat.aop.all.log.SysLog;
+import com.actual.combat.aop.utils.bean.AopCustomBeanUtils;
 import com.actual.combat.aop.utils.gateway.GatewayUtils;
 import com.actual.combat.aop.utils.thread.AopThreadMdcUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -90,33 +92,22 @@ public interface AbsSysLog extends AbsAop {
                             .toString()
                     , traceId, applicationName, module, title, remoteAddr, url, method, args, declaringTypeName, name);
         }
-        // 执行方法
-        Object around = AbsAop.super.around(joinPoint);
 
-        /**
-         * 开启响应日志
-         */
-        boolean openResultLog = ObjectUtil.isNotEmpty(sysLog) && sysLog.result();
-        Object returnObj = around;
-        if (openResultLog) {
-            // 处理完请求，返回内容
-            if (returnObj == null) {
-                returnObj = "返回值为空";
-            } else if (JSONUtil.isTypeJSON(JSONUtil.toJsonStr(returnObj))) {
-                JSON parse = JSONUtil.parse(around, JSON_CONFIG);
-                returnObj = parse;
-            } else {
-                returnObj = around;
+        Object around = null;
+        try {
+            around = AbsAop.super.around(joinPoint);
+            return around;
+        } finally {
+            boolean openResultLog = ObjectUtil.isNotEmpty(sysLog) && sysLog.result();
+            if (openResultLog) {
+                String resultStr = around == null ? "返回值为空" : JSONUtil.toJsonStr(around, JSON_CONFIG);
+                log().info("\n====================================响应内容====================================\n" +
+                                "==>TRACE_ID : {} <==\n" +
+                                "==>响应 : {} <==\n" +
+                                "================================================================================",
+                        traceId, resultStr);
             }
-            String jsonStr = JSONUtil.toJsonStr(returnObj);
-            log().info(new StringBuffer()
-                    .append("\n====================================响应内容====================================")
-                    .append("\n==>TRACE_ID : {} <==")
-                    .append("\n==>响应 : {} <==")
-                    .append("\n================================================================================")
-                    .toString(), traceId, jsonStr);
         }
-        return around;
     }
 
     @Override

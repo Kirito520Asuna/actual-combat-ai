@@ -1,21 +1,25 @@
 package com.actual.combat.basic.gen.core.service.impl;
 
+import cn.hutool.extra.spring.SpringUtil;
+import com.actual.combat.auth.service.AuthUserService;
+import com.actual.combat.basic.constant.Constants;
+import com.actual.combat.basic.core.config.gen.GenConfig;
+import com.actual.combat.basic.core.constant.gen.GenConstants;
+import com.actual.combat.basic.exceptions.GlobalCustomException;
+import com.actual.combat.basic.utils.other.StringUtils;
+import com.actual.combat.basic.utils.other.text.CharsetKit;
+import com.actual.combat.basic.utils.str.StrUtils;
+import com.actual.combat.gen.domain.GenTable;
+import com.actual.combat.gen.domain.GenTableColumn;
+import com.actual.combat.gen.mapper.GenTableMapper;
+import com.actual.combat.gen.utli.GenUtils;
+import com.actual.combat.gen.utli.VelocityInitializer;
+import com.actual.combat.gen.utli.VelocityUtils;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.minimalism.common_code.config.gen.GenConfig;
-import com.minimalism.base.constant.Constants;
-import com.minimalism.base.constant.gen.GenConstants;
-import com.minimalism.base.exception.GlobalCustomException;
-import com.minimalism.gen.domain.GenTableColumn;
 import com.actual.combat.basic.gen.core.service.GenTableColumnService;
-import com.minimalism.gen.utli.GenUtils;
-import com.minimalism.gen.utli.VelocityInitializer;
-import com.minimalism.gen.utli.VelocityUtils;
-import com.minimalism.base.text.CharsetKit;
-import com.minimalism.base.utils.other.StringUtils;
-import com.minimalism.shiro.utils.SecurityContextUtil;
-import com.minimalism.common_code.utils.str.StrUtils;
+import jakarta.annotation.Resource;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
@@ -36,12 +40,9 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.minimalism.gen.domain.GenTable;
-import com.minimalism.gen.mapper.GenTableMapper;
 import com.actual.combat.basic.gen.core.service.GenTableService;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 
 /**
  * @Author minimalism
@@ -315,7 +316,7 @@ public class GenTableServiceImpl extends ServiceImpl<GenTableMapper, GenTable> i
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void importGenTable(List<GenTable> tableList) {
-        String operName = SecurityContextUtil.getUserIdNoThrow();
+        String operName = SpringUtil.getBean(AuthUserService.class).getUserId();
         try {
             for (GenTable table : tableList) {
                 String tableName = table.getTableName();

@@ -1,0 +1,33 @@
+package ${packageName}.mapper;
+
+import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import ${packageName}.domain.${ClassName};
+#if($table.isSub())
+import ${packageName}.domain.${subClassName};
+#end
+
+/**
+ * ${functionName}Mapper接口
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Mapper
+public interface ${ClassName}Mapper extends BaseMapper<${ClassName}> {
+    int updateBatch(@Param("list") List<${ClassName}> list);
+
+    int updateBatchSelective(@Param("list") List<${ClassName}> list);
+
+    int batchInsert(@Param("list") List<${ClassName}> list);
+
+    int batchInsertSelectiveUseDefaultForNull(@Param("list") List<${ClassName}> list);
+
+    int deleteByPrimaryKeyIn(@Param("list") List<Long> list);
+
+    int insertOrUpdate(${ClassName} record);
+
+    int insertOrUpdateSelective(${ClassName} record);
+}

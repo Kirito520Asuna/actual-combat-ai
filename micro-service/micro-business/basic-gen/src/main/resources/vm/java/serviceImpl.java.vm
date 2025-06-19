@@ -1,0 +1,129 @@
+package ${packageName}.service.impl;
+
+import java.util.List;
+    #foreach ($column in $columns)
+        #if($column.javaField == 'createTime' || $column.javaField == 'updateTime')
+
+            #break
+        #end
+    #end
+import org.springframework.stereotype.Service;
+    #if($table.sub)
+
+    import org.springframework.transaction.annotation.Transactional;
+    import ${packageName}.domain.${subClassName};
+    #end
+import ${packageName}.mapper.${ClassName}Mapper;
+import ${packageName}.domain.${ClassName};
+import ${packageName}.service.I${ClassName}Service;
+import java.util.stream.Collectors;
+
+import cn.hutool.core.collection.CollUtil;
+
+/**
+ * ${functionName}Service业务层处理
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Service
+public class ${ClassName}ServiceImpl extends ServiceImpl<${ClassName}Mapper, ${ClassName}> implements I${ClassName}Service {
+
+    /**
+     * 查询业务信息
+     *
+     * @param ${pkColumn.javaField}
+     * @return 结果
+     */
+    @Override
+    public ${ClassName} select${ClassName}By${pkColumn.toUpJavaField}(${pkColumn.javaType} ${pkColumn.javaField}) {
+        return getById(${pkColumn.javaField});
+    }
+
+    /**
+     * 查询业务信息列表
+     *
+     * @param ${className} ${functionName}
+     * @return 业务信息集合
+     */
+    @Override
+    public List<${ClassName}> select${ClassName}List(${ClassName} ${className}) {
+        return list();
+    }
+
+    /**
+     * 删除业务信息
+     *
+     * @param ${pkColumn.javaField}s 需要删除的表数据List
+     * @return 结果
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean deleteBy${pkColumn.toUpJavaField}s(List<${pkColumn.javaType}> ${pkColumn.javaField}s) {
+        boolean removeByIds = removeByIds(${pkColumn.javaField}s);
+        return removeByIds;
+    }
+
+
+    /**
+     * 导入${functionName}数据
+     *
+     * @param ${className}List ${functionName}数据列表
+     * @param isUpdateSupport 是否更新支持，如果已存在，则进行更新数据
+     * @param operName 操作用户
+     * @return 结果
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public String importData${ClassName}(List<${ClassName}> ${className}List,Boolean isUpdateSupport,String operName) {
+
+        isUpdateSupport = ObjectUtils.defaultIfEmpty(isUpdateSupport, false);
+        List<${ClassName}> saveList = ${className}List;
+        if (isUpdateSupport) {
+            List<${ClassName}> updateList = ${className}List.stream().filter(o -> ObjectUtil.isNotEmpty(o.get${pkColumn.toUpJavaField}())).collect(Collectors.toList());
+            ${className}List = sysMenuList.stream().filter(o -> ObjectUtil.isEmpty(o.get${pkColumn.toUpJavaField}())).collect(Collectors.toList());
+            updateBatch(updateList);
+        }
+        if (CollUtil.isNotEmpty(saveList)) {
+            saveBatch(saveList);
+        }
+        return "ok";
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int updateBatch(List<${ClassName}> list) {
+        return baseMapper.updateBatch(list);
+    }
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int updateBatchSelective(List<${ClassName}> list) {
+        return baseMapper.updateBatchSelective(list);
+    }
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int batchInsert(List<${ClassName}> list) {
+        return baseMapper.batchInsert(list);
+    }
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int batchInsertSelectiveUseDefaultForNull(List<${ClassName}> list) {
+        return baseMapper.batchInsertSelectiveUseDefaultForNull(list);
+    }
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int deleteByPrimaryKeyIn(List<Long> list) {
+        return baseMapper.deleteByPrimaryKeyIn(list);
+    }
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int insertOrUpdate(${ClassName} record) {
+        return baseMapper.insertOrUpdate(record);
+    }
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int insertOrUpdateSelective(${ClassName} record) {
+        return baseMapper.insertOrUpdateSelective(record);
+    }
+
+}

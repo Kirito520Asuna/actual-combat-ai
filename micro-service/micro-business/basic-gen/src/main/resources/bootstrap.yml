@@ -1,0 +1,50 @@
+server:
+    port: 12900
+    servlet:
+        context-path: /${spring.application.name}
+
+spring:
+  application:
+    name: basic-gen
+
+  profiles:
+    active: @spring.profiles.active@
+
+  cloud:
+    nacos:
+      username: nacos
+      password: nacos
+      discovery:
+        service: ${spring.application.name}
+
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/${spring.application.name}/*.xml
+  configuration:
+    use-generated-keys: true
+    use-column-label: true
+    map-underscore-to-camel-case: true
+
+logstash:
+  addr: 127.0.0.1:4560
+  file: var/log/${spring.application.name}/${spring.profiles.active}/${spring.application.name}.log
+  fileNamePattern: var/log/${spring.application.name}/${spring.profiles.active}/${spring.application.name}-logstash.%d{yyyy-MM-dd}.log
+  maxHistory: 30
+  totalSizeCap: 10MB
+
+config:
+  cors:
+    enabled: true
+    config: false
+    filter: true
+    prop:
+      pattern: "/**"
+      allowedOrigin:
+      allowedOriginPattern: "*"
+      allowedMethods: "GET,POST,PUT,DELETE,OPTIONS"
+      allowedHeader: "*"
+      allowCredentials: true
+      maxAge: 360000
+

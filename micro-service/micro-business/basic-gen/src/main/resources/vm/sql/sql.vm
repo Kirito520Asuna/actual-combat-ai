@@ -1,0 +1,203 @@
+-- 菜单 SQL
+insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('${functionName}', '${parentMenuId}', '1', '${businessName}', '${moduleName}/${businessName}/index', 1, 0, 'C', '0', '0', '${permissionPrefix}:list', '#', '1', sysdate(), '', null, '${functionName}菜单');
+
+-- 按钮父菜单ID
+SELECT @parentId := LAST_INSERT_ID();
+
+-- 按钮 SQL
+insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('${functionName}查询', @parentId, '1',  '#', '', 1, 0, 'F', '0', '0', '${permissionPrefix}:query',        '#', '1', sysdate(), '1', sysdate(), '');
+
+-- 按钮查询ID
+SELECT @queryId := LAST_INSERT_ID();
+
+insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('${functionName}新增', @parentId, '2',  '#', '', 1, 0, 'F', '0', '0', '${permissionPrefix}:add',          '#', '1', sysdate(), '1', sysdate(), '');
+
+-- 按钮新增ID
+SELECT @addId := LAST_INSERT_ID();
+
+insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('${functionName}修改', @parentId, '3',  '#', '', 1, 0, 'F', '0', '0', '${permissionPrefix}:edit',         '#', '1', sysdate(), '1', sysdate(), '');
+
+-- 按钮修改ID
+SELECT @editId := LAST_INSERT_ID();
+
+insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('${functionName}删除', @parentId, '4',  '#', '', 1, 0, 'F', '0', '0', '${permissionPrefix}:remove',       '#', '1', sysdate(), '1', sysdate(), '');
+
+-- 按钮删除ID
+SELECT @removeId := LAST_INSERT_ID();
+
+insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('${functionName}导出', @parentId, '5',  '#', '', 1, 0, 'F', '0', '0', '${permissionPrefix}:export',       '#', '1', sysdate(), '1', sysdate(), '');
+
+-- 按钮导出ID
+SELECT @exportId := LAST_INSERT_ID();
+
+insert into sys_menu (menu_name, parent_id, order_num, path, component, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('${functionName}导入', @parentId, '6',  '#', '', 1, 0, 'F', '0', '0', '${permissionPrefix}:import',       '#', '1', sysdate(), '1', sysdate(), '');
+
+-- 按钮导出ID
+SELECT @importId := LAST_INSERT_ID();
+
+-- 菜单权限祖先 关联
+##insert into `sys_menu_ancestor`(`menu_id`, `menu_parent_id`, `level`)
+##values (@parentId,@parentId,'0'),(@queryId ,'@queryId ,'0'),
+##(@addId ,@addId ,'0'),(@editId ,@editId ,'0'),(@removeId ,@removeId ,'0'),
+##(@exportId  ,@exportId  ,'0');
+
+-- 插入 sys_menu_ancestor 记录
+INSERT INTO sys_menu_ancestor (menu_id, menu_parent_id, level)
+SELECT menu_id, parent_id, level
+FROM (
+    SELECT @parentId as menu_id, @parentId as parent_id, 0 as level
+    UNION ALL
+    -- 递归查询所有父级菜单 ID
+    (WITH RECURSIVE ParentMenus AS (
+    SELECT menu_id, parent_id, 1 AS level
+    FROM sys_menu
+    WHERE menu_id = @parentId
+    UNION ALL
+    SELECT m.menu_id, m.parent_id, pm.level + 1
+    FROM sys_menu m
+    INNER JOIN ParentMenus pm ON m.menu_id = pm.parent_id
+    )
+    SELECT @parentId as menu_id, parent_id, level
+    FROM ParentMenus
+    WHERE parent_id != 0)
+
+UNION ALL
+    SELECT @queryId as menu_id, @queryId as parent_id, 0 as level
+    UNION ALL
+    -- 递归查询所有父级菜单 ID
+    (WITH RECURSIVE ParentMenus AS (
+    SELECT menu_id, parent_id, 1 AS level
+    FROM sys_menu
+    WHERE menu_id = @queryId
+    UNION ALL
+    SELECT m.menu_id, m.parent_id, pm.level + 1
+    FROM sys_menu m
+    INNER JOIN ParentMenus pm ON m.menu_id = pm.parent_id
+    )
+    SELECT @queryId as menu_id, parent_id, level
+    FROM ParentMenus
+    WHERE parent_id != 0)
+
+UNION ALL
+    SELECT @addId as menu_id, @addId as parent_id, 0 as level
+    UNION ALL
+    -- 递归查询所有父级菜单 ID
+    (WITH RECURSIVE ParentMenus AS (
+    SELECT menu_id, parent_id, 1 AS level
+    FROM sys_menu
+    WHERE menu_id = @addId
+    UNION ALL
+    SELECT m.menu_id, m.parent_id, pm.level + 1
+    FROM sys_menu m
+    INNER JOIN ParentMenus pm ON m.menu_id = pm.parent_id
+    )
+    SELECT @addId as menu_id, parent_id, level
+    FROM ParentMenus
+    WHERE parent_id != 0)
+
+UNION ALL
+    SELECT @editId as menu_id, @editId as parent_id, 0 as level
+    UNION ALL
+    -- 递归查询所有父级菜单 ID
+    (WITH RECURSIVE ParentMenus AS (
+    SELECT menu_id, parent_id, 1 AS level
+    FROM sys_menu
+    WHERE menu_id = @editId
+    UNION ALL
+    SELECT m.menu_id, m.parent_id, pm.level + 1
+    FROM sys_menu m
+    INNER JOIN ParentMenus pm ON m.menu_id = pm.parent_id
+    )
+    SELECT @editId as menu_id, parent_id, level
+    FROM ParentMenus
+    WHERE parent_id != 0)
+
+UNION ALL
+    SELECT @removeId as menu_id, @removeId as parent_id, 0 as level
+    UNION ALL
+    -- 递归查询所有父级菜单 ID
+    (WITH RECURSIVE ParentMenus AS (
+    SELECT menu_id, parent_id, 1 AS level
+    FROM sys_menu
+    WHERE menu_id = @removeId
+    UNION ALL
+    SELECT m.menu_id, m.parent_id, pm.level + 1
+    FROM sys_menu m
+    INNER JOIN ParentMenus pm ON m.menu_id = pm.parent_id
+    )
+    SELECT @removeId as menu_id, parent_id, level
+    FROM ParentMenus
+    WHERE parent_id != 0)
+
+UNION ALL
+    SELECT @exportId as menu_id, @exportId as parent_id, 0 as level
+    UNION ALL
+    -- 递归查询所有父级菜单 ID
+    (WITH RECURSIVE ParentMenus AS (
+    SELECT menu_id, parent_id, 1 AS level
+    FROM sys_menu
+    WHERE menu_id = @exportId
+    UNION ALL
+    SELECT m.menu_id, m.parent_id, pm.level + 1
+    FROM sys_menu m
+    INNER JOIN ParentMenus pm ON m.menu_id = pm.parent_id
+    )
+    SELECT @exportId as menu_id, parent_id, level
+    FROM ParentMenus
+    WHERE parent_id != 0)
+
+UNION ALL
+    SELECT @importId as menu_id, @exportId as parent_id, 0 as level
+    UNION ALL
+    -- 递归查询所有父级菜单 ID
+    (WITH RECURSIVE ParentMenus AS (
+    SELECT menu_id, parent_id, 1 AS level
+    FROM sys_menu
+    WHERE menu_id = @exportId
+    UNION ALL
+    SELECT m.menu_id, m.parent_id, pm.level + 1
+    FROM sys_menu m
+    INNER JOIN ParentMenus pm ON m.menu_id = pm.parent_id
+    )
+    SELECT @exportId as menu_id, parent_id, level
+    FROM ParentMenus
+    WHERE parent_id != 0)
+) AS subquery;
+
+
+-- <sql id="ancestorInsertInto">
+    --<!--@mbg.generated-->
+    --<if test="ids != null and ids.size() != 0">
+    --    INSERT INTO `sys_menu_ancestor` (`menu_id`, `menu_parent_id`, `level`)
+    --    SELECT `id`, `parent_id`, `level`
+    --    FROM (
+    --    <foreach collection="ids" item="idOneInsert" index="i">
+    --        SELECT #{idOneInsert} as `id`, #{idOneInsert} as `parent_id`, 0 as `level`
+    --        UNION ALL
+            -- 递归查询所有父级菜单 ID
+    --        (WITH RECURSIVE ParentMenus AS (SELECT `menu_id`, `parent_id`, 1 AS `level`
+    --        FROM `sys_menu`
+    --        WHERE `menu_id` = #{idOneInsert}
+    --        UNION ALL
+    --        SELECT m.`menu_id`, m.`parent_id`, (pm.`level` + 1) as `level`
+    --        FROM `sys_menu` m
+    --        INNER JOIN ParentMenus pm ON m.`menu_id` = pm.`parent_id`)
+    --        SELECT #{idOneInsert} as `id`, `parent_id`, `level`
+    --        FROM ParentMenus
+    --        WHERE `parent_id` != 0)
+    --        <choose>
+    --            <when test="i != (ids.size() - 1)">
+    --                UNION ALL
+    --            </when>
+    --        </choose>
+    --    </foreach>
+    --    ) as ancestorInsertInto
+    -- </if>
+    --</sql>

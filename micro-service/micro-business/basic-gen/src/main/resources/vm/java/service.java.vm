@@ -1,0 +1,63 @@
+package ${packageName}.service;
+
+import java.util.List;
+
+import ${packageName}.domain.${ClassName};
+import com.baomidou.mybatisplus.extension.service.IService;
+
+/**
+ * ${functionName}Service接口
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+public interface I${ClassName}Service extends IService<${ClassName}> {
+    /**
+     * 查询业务信息
+     *
+     * @param ${pkColumn.javaField}
+     * @return 结果
+    */
+    ${ClassName} select${ClassName}By${pkColumn.toUpJavaField}(${pkColumn.javaType} ${pkColumn.javaField});
+
+    /**
+     * 查询业务信息列表
+     *
+     * @param ${className} ${functionName}
+     * @return 业务信息集合
+     */
+    List<${ClassName}> select${ClassName}List(${ClassName} ${className});
+
+    /**
+     * 删除业务信息
+     *
+     * @param ${pkColumn.javaField}s 需要删除的表数据List
+     * @return 结果
+     */
+    boolean deleteBy${pkColumn.toUpJavaField}s(List<${pkColumn.javaType}> ${pkColumn.javaField}s);
+    /**
+    * 导入${functionName}数据
+    *
+    * @param ${className}List ${functionName}数据列表
+    * @param isUpdateSupport 是否更新支持，如果已存在，则进行更新数据
+    * @param operName 操作用户
+    * @return 结果
+    */
+    String importData${ClassName}(List<${ClassName}> ${className}List,Boolean isUpdateSupport, String operName);
+
+    int updateBatch(List<${ClassName}> list);
+
+    int updateBatchSelective(List<${ClassName}> list);
+
+    int batchInsert(List<${ClassName}> list);
+
+    int batchInsertSelectiveUseDefaultForNull(List<${ClassName}> list);
+
+    int deleteByPrimaryKeyIn(List<Long> list);
+
+    int insertOrUpdate(${ClassName} record);
+
+    int insertOrUpdateSelective(${ClassName} record);
+}
+
+

@@ -1,0 +1,185 @@
+package ${packageName}.controller;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import javax.annotation.Resource;
+
+import com.minimalism.aop.controller.AbsBaseController;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
+
+
+import org.springframework.web.bind.annotation.*;
+import com.minimalism.aop.all.log.SysLog;
+import com.minimalism.base.enums.BusinessType;
+#if($table.isShiro())
+import com.minimalism.shiro.aop.ShiroPermissions;
+#else
+import org.springframework.security.access.prepost.PreAuthorize;
+import com.minimalism.utils.SecurityContextUtil;
+#end
+import ${packageName}.domain.${ClassName};
+import ${packageName}.service.${ClassName}Service;
+import com.minimalism.base.result.Result;
+import com.minimalism.base.result.ResultPage;
+import com.minimalism.mp.util.PageUtils;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+#if($table.crud || $table.sub)
+#elseif($table.tree)
+#end
+
+/**
+ * ${functionName}Controller
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Tag(name = "${functionName}")
+@RestController
+@RequestMapping({"/api/${businessName}", "/jwt/${businessName}", "/${businessName}"})
+public class ${ClassName}Controller implements AbsBaseController {
+    @Resource
+    private ${ClassName}Service ${className}Service;
+
+/**
+ * 查询${functionName}列表
+ */
+@SysLog
+@Operation(summary = "查询${functionName}列表")
+    #if($table.isShiro())
+    @ShiroPermissions("${permissionPrefix}:list")
+    #else
+    @PreAuthorize(value = "@custom.hasAuthority('${permissionPrefix}:list')")
+    #end
+@GetMapping("/list")
+    #if($table.isCrud() || $table.isSub())
+    public Result<ResultPage<${ClassName}>> list(@RequestParam(defaultValue = "1") Long pageNumber,
+                                                 @RequestParam(defaultValue = "10") Long pageSize) {
+        ${ClassName} ${className} =new ${ClassName}();
+        Map<String, Object> params = ${className}.getParams();
+        params.put(PageUtils.pageNumber, pageNumber);
+        params.put(PageUtils.pageSize, pageSize);
+        PageUtils.startPage(params);
+        List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
+        return listToPage(list);
+    }
+    #elseif($table.isTree())
+        public Result<ResultPage<${ClassName}>> list(@RequestParam(defaultValue = "1") Long pageNumber,
+                                                     @RequestParam(defaultValue = "10") Long pageSize) {
+            ${ClassName} ${className} =new ${ClassName}();
+            Map<String, Object> params = ${className}.getParams();
+            params.put(PageUtils.pageNumber, pageNumber);
+            params.put(PageUtils.pageSize, pageSize);
+            PageUtils.startPage(params);
+            List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
+            return listToPage(list);
+        }
+    #end
+
+    /**
+     * 导出${functionName}列表
+     */
+    @SysLog(businessType = BusinessType.EXPORT)
+    @Operation(summary = "导出${functionName}列表")
+        #if($table.isShiro())
+        @ShiroPermissions("${permissionPrefix}:export")
+        #else
+        @PreAuthorize(value = "@custom.hasAuthority('${permissionPrefix}:export')")
+        #end
+    @PostMapping("/export")
+    public void export(HttpServletResponse response, ${ClassName} ${className}) {
+        PageUtils.startPage(${className}.getParams());
+        List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
+        ExcelUtil<${ClassName}> util = new ExcelUtil<${ClassName}>(${ClassName}. class);
+        util.exportExcel(response, list, "${functionName}数据");
+    }
+
+    /**
+     * 导入${functionName}
+     */
+    @SysLog(businessType = BusinessType.EXPORT)
+    @Operation(summary = "导入${functionName}")
+        #if($table.isShiro())
+        @ShiroPermissions("${permissionPrefix}:import")
+        #else
+        @PreAuthorize(value = "@custom.hasAuthority('${permissionPrefix}:import')")
+        #end
+    @PostMapping("/importData")
+    public Result importData(MultipartFile file, boolean updateSupport) {
+        ExcelUtil<${ClassName}> util = new ExcelUtil<${ClassName}>(${ClassName}. class);
+        List<${ClassName}> ${className}List = util.importExcel(file.getInputStream());
+        String operName = SecurityContextUtil.getUserIdNoThrow();
+        String message = ${className}Service.importData${ClassName}(${className}List, updateSupport, operName);
+        return ok();
+    }
+
+
+    /**
+     * 获取${functionName}详细信息
+     */
+    @SysLog
+    @Operation(summary = "获取${functionName}详细信息")
+        #if($table.isShiro())
+        @ShiroPermissions("${permissionPrefix}:query")
+        #else
+        @PreAuthorize(value = "@custom.hasAuthority('${permissionPrefix}:query')")
+        #end
+    @GetMapping(value = "/{${pkColumn.javaField}}")
+    public Result<${ClassName}> getInfo(@PathVariable("${pkColumn.javaField}") ${pkColumn.javaType} ${pkColumn.javaField}) {
+        return ok(${className}Service.select${ClassName}By${pkColumn.toUpJavaField}(${pkColumn.javaField}));
+    }
+
+    /**
+     * 新增${functionName}
+     */
+    @SysLog(businessType = BusinessType.INSERT)
+    @Operation(summary = "新增${functionName}")
+        #if($table.isShiro())
+        @ShiroPermissions("${permissionPrefix}:add")
+        #else
+        @PreAuthorize(value = "@custom.hasAuthority('${permissionPrefix}:add')")
+        #end
+    @PostMapping
+    public Result add(@RequestBody ${ClassName} ${className}) {
+        return ok(${className}Service.save(${className}));
+    }
+
+    /**
+     * 修改${functionName}
+     */
+    @SysLog(businessType = BusinessType.UPDATE)
+    @Operation(summary = "修改${functionName}")
+        #if($table.isShiro())
+        @ShiroPermissions("${permissionPrefix}:edit")
+        #else
+        @PreAuthorize(value = "@custom.hasAuthority('${permissionPrefix}:edit')")
+        #end
+    @PutMapping
+    public Result edit(@RequestBody ${ClassName} ${className}) {
+        return ok(${className}Service.updateById(${className}));
+    }
+
+    /**
+     * 删除${functionName}
+     */
+    @SysLog(businessType = BusinessType.DELETE)
+    @Operation(summary = "删除${functionName}")
+        #if($table.isShiro())
+        @ShiroPermissions("${permissionPrefix}:remove")
+        #else
+        @PreAuthorize(value = "@custom.hasAuthority('${permissionPrefix}:remove')")
+        #end
+    @DeleteMapping("/{${pkColumn.javaField}s}")
+    public Result remove(@PathVariable ${pkColumn.javaType}[] ${pkColumn.javaField}s) {
+
+        List<${pkColumn.javaType}> ${pkColumn.javaField}List = Arrays.stream(${pkColumn.javaField}s).collect(Collectors.toList());
+        if (CollUtil.isNotEmpty(${pkColumn.javaField}List)) {
+                ${className}Service.deleteBy${pkColumn.toUpJavaField}s(${pkColumn.javaField}List);
+        }
+        return ok();
+    }
+}

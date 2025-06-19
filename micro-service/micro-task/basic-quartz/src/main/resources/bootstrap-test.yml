@@ -16,10 +16,3 @@ seata-server:
     group: SEATA_GROUP
     namespace:
 
-shiro:
-  annotation:
-    enable: false
-
-security:
-  annotation:
-    enable: true

@@ -11,4 +11,7 @@
 
     <artifactId>micro-business</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>basic-gen</module>
+    </modules>
 </project>

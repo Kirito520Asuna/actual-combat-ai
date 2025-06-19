@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.3.22:8848
+  datasource:
+    dynamic:
+      datasource:
+        master:
+          url: jdbc:mysql://192.168.3.22:3306/minimalism?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&tinyInt1isBit=false
+  data:
+    redis:
+      host: 192.168.3.22
+
+

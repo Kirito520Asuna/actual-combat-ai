@@ -3,6 +3,7 @@ package com.actual.combat.basic.core.abs.auth.core;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
+import cn.hutool.http.Header;
 import com.actual.combat.aop.abs.bean.AbsBean;
 import com.actual.combat.aop.utils.response.ResponseUtils;
 import com.actual.combat.basic.core.config.jwt.JwtConfig;
@@ -120,6 +121,9 @@ public interface AbsAuthorization extends AbsBean {
         tokenName = ObjectUtils.defaultIfEmpty(tokenName, JwtUtils.HEADER_AS_TOKEN);
         //获取token
         String token = request.getHeader(tokenName);
+        if (StrUtil.isBlank(token)) {
+            token = request.getHeader(Header.AUTHORIZATION.getValue());
+        }
         token = getTokenBySubstring(token);
         String userId = null;
         try {

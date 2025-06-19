@@ -11,7 +11,7 @@
     <artifactId>basic-quartz</artifactId>
 
     <properties>
-        <resources.basedir>../../../</resources.basedir>
+
         <seata.version>1.7.1</seata.version>
     </properties>
 

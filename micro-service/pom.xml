@@ -12,7 +12,7 @@
     <artifactId>micro-service</artifactId>
     <packaging>pom</packaging>
     <properties>
-        <resources.basedir>../../</resources.basedir>
+        <resources.basedir>../../../</resources.basedir>
         <resources.resources-common>resources-common</resources.resources-common>
         <resources.banner.name>banner.txt</resources.banner.name>
         <resources.logstash.name>logback-spring.xml</resources.logstash.name>

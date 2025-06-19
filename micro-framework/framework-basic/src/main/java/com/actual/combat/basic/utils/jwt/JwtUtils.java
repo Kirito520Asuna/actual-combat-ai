@@ -5,7 +5,9 @@ import cn.hutool.extra.spring.SpringUtil;
 import com.actual.combat.basic.enums.ApiCode;
 import com.actual.combat.basic.exceptions.GlobalCustomException;
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +23,7 @@ import java.util.UUID;
  * @Description JWT工具类
  */
 @Data
-@Component
+@Component @Slf4j
 @ConfigurationProperties(prefix = "common.jwt")
 public class JwtUtils {
     //有效期为
@@ -29,7 +31,7 @@ public class JwtUtils {
     //
     public static final long LONG_JWT_TTL = 7 * JWT_TTL;
     //设置秘钥明文
-    public static final String JWT_KEY = "kiritoasuna";
+    public static final String JWT_KEY = "a2lyaXRvYXN1bkeyMjM0yan3ODkwMTIzNDjwtzg5MDEy";
     public static final String REFRESH_TOKEN_KEY = "refreshToken";
     //设置签发者
     public static final String IS_SUER = "yan";
@@ -59,24 +61,34 @@ public class JwtUtils {
 
     }
 
+    public static JwtUtils fetchJwtUtils() {
+        JwtUtils jwtUtils = new JwtUtils();
+        try {
+            jwtUtils = SpringUtil.getBean(JwtUtils.class);
+        }catch (Exception e){
+            log.warn("未找到JwtUtils Bean");
+        }
+        return jwtUtils;
+    }
+
     public static long getJWT_TTL() {
-        return SpringUtil.getBean(JwtUtils.class).getExpire();
+        return fetchJwtUtils().getExpire();
     }
 
     public static long getLONG_JWT_TTL() {
-        return SpringUtil.getBean(JwtUtils.class).getExpireLong();
+        return fetchJwtUtils().getExpireLong();
     }
 
     public static String getJWT_KEY() {
-        return SpringUtil.getBean(JwtUtils.class).getSecret();
+        return fetchJwtUtils().getSecret();
     }
 
     public static String getHEADER_AS_TOKEN() {
-        return SpringUtil.getBean(JwtUtils.class).getHeader();
+        return fetchJwtUtils().getHeader();
     }
 
     public static String getIS_SUER() {
-        return SpringUtil.getBean(JwtUtils.class).getIsSuer();
+        return fetchJwtUtils().getIsSuer();
     }
 
     public static String getUUID() {
@@ -153,16 +165,24 @@ public class JwtUtils {
     }
 
 
+    ///**
+    // * 生成加密后的秘钥 secretKey
+    // *
+    // * @return
+    // */
+    //public static SecretKey generalKey(String secret) {
+    //    byte[] encodedKey = Base64.getDecoder().decode(secret);
+    //    SecretKey key = new SecretKeySpec(encodedKey, 0, encodedKey.length, "AES");
+    //    return key;
+    //}
     /**
-     * 生成加密后的秘钥 secretKey
-     *
-     * @return
+     * 生成 HMAC-SHA256 密钥
      */
     public static SecretKey generalKey(String secret) {
         byte[] encodedKey = Base64.getDecoder().decode(secret);
-        SecretKey key = new SecretKeySpec(encodedKey, 0, encodedKey.length, "AES");
-        return key;
+        return Keys.hmacShaKeyFor(encodedKey); // HMAC-SHA 密钥
     }
+
 
     /**
      * 解析
@@ -174,7 +194,8 @@ public class JwtUtils {
     public static Claims parseJWT(String jwt, String secret) throws Exception {
         SecretKey secretKey = generalKey(secret);
         return Jwts.parser()
-                .setSigningKey(secretKey)
+                .verifyWith(secretKey)
+                .build()
                 .parseClaimsJws(jwt)
                 .getBody();
     }

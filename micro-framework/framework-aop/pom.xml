@@ -20,6 +20,7 @@
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <commons-codec.version>1.16.0</commons-codec.version>
         <commons-text.version>1.10.0</commons-text.version>
+        <commons-beanutils.version>1.9.4</commons-beanutils.version>
 
         <aviator.version>5.2.0</aviator.version>
         <guava.version>30.0-jre</guava.version>
@@ -85,7 +86,11 @@
                 <artifactId>springfox-boot-starter</artifactId>
                 <version>${springfox-boot-starter.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons-beanutils.version}</version>
+            </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
@@ -123,6 +128,11 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
         </dependency>
 
         <dependency>

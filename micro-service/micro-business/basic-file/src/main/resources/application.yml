@@ -1,0 +1,66 @@
+
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+#  autoconfigure:
+#    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure  #??druid??
+#  datasource:
+#    dynamic:
+#      primary: master
+#      strict: false #??????,??false???. ????????????????????,???????????.
+#      datasource:
+#        master:
+#          url: jdbc:mysql://127.0.0.1:3306/minimalism?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&tinyInt1isBit=false
+#          username: root
+#          password: root
+#          type: com.alibaba.druid.pool.DruidDataSource
+#          driver-class-name: com.mysql.cj.jdbc.Driver
+security:
+  ignored: none
+
+knife4j:
+  setting:
+    enable-dynamic-parameter: true
+  #????swagger????
+  basic:
+    #enable: false
+    username: root
+    password: root
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  open:
+    default-group-configs:
+      enable: true
+#      other: false
+
+  group-configs:
+    - group: "test"
+      paths-to-match:
+        - "/test/**"
+    - group: "api"
+      paths-to-match:
+        - "/api/**"
+  swagger-ui:
+    operations-sorter: alpha
+    path: /swagger-ui.html
+    tags-sorter: alpha
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml, classpath:mapper/**/*.xml
+  configuration:
+    use-generated-keys: true
+    use-column-label: true
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com.minimalism: DEBUG
+#    com.baomidou.mybatisplus: DEBUG
+
+#shiro:
+#  annotation:
+#    enable: false

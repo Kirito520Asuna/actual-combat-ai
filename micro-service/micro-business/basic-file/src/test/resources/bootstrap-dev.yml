@@ -1,0 +1,6 @@
+logging:
+  level:
+    com.minimalism: info
+    com.baomidou.mybatisplus: info
+server:
+  port: 19820

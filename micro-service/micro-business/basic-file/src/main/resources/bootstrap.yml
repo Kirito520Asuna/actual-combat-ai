@@ -1,0 +1,50 @@
+server:
+    port: 13600
+    servlet:
+        context-path: /${spring.application.name}
+
+spring:
+  application:
+    name: basic-file
+  profiles:
+    active: @spring.profiles.active@
+  cloud:
+    nacos:
+      discovery:
+        service: ${spring.application.name}
+      config:
+        refresh-enabled: true
+        refreshable-dataids: ${spring.cloud.nacos.discovery.service:${spring.application.name}}-${spring.profiles.active:test}.${spring.cloud.nacos.config.file-extension:yaml}
+
+logstash:
+  addr: 127.0.0.1:4560
+  file: var/log/${spring.application.name}/${spring.profiles.active}/${spring.application.name}.log
+  fileNamePattern: var/log/${spring.application.name}/${spring.profiles.active}/${spring.application.name}-logstash.%d{yyyy-MM-dd}.log
+  maxHistory: 30
+  totalSizeCap: 10MB
+
+config:
+  file:
+    prop:
+      type: local
+      local:
+        uploadDir: ../../tmp/uploads
+    url:
+      byte:
+        get: /fetch/byte/local
+        del: /del/file/local
+      downLoad: downLoadFile
+
+  cors:
+    enabled: true
+    prop:
+      pattern: "/**"
+      allowedOrigin: "*"
+      allowedOriginPattern: "*"
+      allowedMethods: "GET,POST,PUT,DELETE,OPTIONS,HEAD,PATCH"
+      allowedHeader: "*"
+      allowCredentials: true
+      maxAge: 360000
+logging:
+  level:
+    com.actual.combat: debug

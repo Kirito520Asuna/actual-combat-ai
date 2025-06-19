@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    dynamic:
+      datasource:
+        master:
+          url: jdbc:mysql://192.168.3.22:3306/master?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&tinyInt1isBit=false
+  data:
+    redis:
+      host: 192.168.3.22
+      database: 3
+

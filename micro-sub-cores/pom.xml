@@ -30,6 +30,7 @@
         <module>basic-file-core</module>
         <module>basic-gateway-core</module>
         <module>basic-gen-core</module>
+        <module>basic-im-core</module>
         <module>basic-job-core</module>
         <module>basic-quartz-core</module>
         <module>basic-user-core</module>

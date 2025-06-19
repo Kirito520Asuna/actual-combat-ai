@@ -27,4 +27,9 @@ public interface AuthSecurityService extends AbsAuthService {
     default boolean matchPassword(String plainPassword, String encodedPassword) {
         return EncodePasswordUtils.matchPassword(plainPassword, encodedPassword);
     }
+
+    @Override
+    default String encodePassword(String plainPassword) {
+        return EncodePasswordUtils.encodePassword(plainPassword);
+    }
 }

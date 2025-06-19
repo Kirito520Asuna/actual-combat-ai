@@ -11,6 +11,7 @@ import com.actual.combat.task.quartz.utils.ScheduleUtils;
 import com.google.common.collect.Maps;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobDataMap;
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
@@ -23,7 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
+@Slf4j
 @Service
 public class SysJobServiceImpl extends ServiceImpl<SysJobMapper, SysJob> implements SysJobService {
     @Resource
@@ -41,19 +42,24 @@ public class SysJobServiceImpl extends ServiceImpl<SysJobMapper, SysJob> impleme
     public void init() throws SchedulerException, TaskException {
         Scheduler scheduler = getScheduler();
         scheduler.clear();
-        List<SysJob> jobList = list();
+        try {
+            List<SysJob> jobList = list();
 
-        List<Map<String, Object>> jobMapList = jobList.stream()
-                .map(job -> {
+            List<Map<String, Object>> jobMapList = jobList.stream()
+                    .map(job -> {
 
-                    Map<String, Object> jobMap = Maps.newLinkedHashMap();
-                    CustomBeanUtils.copyPropertiesIgnoreNull(job, jobMap);
-                    return jobMap;
-                }).collect(Collectors.toList());
+                        Map<String, Object> jobMap = Maps.newLinkedHashMap();
+                        CustomBeanUtils.copyPropertiesIgnoreNull(job, jobMap);
+                        return jobMap;
+                    }).collect(Collectors.toList());
 
-        for (Map<String, Object> jobMap : jobMapList) {
-            ScheduleUtils.createScheduleJob(scheduler, jobMap);
+            for (Map<String, Object> jobMap : jobMapList) {
+                ScheduleUtils.createScheduleJob(scheduler, jobMap);
+            }
+        } catch (Exception e) {
+            log.error("quartz任务初始化失败error: {}", e.getMessage());
         }
+
     }
 
     /**

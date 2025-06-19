@@ -7,6 +7,8 @@ import com.actual.combat.auth.service.impl.ShiroAuthUserService;
 import com.actual.combat.auth.service.impl.SimpleAuthUserService;
 import com.actual.combat.auth.service.impl.mp.AuthUserMpService;
 import com.actual.combat.auth.shiro.abs.AbsAuthorizationShiro;
+import com.actual.combat.basic.core.abs.auth.config.AbsAuthSecurityConfig;
+import com.actual.combat.basic.core.abs.auth.config.AbsAuthShiroConfig;
 import com.actual.combat.basic.core.abs.auth.core.AbsSecurityAuth;
 import com.actual.combat.basic.core.abs.auth.core.AbsShiroAuth;
 import com.actual.combat.basic.core.abs.bean.AbstractAuthBean;
@@ -16,6 +18,7 @@ import com.actual.combat.basic.core.abs.bean.AbstractShiroBean;
 import com.actual.combat.mp.abs.handler.AbsEntityHandler;
 import com.actual.combat.mp.abs.service.MpUserService;
 import jakarta.annotation.PostConstruct;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -28,7 +31,8 @@ import org.springframework.context.annotation.Configuration;
  * @Description
  */
 @Configuration
-@AutoConfigureBefore({AbstractSecurityBean.class,AbstractShiroBean.class,AbstractBean.class})
+@AutoConfigureAfter({AbstractSecurityBean.class,AbstractShiroBean.class})
+//@AutoConfigureBefore({AbstractBean.class})
 public class BeanAuthConfig implements AbstractAuthBean {
     @Override
     @PostConstruct
@@ -37,22 +41,25 @@ public class BeanAuthConfig implements AbstractAuthBean {
     }
 
     @Bean
-    @ConditionalOnBean(AbsAuthorizationShiro.class)
+    @ConditionalOnBean(AbsAuthShiroConfig.class)
     @ConditionalOnMissingBean(AuthUserService.class)
     public AuthUserService shiroAuthUserService() {
+        log().debug("[AuthShiro]-[shiroAuthUserService]::[{}]",getAClassName());
         return new ShiroAuthUserService();
     }
 
     @Bean
-    @ConditionalOnBean(AbsSecurityAuth.class)
+    @ConditionalOnBean(AbsAuthSecurityConfig.class)
     @ConditionalOnMissingBean(AuthUserService.class)
     public AuthUserService securityAuthUserService() {
+        log().debug("[AuthSecurity]-[securityAuthUserService]::[{}]",getAClassName());
         return new SecurityAuthUserService();
     }
 
     @Bean
     @ConditionalOnMissingBean({AbsShiroAuth.class, AbsSecurityAuth.class, AuthUserService.class})
     public AuthUserService authUserService() {
+        log().warn("AuthUserService==>SimpleAuthUserService");
         return new SimpleAuthUserService();
     }
 

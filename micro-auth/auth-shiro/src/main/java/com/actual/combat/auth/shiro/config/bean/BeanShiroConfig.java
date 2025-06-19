@@ -37,17 +37,5 @@ public class BeanShiroConfig implements AbstractShiroBean {
         return new ShiroConfig();
     }
 
-    @Bean
-    @ConditionalOnBean(ShiroConfig.class)
-    @ConditionalOnMissingBean(AbstractLoginService.class)
-    public AbstractLoginService authLoginService() {
-        return new SimpleLoginShiroService();
-    }
 
-    @Bean
-    @ConditionalOnBean(ShiroConfig.class)
-    @ConditionalOnMissingBean(AbstractUserDetailsService.class)
-    public AbstractUserDetailsService authUserDetailsService() {
-        return new SimpleUserDetailsShiroService();
-    }
 }

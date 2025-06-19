@@ -41,6 +41,12 @@ public interface AbsAop extends Ordered, AbsBean {
         if (ObjectUtil.isNotEmpty(method)) {
             annotation = method.getAnnotation(annotationClass);
         }
+        if (annotation == null) {
+            // 获取目标类
+            Class<?> targetClass = joinPoint.getTarget().getClass();
+            // 获取类上的 注解
+            annotation = targetClass.getAnnotation(annotationClass);
+        }
         return annotation;
     }
 

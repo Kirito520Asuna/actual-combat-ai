@@ -1,0 +1,178 @@
+server:
+  servlet:
+    context-path: /${spring.application.name}
+
+spring:
+  application:
+    name: quartz
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+  profiles:
+    active: @spring.profiles.active@
+
+  cloud:
+    loadbalancer:
+      enabled: true
+      ribbon:
+        enabled: false
+
+    nacos:
+      server-addr: 127.0.0.1:8848
+      username: nacos
+      password: nacos
+knife4j:
+  setting:
+    enable-dynamic-parameter: true
+  #????swagger????
+  basic:
+    #enable: false
+    username: root
+    password: root
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  open:
+    default-group-configs:
+      enable: true
+  #      other: false
+
+  group-configs:
+    - group: "test"
+      paths-to-match:
+        - "/test/**"
+    - group: "api"
+      paths-to-match:
+        - "/api/**"
+  swagger-ui:
+    operations-sorter: alpha
+    path: /swagger-ui.html
+    tags-sorter: alpha
+  # demo
+#====================================================================================================================================
+  datasource:
+    dynamic:
+      # 开启seata代理
+      seata: ${seata.enabled}
+# seata配置
+seata:
+  enabled: true
+  # Seata 应用编号，默认为 ${spring.application.name}
+  #application-id: seata-server
+  # Seata 事务组编号，用于 TC 集群名
+  tx-service-group: default_tx_group
+  #tx-service-group: ${spring.application.name}-group
+  # 关闭自动代理
+  enable-auto-data-source-proxy: false
+  # 服务配置项
+  service:
+    grouplist:
+      default: 127.0.0.1:8091
+    # 虚拟组和分组的映射
+    vgroup-mapping:
+      default_tx_group: default
+      #ruoyi-system-group: default
+      # 分组和 Seata 服务的映射
+      # grouplist:  # 仅注册中心为file时使用
+      # default: 127.0.0.1:8091
+  registry:
+    type: nacos
+    nacos:
+      server-addr: ${spring.cloud.nacos.server-addr}
+      group: ${seata-server.discovery.group}
+      namespace: ${seata-server.discovery.namespace}
+      username: ${spring.cloud.nacos.username}
+      password: ${spring.cloud.nacos.password}
+
+  config:
+    type: nacos
+    nacos:
+      server-addr: ${spring.cloud.nacos.server-addr}
+      group: ${seata-server.config.group}
+      namespace: ${seata-server.config.namespace}
+      username: ${spring.cloud.nacos.username}
+      password: ${spring.cloud.nacos.password}
+#====================================================================================================================================
+# OpenFeign 配置
+
+# OpenFeign默认使用jdk自带的HttpURLConnection，
+#我们知道HttpURLConnection没有连接池、性能和效率比较低，如果采用默认，很可能会遇到性能问题导致系统故障
+# OkHttpClient
+feign:
+  okhttp:
+    enabled: true
+  #OpenFeign可以设置超时时间，简单粗暴，设置一个全局的超时时间。如果不配置超时时间，默认是连接超时10s，读超时60s
+  client:
+    config:
+      default:
+        connectTimeout: 2000
+        readTimeout: 60000
+  #上文所述，对单个服务设置超时时间。
+  #feign.client.config.serviceA.connectTimeout=2000
+  #feign.client.config.serviceA.readTimeout=60000
+  # 开启熔断
+  hystrix:
+    enabled: true
+#通过OpenFeign作为注册中心的客户端时，
+# 默认使用Ribbon做负载均衡，Ribbon默认也是用jdk自带的HttpURLConnection，
+# 需要给Ribbon也设置一个Http client，比如使用okhttp，在properties文件中增加下面配置
+ribbon:
+  okhttp:
+    enabled: true
+#====================================================================================================================================
+# 是否使用properties作为数据存储
+org:
+  quartz:
+    jobStore:
+      useProperties: false
+      # 数据库中表的命名前缀
+      tablePrefix: QRTZ_
+      # 是否是一个集群，是不是分布式的任务
+      isClustered: true
+      # 集群检查周期，单位为毫秒，可以自定义缩短时间。当某一个节点宕机的时候，其他节点等待多久后开始执行任务
+      clusterCheckinInterval: 5000
+      # 单位为毫秒，集群中的节点退出后，再次检查进入的时间间隔
+      misfireThreshold: 60000
+      # 事务隔离级别
+      txIsolationLevelReadCommitted: true
+      # 存储的事务管理类型
+      #      class: org:quartz:impl.jdbcjobstore.JobStoreTX
+      class: org:springframework.scheduling.quartz.LocalDataSourceJobStore
+      # 使用的Delegate类型
+      driverDelegateClass: org:quartz:impl.jdbcjobstore.StdJDBCDelegate
+    #      dataSource: quartzDataSource
+    # 集群的命名，一个集群要有相同的命名
+    scheduler:
+      instanceName: ClusterQuartz
+      # 节点的命名，可以自定义。AUTO代表自动生成
+      instanceId: AUTO
+      # rmi远程协议是否发布
+      rmi.export: false
+      # rmi远程协议代理是否创建
+      rmi.proxy: false
+      # 是否使用用户控制的事务环境触发执行任务
+      wrapJobExecutionInUserTransaction: false
+
+
+config:
+  cors:
+    enabled: true
+    config: false
+    filter: true
+    prop:
+      pattern: "/**"
+      allowedOrigin:
+      allowedOriginPattern: "*"
+      allowedMethods: "GET,POST,PUT,DELETE,OPTIONS"
+      allowedHeader: "*"
+      allowCredentials: true
+      maxAge: 360000
+#authorization:
+#  shiro:
+#    enable: true
+#  security:
+#    enable: false
+logging:
+  level:
+    com.actual.combat: debug

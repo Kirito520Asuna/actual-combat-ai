@@ -1,0 +1,23 @@
+spring:
+  datasource:
+#    dynamic:
+#      primary: quartz
+#      datasource:
+#        quartz:
+#          driver-class-name: com.mysql.cj.jdbc.Driver
+#          url: jdbc:mysql://127.0.0.1:3306/minimalism?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+#          username: root
+#          password: root
+
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    max-active: 1000
+    max-idle: 20
+    min-idle: 5
+    initial-size: 10
+  
+
+  #org:quartz:dataSource.quartzDataSource.driver: ${  datasource:driver-class-name}
+  #org:quartz:dataSource.quartzDataSource.URL: ${  datasource:url}
+  #org:quartz:dataSource.quartzDataSource.user: ${  datasource:username}
+  #org:quartz:dataSource.quartzDataSource.password: ${  datasource:password}
+  

@@ -12,5 +12,8 @@
     <artifactId>micro-task</artifactId>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>basic-quartz</module>
+    </modules>
 
 </project>

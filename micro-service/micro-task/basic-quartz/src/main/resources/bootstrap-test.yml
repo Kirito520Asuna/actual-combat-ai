@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    dynamic:
+      datasource:
+        master:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/minimalism?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+          username: root
+          password: root
+#==================================================================================================================
+seata-server:
+  config:
+    group: SEATA_GROUP
+    namespace:
+  discovery:
+    group: SEATA_GROUP
+    namespace:
+
+shiro:
+  annotation:
+    enable: false
+
+security:
+  annotation:
+    enable: true

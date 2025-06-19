@@ -18,6 +18,7 @@
         <fastjson.version>2.0.32</fastjson.version>
         <jwt.version>0.9.1</jwt.version>
         <alibaba-ttl.version>2.14.4</alibaba-ttl.version>
+        <okhttp.version>4.9.1</okhttp.version>
     </properties>
 
     <dependencyManagement>
@@ -67,6 +68,13 @@
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
                 <version>${jwt.version}</version>
+            </dependency>
+
+            <!--okhttp-->
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -118,6 +126,11 @@
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
         </dependency>
     </dependencies>
 </project>

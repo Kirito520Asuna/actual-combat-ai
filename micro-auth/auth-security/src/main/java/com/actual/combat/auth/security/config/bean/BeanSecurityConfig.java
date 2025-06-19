@@ -44,7 +44,7 @@ public class BeanSecurityConfig implements AbstractSecurityBean {
         return new SecurityConfig();
     }
 
-    @Bean
+    @Bean("auth")
     @ConditionalOnBean(SecurityConfig.class)
     @ConditionalOnMissingBean(AbsSecurityExpressionRoot.class)
     public AbsSecurityExpressionRoot securityExpressionRoot(){

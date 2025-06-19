@@ -26,6 +26,7 @@
 
     <modules>
         <module>basic-dict-core</module>
+        <module>basic-dept-core</module>
         <module>basic-gateway-core</module>
         <module>basic-gen-core</module>
         <module>basic-job-core</module>

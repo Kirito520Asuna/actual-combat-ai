@@ -11,6 +11,14 @@
 
     <artifactId>micro-service</artifactId>
     <packaging>pom</packaging>
+    <properties>
+        <resources.basedir>../../</resources.basedir>
+        <resources.resources-common>resources-common</resources.resources-common>
+        <resources.banner.name>banner.txt</resources.banner.name>
+        <resources.logstash.name>logback-spring.xml</resources.logstash.name>
+
+        <logstash.version>5.3</logstash.version>
+    </properties>
     <modules>
         <module>micro-ai</module>
         <module>micro-gateway</module>
@@ -27,8 +35,21 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!--集成logstash-->
+            <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>${logstash.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+        </dependency>
+    </dependencies>
 
 
     <build>

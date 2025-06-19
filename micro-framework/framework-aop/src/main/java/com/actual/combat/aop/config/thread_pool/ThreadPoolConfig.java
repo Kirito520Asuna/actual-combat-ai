@@ -18,7 +18,7 @@ import java.util.concurrent.Executor;
  */
 @Configuration
 @EnableAsync
-@Slf4j @ConditionalOnExpression("${config.thread-pool.enabled:false}")
+@Slf4j @ConditionalOnExpression("${config.thread-pool.enabled:true}")
 public class ThreadPoolConfig {
     private static final String DEFAULT_TASK_EXECUTOR = ThreadPoolConfiguration.DEFAULT_TASK_EXECUTOR;
     private static final String DEFAULT_ASYNC_EXECUTOR = ThreadPoolConfiguration.DEFAULT_ASYNC_EXECUTOR;

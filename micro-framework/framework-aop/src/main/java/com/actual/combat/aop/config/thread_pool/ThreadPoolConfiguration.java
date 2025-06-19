@@ -24,8 +24,8 @@ import java.util.Map;
 @SuperBuilder
 @AllArgsConstructor
 @Configuration
-@ConditionalOnExpression("${config.thread-pool.enable:false}")
-@ConfigurationProperties(prefix = "thread-pool.config")
+@ConditionalOnExpression("${config.thread-pool.enable:true}")
+@ConfigurationProperties(prefix = "config.thread-pool")
 public class ThreadPoolConfiguration {
     public static final String DEFAULT_TASK_EXECUTOR = "taskExecutor";
     public static final String DEFAULT_ASYNC_EXECUTOR = "asyncExecutor";

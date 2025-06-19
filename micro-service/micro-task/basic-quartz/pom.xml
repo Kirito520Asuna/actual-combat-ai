@@ -11,7 +11,7 @@
     <artifactId>basic-quartz</artifactId>
 
     <properties>
-
+        <resources.basedir>../../../</resources.basedir>
         <seata.version>1.7.1</seata.version>
     </properties>
 
@@ -139,5 +139,38 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.verison}</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <!-- 输出目录为子模块的 target/classes -->
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <!-- 假设 banner.txt 放在父模块的 resources 目录中 -->
+                                    <directory>${resources.basedir}/${resources.resources-common}</directory>
+                                    <includes>
+                                        <include>${resources.banner.name}</include>
+                                        <include>${resources.logstash.name}</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

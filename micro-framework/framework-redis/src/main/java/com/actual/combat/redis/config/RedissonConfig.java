@@ -4,6 +4,8 @@ import com.actual.combat.redis.abs.ban.BanManager;
 import com.actual.combat.redis.abs.config.AbsRedissonConfig;
 import com.actual.combat.redis.ban.BanConfiguration;
 import com.actual.combat.redis.ban.SimpleBanManager;
+import com.actual.combat.redis.service.RedisService;
+import com.actual.combat.redis.service.impl.SimpleRedisService;
 import jakarta.annotation.Resource;
 import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -64,4 +66,10 @@ public class RedissonConfig implements AbsRedissonConfig {
         return new SimpleBanManager();
     }
 
+    @Bean
+    @ConditionalOnMissingBean(RedisService.class)
+    public RedisService redisService() {
+        log.debug("redisService init");
+        return new SimpleRedisService();
+    }
 }

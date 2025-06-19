@@ -28,23 +28,23 @@ import java.util.stream.Collectors;
 @Accessors(chain = true)
 @Slf4j
 public class RedisConfiguration {
-    @Value("${spring.redis.host:-127.0.0.1}")
+    @Value("${spring.data.redis.host:-127.0.0.1}")
     private String redisHost;
 
-    @Value("${spring.redis.port:-6379}")
+    @Value("${spring.data.redis.port:-6379}")
     private int redisPort;
 
-    @Value("${spring.redis.password:#{null}}")
+    @Value("${spring.data.redis.password:#{null}}")
     private String redisPassword;
 
-    @Value("${spring.redis.timeout:#{null}}")
+    @Value("${spring.data.redis.timeout:#{null}}")
     private Integer redisTimeout;
 
-    @Value("${spring.redis.mode:single}")
+    @Value("${spring.data.redis.mode:single}")
     private String redisMode; // 可配置为 "single" 或 "cluster"
-    @Value("${spring.redis.cluster.nodes:redis://127.0.0.1:6379}")
+    @Value("${spring.data.redis.cluster.nodes:redis://127.0.0.1:6379}")
     private String clusterNodeStr;
-    @Value("${spring.redis.cluster.nodes:redis://127.0.0.1:6379}")
+    @Value("${spring.data.redis.cluster.nodes:redis://127.0.0.1:6379}")
     private List<String> clusterNodes = CollUtil.newArrayList();
     @Resource
     private RedisProperties redisProperties;

@@ -43,7 +43,12 @@ public class CorsRequestFilter extends OncePerRequestFilter implements AbsBean {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         Map<String, Object> headerMap = Maps.newLinkedHashMap();
 
-        CorsProperties cors = SpringUtil.getBean(CorsProperties.class);
+        CorsProperties cors = new CorsProperties();
+        try {
+            cors = SpringUtil.getBean(CorsProperties.class);
+        }catch (Exception e) {
+            log().warn("[warn]-[Filter]-[Cors] {}", e.getMessage());
+        }
         String allowedOrigin = cors.getAllowedOrigin();
         String[] allowedMethods = cors.AllowedMethods();
         Long maxAge = cors.getMaxAge();

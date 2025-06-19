@@ -1,10 +1,9 @@
 package com.actual.combat;
 
-import org.apache.shiro.spring.config.web.autoconfigure.ShiroWebAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(exclude = ShiroWebAutoConfiguration.class)
+@SpringBootApplication
 public class BasicQuartzApplication {
 
     public static void main(String[] args) {

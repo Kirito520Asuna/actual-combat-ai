@@ -1,0 +1,78 @@
+#server:
+#  port: 11030
+#  servlet:
+#    context-path: /${spring.application.name}
+#
+#spring:
+#  application:
+#    name: user
+#  profiles:
+#    active: dev
+#  main:
+#    allow-bean-definition-overriding: true
+#    #防止循环依赖
+#    allow-circular-references: true
+##关闭security默认过滤器
+#security:
+#  ignored: none
+#
+#knife4j:
+##  cors: true
+##  enable: true
+#  setting:
+#    enable-dynamic-parameter: true
+#  #是否开启swagger登录验证
+#  basic:
+#    #enable: false
+#    username: root
+#    password: root
+#
+#springdoc:
+#  api-docs:
+#    path: /v3/api-docs
+#  open:
+#    default-group-configs:
+#      enable: true
+#  group-configs:
+##    - group: "api"
+##      paths-to-match: "/api/**"
+##    - group: "jwt"
+##      paths-to-match: "/jwt/**"
+#    - group: "test"
+#      paths-to-match:
+#        - "/test/**"
+#  swagger-ui:
+#    operations-sorter: alpha
+#    path: /swagger-ui.html
+#    tags-sorter: alpha
+#
+#mybatis-plus:
+#  # 设置Mapper文件位置
+#  mapper-locations: classpath:mapper/*.xml, classpath:mapper/**/*.xml
+#  #配置
+#  configuration:
+#    # 使用JDBC的getGeneratedKeys，获取数据库自增主键值
+#    use-generated-keys: true
+#    # 使用列别名
+#    use-column-label: true
+#    # 驼峰下划线转换
+#    map-underscore-to-camel-case: true
+##logstash:
+##  addr: 127.0.0.1:4560
+#logging:
+#  # 日志文件
+##  file:
+##    name: var/log/${spring.application.name}/${spring.profiles.active}/${spring.application.name}0.log
+#  # 日志等级
+#  level:
+#    root: info
+#
+#captcha:
+#  enabled: true
+#cors:
+#  filter: false
+#authorization:
+#  shiro:
+#    enable: true
+#  security:
+#    enable: false

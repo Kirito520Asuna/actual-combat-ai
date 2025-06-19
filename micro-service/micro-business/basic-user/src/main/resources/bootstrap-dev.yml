@@ -1,0 +1,20 @@
+spring:
+  cloud:
+    nacos:
+      server-addr: 192.168.3.22:8848
+
+nacos:
+  discovery:
+    server-addr: 192.168.3.22:8848
+  config:
+    server-addr: 192.168.3.22:8848
+    file-extension: yaml
+    #group: test
+    group: DEFAULT_GROUP
+seata-server:
+  config:
+    group: SEATA_GROUP
+    namespace: SEATA_GROUP
+  discovery:
+    group: SEATA_GROUP
+    namespace: SEATA_GROUP

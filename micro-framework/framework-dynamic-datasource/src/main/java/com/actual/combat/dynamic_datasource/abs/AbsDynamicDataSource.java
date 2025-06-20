@@ -98,6 +98,11 @@ public interface AbsDynamicDataSource {
         //dataSource.setProvider(dynamicDataSourceProvider);
         dataSource.setP6spy(dynamicDataSourceProperties.getP6spy());
         dataSource.setSeata(dynamicDataSourceProperties.getSeata());
+
+        // 手动加载数据源
+        Map<String, DataSource> dataSourceMap = dynamicDataSourceProvider.loadDataSources();
+        dataSourceMap.forEach(dataSource::addDataSource);
+
         return dataSource;
     }
 

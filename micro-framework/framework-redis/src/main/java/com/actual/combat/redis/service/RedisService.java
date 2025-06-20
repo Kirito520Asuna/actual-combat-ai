@@ -54,6 +54,7 @@ public interface RedisService {
         Object value;
         if (isHash) {
             value = redisTemplate.opsForHash().get(cacheName, key);
+            key = cacheName + ":" + key;
         } else {
             value = redisTemplate.opsForValue().get(key);
         }
@@ -164,6 +165,7 @@ public interface RedisService {
             if (timeout > 0) {
                 redisTemplate.expire(cacheName, timeout, timeUnit);
             }
+            key = cacheName + ":" + key;
         } else if (timeout < 1) {
             redisTemplate.opsForValue().set(key, value);
         } else {
@@ -196,6 +198,7 @@ public interface RedisService {
         Logger log = log();
         if (isHash) {
             redisTemplate.opsForHash().delete(cacheName, key);
+            key = cacheName + ":" + key;
             log.debug("[RT]删除hash缓存成功,key:{}", key);
         } else {
             redisTemplate.delete(key);
@@ -275,6 +278,7 @@ public interface RedisService {
 
     /**
      * 获取redisson的RAtomicLong
+     *
      * @param key
      * @return
      */

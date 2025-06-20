@@ -2,7 +2,7 @@ package com.actual.combat.basic.result;
 
 
 import com.actual.combat.basic.enums.ApiCode;
-import com.actual.combat.basic.view.BaseJsonView;
+import com.actual.combat.basic.view.BasicJsonView;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -23,7 +23,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor @Accessors(chain = true)
-@JsonView(BaseJsonView.BaseView.class)
+@JsonView(BasicJsonView.BaseView.class)
 public class Result<T> implements Serializable, AbsResult {
     private static final long serialVersionUID = 8831550221241490078L;
 
@@ -32,14 +32,14 @@ public class Result<T> implements Serializable, AbsResult {
      */
     @JsonProperty("code")
     @Schema(description = "返回代码", example = "200")
-    @JsonView(BaseJsonView.BaseView.class)
+    @JsonView(BasicJsonView.BaseView.class)
     private Integer code;
     /**
      * 返回信息
      */
     @JsonProperty("message")
     @Schema(description = "返回信息", example = "操作成功")
-    @JsonView(BaseJsonView.BaseView.class)
+    @JsonView(BasicJsonView.BaseView.class)
     private String message;
 
     /**
@@ -47,14 +47,14 @@ public class Result<T> implements Serializable, AbsResult {
      */
     @JsonProperty("resultTime")
     @Schema(description = "响应时间")
-    @JsonView(BaseJsonView.BaseView.class)
+    @JsonView(BasicJsonView.BaseView.class)
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Long resultTime = System.currentTimeMillis();
     /**
      * 返回数据
      */
     @JsonProperty("data")
-    @JsonView(BaseJsonView.BaseView.class)
+    @JsonView(BasicJsonView.BaseView.class)
     @Schema(description = "返回数据")
     private T data;
 

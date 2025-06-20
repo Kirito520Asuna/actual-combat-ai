@@ -5,7 +5,7 @@ package com.actual.combat.basic.view;
  * @Date 2023/7/26 0026 11:46
  * @Description JSON视图
  */
-public class BaseJsonView {
+public class BasicJsonView {
     /**
      * 基础
      */

@@ -7,6 +7,8 @@ import com.actual.combat.auth.service.impl.ShiroAuthUserService;
 import com.actual.combat.auth.service.impl.SimpleAuthUserService;
 import com.actual.combat.auth.service.impl.mp.AuthUserMpService;
 import com.actual.combat.auth.shiro.abs.AbsAuthorizationShiro;
+import com.actual.combat.basic.core.abs.api.service.AbstractApiSaltService;
+import com.actual.combat.basic.core.abs.api.service.SimpleApiSaltService;
 import com.actual.combat.basic.core.abs.auth.config.AbsAuthSecurityConfig;
 import com.actual.combat.basic.core.abs.auth.config.AbsAuthShiroConfig;
 import com.actual.combat.basic.core.abs.auth.core.AbsSecurityAuth;
@@ -38,6 +40,11 @@ public class BeanAuthConfig implements AbstractAuthBean {
     @PostConstruct
     public void init() {
         AbstractAuthBean.super.init();
+    }
+    @Bean
+    @ConditionalOnMissingBean(AbstractApiSaltService.class)
+    public AbstractApiSaltService apiSaltService() {
+        return new SimpleApiSaltService();
     }
 
     @Bean

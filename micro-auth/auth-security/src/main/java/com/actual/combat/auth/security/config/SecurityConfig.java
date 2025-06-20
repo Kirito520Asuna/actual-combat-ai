@@ -1,15 +1,20 @@
 package com.actual.combat.auth.security.config;
 
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.actual.combat.auth.security.abs.AbsSecurityConfig;
+import com.actual.combat.auth.security.config.bean.BeanSecurityConfig;
 import com.actual.combat.auth.security.service.AbsUserDetailsService;
-import com.actual.combat.basic.core.abs.auth.service.SimpleUserDetailsService;
 import com.actual.combat.basic.core.abs.auth.config.AbsAuthSecurityConfig;
 import com.actual.combat.basic.core.abs.auth.service.AbstractUserDetailsService;
 import com.actual.combat.basic.core.config.jwt.JwtConfig;
+import jakarta.annotation.PostConstruct;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,9 +33,45 @@ import org.springframework.security.web.SecurityFilterChain;
  * @Date 2025/6/12 23:24:35
  * @Description Spring Boot 3.x 的安全配置
  */
+@ConditionalOnExpression("${config.auth.security.enable:true}")
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
+@AutoConfigureAfter(BeanSecurityConfig.class)
 public class SecurityConfig implements AbsAuthSecurityConfig {
+    SecurityAutoConfiguration securityAutoConfiguration = null;
+
+    @Override
+    @PostConstruct
+    public void init() {
+        AbsAuthSecurityConfig.super.init();
+        try {
+            securityAutoConfiguration = SpringUtil.getBean(SecurityAutoConfiguration.class);
+        } catch (Exception e) {
+        }
+
+        AbsUserDetailsService userDetailsService = null;
+        try {
+            userDetailsService = SpringUtil.getBean(AbsUserDetailsService.class);
+        } catch (Exception e) {
+            log().warn("未找到 AbsUserDetailsService Bean，请检查配置 error:{}", e.getMessage());
+        }
+
+        if (securityAutoConfiguration != null && userDetailsService == null) {
+            Class<SecurityAutoConfiguration> classAuto = SecurityAutoConfiguration.class;
+
+            String className = StrUtil.subBefore(classAuto.getName(), "$", false);
+            log().debug("""
+                    
+                    [Security]-[默认安全配置]-[已启用]-[用户名:user]
+                    [自定义用户名和密码]
+                    spring.security.user.name=自定义用户名
+                    spring.security.user.password=自定义密码
+                    [禁用默认安全配置]
+                    @SpringBootApplication(exclude = { {}.class })
+                    or
+                    spring.autoconfigure.exclude={}""", className, className);
+        }
+    }
 
     /**
      * 密码加密器 Bean，用于加密存储密码
@@ -40,7 +81,64 @@ public class SecurityConfig implements AbsAuthSecurityConfig {
     @Bean
     @ConditionalOnMissingBean(PasswordEncoder.class)
     public PasswordEncoder passwordEncoder() {
+        log().debug("class:{},msg:PasswordEncoder", getAClassName());
         return new BCryptPasswordEncoder();
+    }
+
+    /**
+     * 配置 AuthenticationProvider，使用自定义 UserDetailsService 和 PasswordEncoder
+     *
+     * @return AuthenticationProvider
+     */
+    @Bean
+    @ConditionalOnBean({AbstractUserDetailsService.class, AbsUserDetailsService.class, PasswordEncoder.class})
+    public AuthenticationProvider authenticationProvider() {
+        log().debug("class:{},msg:AuthenticationProvider", getAClassName());
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(SpringUtil.getBean(AbsUserDetailsService.class));
+        authProvider.setPasswordEncoder(SpringUtil.getBean(PasswordEncoder.class));
+        return authProvider;
+    }
+
+
+    /**
+     * 显式定义 AuthenticationConfiguration Bean
+     *
+     * @return AuthenticationConfiguration
+     */
+    @Bean
+    public AuthenticationConfiguration authenticationConfiguration() {
+        log().debug("class:{},msg:AuthenticationConfiguration", getAClassName());
+        return new AuthenticationConfiguration();
+    }
+
+    /**
+     * 配置 AuthenticationManager，注入自定义 AuthenticationProvider
+     *
+     * @param authenticationConfiguration 认证配置
+     * @return AuthenticationManager
+     * @throws Exception 配置失败时抛出
+     */
+    @Bean
+    //@ConditionalOnMissingBean(AuthenticationManager.class)
+    @ConditionalOnBean(AuthenticationProvider.class)
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        log().debug("class:{},msg:AuthenticationManager", getAClassName());
+        AuthenticationManager authenticationManager = authenticationConfiguration.getAuthenticationManager();
+        // 自定义认证提供者 authenticationProvider
+        AuthenticationProvider authenticationProvider = null;
+        try {
+            authenticationProvider = SpringUtil.getBean(AuthenticationProvider.class);
+        } catch (Exception e) {
+            log().error("class:{},err:{}", getAClassName(), e.getMessage());
+            log().warn("自定义认证提供者 authenticationProvider is Null");
+        }
+        if (authenticationProvider != null) {
+            // 添加自定义 AuthenticationProvider
+            authenticationManager = new org.springframework.security.authentication.ProviderManager(authenticationProvider);
+        }
+        return authenticationManager;
     }
 
     /**
@@ -79,74 +177,24 @@ public class SecurityConfig implements AbsAuthSecurityConfig {
                     }
                     auth.anyRequest().permitAll(); // 其他请求允许访问
                 });
-
+        if (securityAutoConfiguration != null) {
+            http.formLogin(form -> form
+                    .loginPage("/login") // 自定义登录页面
+                    .loginProcessingUrl("/login") // 表单提交 URL
+                    .permitAll()
+            );
+        }
         if (openFilter) {
             try {
                 AbsSecurityConfig config = SpringUtil.getBean(AbsSecurityConfig.class);
                 config.addFilterBeforeList(http); // 添加自定义过滤器
-            }catch (Exception e){
+            } catch (Exception e) {
                 log().warn("自定义过滤器 AbsSecurityConfig is Null");
-                log().error("class:{},err:{}",getAClassName(),e.getMessage());
+                log().error("class:{},err:{}", getAClassName(), e.getMessage());
             }
         }
 
         return http.build();
     }
 
-    @Bean
-    @ConditionalOnMissingBean(AbstractUserDetailsService.class)
-    public AbstractUserDetailsService authUserDetailsService() {
-        return new SimpleUserDetailsService();
-    }
-
-    /**
-     * 配置 AuthenticationProvider，使用自定义 UserDetailsService 和 PasswordEncoder
-     *
-     * @return AuthenticationProvider
-     */
-    @Bean
-    @ConditionalOnBean({AbsUserDetailsService.class, PasswordEncoder.class})
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(SpringUtil.getBean(AbsUserDetailsService.class));
-        authProvider.setPasswordEncoder(SpringUtil.getBean(PasswordEncoder.class));
-        return authProvider;
-    }
-
-    /**
-     * 显式定义 AuthenticationConfiguration Bean
-     *
-     * @return AuthenticationConfiguration
-     */
-    @Bean
-    public AuthenticationConfiguration authenticationConfiguration() {
-        return new AuthenticationConfiguration();
-    }
-
-    /**
-     * 配置 AuthenticationManager，注入自定义 AuthenticationProvider
-     *
-     * @param authenticationConfiguration 认证配置
-     * @return AuthenticationManager
-     * @throws Exception 配置失败时抛出
-     */
-    @Bean
-    @ConditionalOnMissingBean(AuthenticationManager.class)
-    public AuthenticationManager authenticationManager(
-            AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        AuthenticationManager authenticationManager = authenticationConfiguration.getAuthenticationManager();
-        // 自定义认证提供者 authenticationProvider
-        AuthenticationProvider authenticationProvider = null;
-        try {
-            authenticationProvider = SpringUtil.getBean(AuthenticationProvider.class);
-        } catch (Exception e) {
-            log().error("class:{},err:{}", getAClassName(), e.getMessage());
-            log().warn("自定义认证提供者 authenticationProvider is Null");
-        }
-        if (authenticationProvider != null) {
-            // 添加自定义 AuthenticationProvider
-            authenticationManager = new org.springframework.security.authentication.ProviderManager(authenticationProvider);
-        }
-        return authenticationManager;
-    }
 }

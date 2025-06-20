@@ -1,6 +1,7 @@
 package com.actual.combat.auth.security.config.bean;
 
 import com.actual.combat.auth.security.config.SecurityConfig;
+import com.actual.combat.auth.security.service.AbsUserDetailsService;
 import com.actual.combat.auth.security.service.impl.SimpleAuthSecurityService;
 import com.actual.combat.auth.security.service.impl.SimpleLoginSecurityService;
 import com.actual.combat.auth.security.service.impl.SimpleUserDetailsSecurityService;
@@ -49,7 +50,8 @@ public class BeanBeforeSecurityConfig extends BeanConfig {
     @Bean
     //@ConditionalOnBean(SecurityConfig.class)
     @ConditionalOnMissingBean(AbstractUserDetailsService.class)
-    public AbstractUserDetailsService authUserDetailsService() {
+    public AbsUserDetailsService authUserDetailsService() {
+        log().debug("class:{} ==> authUserDetailsService <==",getAClassName());
         return new SimpleUserDetailsSecurityService();
     }
 

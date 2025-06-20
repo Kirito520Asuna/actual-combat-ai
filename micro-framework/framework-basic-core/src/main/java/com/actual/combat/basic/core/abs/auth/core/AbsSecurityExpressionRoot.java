@@ -22,7 +22,7 @@ public interface AbsSecurityExpressionRoot extends AbsBean {
     @Override
     @PostConstruct
     default void init() {
-        log().debug("[init]-[SecurityExpressionRoot]::[{}]", getAClassName());
+        log().debug("[SecurityExpressionRoot]:[init]:[{}]", getAClassName());
     }
 
     /**

@@ -44,17 +44,18 @@ public class BeanSecurityConfig implements AbstractSecurityBean {
     @Bean
     @ConditionalOnMissingBean(AbsSecurityConfig.class)
     public AbsSecurityConfig authSecurityConfig() {
+        log().debug("==> authSecurityConfig <== class:{}",getAClassName());
         return new SimpleSecurityConfig();
     }
 
-    @Bean
-    @ConditionalOnExpression("${config.auth.security.enable:true}")
-    public SecurityConfig securityConfig() {
-        return new SecurityConfig();
-    }
+    //@Bean
+    //@ConditionalOnExpression("${config.auth.security.enable:true}")
+    //public SecurityConfig securityConfig() {
+    //    return new SecurityConfig();
+    //}
 
     @Bean("auth")
-    @ConditionalOnBean(SecurityConfig.class)
+    //@ConditionalOnBean(SecurityConfig.class)
     @ConditionalOnMissingBean(AbsSecurityExpressionRoot.class)
     public AbsSecurityExpressionRoot securityExpressionRoot(){
         return new SecurityExpressionRoot();

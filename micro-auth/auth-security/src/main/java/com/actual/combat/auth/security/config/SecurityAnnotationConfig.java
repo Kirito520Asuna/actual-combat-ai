@@ -34,7 +34,9 @@ public class SecurityAnnotationConfig {
 
     @PostConstruct
     public void init() {
-        log.debug("初始化自定义权限校验");
-        log.debug("设置 {}.enable=false 可跳过权限校验 用于本地测试", SECURITY_ANNOTATION);
+        log.debug("""
+                
+                初始化自定义权限校验
+                设置 {}.enable=false 可跳过权限校验 用于本地测试""", SECURITY_ANNOTATION);
     }
 }

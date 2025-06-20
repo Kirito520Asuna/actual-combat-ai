@@ -2,6 +2,7 @@ package com.actual.combat.auth.shiro.config;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.actual.combat.auth.shiro.abs.AuthShiroConfig;
+import com.actual.combat.auth.shiro.config.bean.BeanShiroConfig;
 import com.actual.combat.basic.core.filter.CorsRequestFilter;
 import com.actual.combat.basic.core.properties.cors.CorsProperties;
 import jakarta.servlet.Filter;
@@ -16,6 +17,7 @@ import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.mgt.WebSecurityManager;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -30,6 +32,7 @@ import java.util.Map;
  * @Description
  */
 @Configuration
+@AutoConfigureAfter(BeanShiroConfig.class)
 public class ShiroConfig implements AuthShiroConfig {
 
 
@@ -94,10 +97,10 @@ public class ShiroConfig implements AuthShiroConfig {
     //配置securityManager的实现类，变向的配置了securityManager
     @Bean
     @Primary
-    @ConditionalOnBean({SessionManager.class,Realm.class})
-    public WebSecurityManager webSecurityManager(SessionManager sessionManager) {
+    @ConditionalOnBean({SessionManager.class})
+    public WebSecurityManager webSecurityManager(Realm realm,SessionManager sessionManager) {
         log().debug("init securityManager()");
-        Realm realm = SpringUtil.getBean(Realm.class);
+        //Realm realm = SpringUtil.getBean(Realm.class);
         return AuthShiroConfig.super.securityManager(realm,sessionManager);
     }
 

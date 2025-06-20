@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: basic-xxl-job
+  profiles:
+    active: @spring.profiles.active@
+
+xxl:
+  job:
+    admin:
+      # xxl-job 后台管理界面的地址
+      addresses: http://127.0.0.1:9056/xxl-job-admin
+    executor:
+      # 此执行器的名称
+      appname: kirito-asuna
+      ip:
+      # 此执行器的端口
+      port: 9999
+      # 此执行器的日志存放路径
+      logpath: var/log/xxl-job/${spring.profiles.active}/first-study
+      # 此执行器的日志保存时间
+      logretentiondays: 7

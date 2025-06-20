@@ -1,0 +1,88 @@
+spring:
+  application:
+    name: im
+  profiles:
+    active: @spring.profiles.active@
+  cloud:
+    nacos:
+      discovery:
+        service: ${spring.application.name}
+      config:
+        refresh-enabled: true
+        refreshable-dataids: ${spring.cloud.nacos.discovery.service:${spring.application.name}}-${spring.profiles.active:test}.${spring.cloud.nacos.config.file-extension:yaml}
+#
+  #====================================================================================================================================
+  datasource:
+    dynamic:
+      # 开启seata代理
+      seata: ${seata.enabled}
+
+# seata配置
+seata:
+  enabled: true
+  # Seata 应用编号，默认为 ${spring.application.name}
+  #application-id: seata-server
+  # Seata 事务组编号，用于 TC 集群名
+  tx-service-group: default_tx_group
+  #tx-service-group: ${spring.application.name}-group
+  # 关闭自动代理
+  enable-auto-data-source-proxy: false
+  # 服务配置项
+  service:
+    grouplist:
+      default: 127.0.0.1:8091
+    # 虚拟组和分组的映射
+    vgroup-mapping:
+      default_tx_group: default
+      #ruoyi-system-group: default
+      # 分组和 Seata 服务的映射
+      # grouplist:  # 仅注册中心为file时使用
+      # default: 127.0.0.1:8091
+  registry:
+    type: nacos
+    nacos:
+      server-addr: ${nacos.discovery.server-addr:127.0.0.1:8848}
+      group: ${seata-server.discovery.group:}
+      namespace: ${seata-server.discovery.namespace:}
+  config:
+    type: nacos
+    nacos:
+      server-addr: ${nacos.config.server-addr:127.0.0.1:8848}
+      group: ${seata-server.config.group:}
+      namespace: ${seata-server.config.namespace:}
+#====================================================================================================================================
+# OpenFeign 配置
+
+# OpenFeign默认使用jdk自带的HttpURLConnection，
+#我们知道HttpURLConnection没有连接池、性能和效率比较低，如果采用默认，很可能会遇到性能问题导致系统故障
+# OkHttpClient
+feign:
+  okhttp:
+    enabled: true
+  #OpenFeign可以设置超时时间，简单粗暴，设置一个全局的超时时间。如果不配置超时时间，默认是连接超时10s，读超时60s
+  client:
+    config:
+      default:
+        connectTimeout: 2000
+        readTimeout: 60000
+  #上文所述，对单个服务设置超时时间。
+  #feign.client.config.serviceA.connectTimeout=2000
+  #feign.client.config.serviceA.readTimeout=60000
+  # 开启熔断
+  hystrix:
+    enabled: true
+#通过OpenFeign作为注册中心的客户端时，
+# 默认使用Ribbon做负载均衡，Ribbon默认也是用jdk自带的HttpURLConnection，
+# 需要给Ribbon也设置一个Http client，比如使用okhttp，在properties文件中增加下面配置
+ribbon:
+  okhttp:
+    enabled: true
+  #====================================================================================================================================
+
+#
+logstash:
+  addr: 127.0.0.1:4560
+  file: var/log/${spring.application.name}/${spring.profiles.active}/${spring.application.name}.log
+  fileNamePattern: var/log/${spring.application.name}/${spring.profiles.active}/${spring.application.name}-logstash.%d{yyyy-MM-dd}.log
+  maxHistory: 30
+  totalSizeCap: 10MB

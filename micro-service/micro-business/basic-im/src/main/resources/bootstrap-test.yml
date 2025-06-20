@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+#        server-addr: 192.168.200.128:8848
+        #docker启动时远程调用失败  需要将docker所在服务器地址设置一下
+#        ip: ${LOCAL_IP_ADDRESS:192.168.200.128},192.168.200.132
+      config:
+#        server-addr: 192.168.200.128:8848
+        file-extension: yaml
+        group: test
+
+seata-server:
+  config:
+    group: SEATA_GROUP
+    namespace: SEATA_GROUP
+  discovery:
+    group: SEATA_GROUP
+    namespace: SEATA_GROUP

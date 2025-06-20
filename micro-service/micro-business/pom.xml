@@ -27,6 +27,7 @@
     <modules>
         <module>basic-file</module>
         <module>basic-gen</module>
+        <module>basic-im</module>
         <module>basic-user</module>
         <module>basic-websocket</module>
     </modules>

@@ -1,9 +1,6 @@
 #在配置nacos实现聚合swagger时由于
 #/v3/api-docs引起的网关路由找不到具体服务器的api-docs文档，导致swagger生成文档失败
 #解决方法：可以直接在application.yaml配置后，网关路由正常
-server:
-  servlet:
-    context-path: /dev
 springfox:
   documentation:
     open-api:

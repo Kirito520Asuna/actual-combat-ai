@@ -35,7 +35,7 @@ spring:
         - id: ${spring.application.name}
           uri: no://op
           predicates:
-            - Path=${server.servlet.context-path}/key-pair,${server.servlet.context-path}/websocket,${server.servlet.context-path}/user,${server.servlet.context-path}/im,${server.servlet.context-path}/quartz,${server.servlet.context-path}/,false
+            - Path=${server.servlet.context-path}/${micro-service.websocket.name},${server.servlet.context-path}/${micro-service.user.name},${server.servlet.context-path}/${micro-service.im.name},${server.servlet.context-path}/${micro-service.task.name},${server.servlet.context-path}/,false
           filters:
             #本地
             - RedirectTo=302, http://${config.gateway.domains.full-path}/home
@@ -61,74 +61,62 @@ spring:
           filters:
             - StripPrefix=1
 
-        - id: websocket
-          uri: lb://websocket
-          order: 2
+        - id: ${micro-service.websocket.name}
+          uri: lb://${micro-service.websocket.name}
+          order: ${micro-service.websocket.ui.order}
           metadata:
-            summary: websocket服务
-            description: websocket服务
-            document-uri: /doc.html
+            summary: ${micro-service.websocket.ui.summary}
+            description: ${micro-service.websocket.ui.description}
+            document-uri: ${micro-service.websocket.ui.document-uri}
           predicates:
-            - Path=${server.servlet.context-path}/websocket/**
+            - Path=${server.servlet.context-path}/${micro-service.websocket.name}/**
           filters:
             - StripPrefix=1
 
-        - id: gen
-          uri: lb://gen
-          order: 2
+        - id: ${micro-service.gen.name}
+          uri: lb://${micro-service.gen.name}
+          order: ${micro-service.gen.ui.order}
           metadata:
-            summary: gen服务
-            description: gen服务
-            document-uri: /doc.html
+            summary: ${micro-service.gen.ui.summary}
+            description: ${micro-service.gen.ui.description}
+            document-uri: ${micro-service.gen.ui.document-uri}
           predicates:
-            - Path=${server.servlet.context-path}/gen/**
+            - Path=${server.servlet.context-path}/${micro-service.gen.name}/**
           filters:
             - StripPrefix=1
 
-        - id: quartz
-          uri: lb://quartz
+        - id: ${micro-service.task.name}
+          uri: lb://${micro-service.task.name}
           order: 2
           metadata:
-            summary: quartz服务
-            description: quartz服务
-            document-uri: /doc.html
+            summary: ${micro-service.task.ui.summary}
+            description: ${micro-service.task.ui.description}
+            document-uri: ${micro-service.task.ui.document-uri}
           predicates:
-            - Path=${server.servlet.context-path}/quartz/**
+            - Path=${server.servlet.context-path}/${micro-service.task.name}/**
           filters:
             - StripPrefix=1
 
-        - id: user
-          uri: lb://user
-          order: 2
+        - id: ${micro-service.user.name}
+          uri: lb://${micro-service.user.name}
+          order: ${micro-service.user.ui.order}
           metadata:
-            summary: user服务
-            description: user服务
-            document-uri: /doc.html
+            summary: ${micro-service.user.ui.summary}
+            description: ${micro-service.user.ui.description}
+            document-uri: ${micro-service.user.ui.document-uri}
           predicates:
-            - Path=${server.servlet.context-path}/user/**
+            - Path=${server.servlet.context-path}/${micro-service.user.name}/**
           filters:
             - StripPrefix=1
 
-        - id: im
-          uri: lb://im
-          order: 2
+        - id: ${micro-service.im.name}
+          uri: lb://${micro-service.im.name}
+          order: ${micro-service.im.ui.order}
           metadata:
-            summary: im服务
-            description: im服务
-            document-uri: /doc.html
+            summary: ${micro-service.im.ui.summary}
+            description: ${micro-service.im.ui.description}
+            document-uri: ${micro-service.im.ui.document-uri}
           predicates:
-            - Path=${server.servlet.context-path}/im/**
-          filters:
-            - StripPrefix=1
-
-        - id: key-pair
-          uri: lb://key-pair
-          order: 2
-          metadata:
-            summary: key-pair服务
-            description: key-pair服务
-            document-uri: /doc.html
-          predicates:
-            - Path=${server.servlet.context-path}/key-pair/**
+            - Path=${server.servlet.context-path}/${micro-service.im.name}/**
           filters:
             - StripPrefix=1

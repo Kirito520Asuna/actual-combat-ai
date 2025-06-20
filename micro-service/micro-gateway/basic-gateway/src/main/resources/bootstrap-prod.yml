@@ -31,18 +31,4 @@ spring:
           filters[0]: PreserveHostHeader
 
       routes:
-        - id: gateway
-          uri: no://op
-          predicates:
-            - Path=${server.servlet.context-path}/**,false
-          filters:
-            #本地
-            - RedirectTo=302, http://${domains.all-paths}
 
-        - id: static-resource
-          uri: lb://gateway
-          order: 1
-          predicates:
-            - Path=${server.servlet.context-path}/assert/**
-          filters:
-            - StripPrefix=1

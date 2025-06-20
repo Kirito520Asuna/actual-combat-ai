@@ -1,15 +1,15 @@
 server:
   port: 10110
   servlet:
-   context-path: /${spring.profiles.active}
+    context-path: /${spring.profiles.active}
 #===========================================================================
 spring:
   profiles:
     active: @spring.profiles.active@
-#===========================================================================
+  #===========================================================================
   application:
     name: basic-gateway
-#===========================================================================
+  #===========================================================================
   cloud:
     nacos:
       username: nacos
@@ -18,8 +18,8 @@ spring:
         service: ${spring.application.name}
 
     gateway:
-      # 网关跨域配置start---------------------------------
-      # 开启网关的跨域功能，具体微服务上的跨域需要进行关闭，否则无效
+    # 网关跨域配置start---------------------------------
+    # 开启网关的跨域功能，具体微服务上的跨域需要进行关闭，否则无效
 #      default-filters:
 #        # 解决响应头重复问题  options
 #        - DedupeResponseHeader=Vary Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
@@ -52,6 +52,9 @@ knife4j:
   setting:
     enable-dynamic-parameter: true
 #===========================================================================
+logging:
+  level:
+    com.actual.combat: debug
 #===========================================================================
 config:
   cors:
@@ -73,11 +76,51 @@ config:
         web-filter: false
         distinct-headers-filter: true
         https-to-http-filter: false
-#==================================域名配置==================================
+    #==================================域名配置==================================
     domains:
       name: 127.0.0.1:${server.port}
       full-path: ${config.gateway.domains.name}${server.servlet.context-path:}
 
-logging:
-  level:
-    com.actual.combat: debug
+micro-service:
+  default:
+    name: 默认
+    ui:
+      order: 2
+      summary: 默认服务
+      description: 默认服务
+      document-uri: /doc.html
+  user:
+    name: basic-user
+    ui:
+      order: 2
+      summary: user服务
+      description: user服务
+      document-uri: /doc.html
+  task:
+    name: basic-quartz
+    ui:
+      order: 2
+      summary: quartz服务
+      description: quartz服务
+      document-uri: /doc.html
+  websocket:
+    name: basic-websocket
+    ui:
+      order: 2
+      summary: websocket服务
+      description: websocket服务
+      document-uri: /doc.html
+  gen:
+    name: basic-gen
+    ui:
+      order: 2
+      summary: gen服务
+      description: gen服务
+      document-uri: /doc.html
+  im:
+    name: basic-im
+    ui:
+      order: 2
+      summary: im服务
+      description: im服务
+      document-uri: /doc.html

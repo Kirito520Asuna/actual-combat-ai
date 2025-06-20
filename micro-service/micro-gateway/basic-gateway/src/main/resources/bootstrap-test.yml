@@ -63,7 +63,7 @@ spring:
 
         - id: ${micro-service.websocket.name}
           uri: lb://${micro-service.websocket.name}
-          order: ${micro-service.websocket.ui.order}
+          order: ${micro-service.websocket.order}
           metadata:
             summary: ${micro-service.websocket.ui.summary}
             description: ${micro-service.websocket.ui.description}
@@ -75,7 +75,7 @@ spring:
 
         - id: ${micro-service.gen.name}
           uri: lb://${micro-service.gen.name}
-          order: ${micro-service.gen.ui.order}
+          order: ${micro-service.gen.order}
           metadata:
             summary: ${micro-service.gen.ui.summary}
             description: ${micro-service.gen.ui.description}
@@ -87,7 +87,7 @@ spring:
 
         - id: ${micro-service.task.name}
           uri: lb://${micro-service.task.name}
-          order: 2
+          order: ${micro-service.task.order}
           metadata:
             summary: ${micro-service.task.ui.summary}
             description: ${micro-service.task.ui.description}
@@ -99,7 +99,7 @@ spring:
 
         - id: ${micro-service.user.name}
           uri: lb://${micro-service.user.name}
-          order: ${micro-service.user.ui.order}
+          order: ${micro-service.user.order}
           metadata:
             summary: ${micro-service.user.ui.summary}
             description: ${micro-service.user.ui.description}
@@ -111,7 +111,7 @@ spring:
 
         - id: ${micro-service.im.name}
           uri: lb://${micro-service.im.name}
-          order: ${micro-service.im.ui.order}
+          order: ${micro-service.im.order}
           metadata:
             summary: ${micro-service.im.ui.summary}
             description: ${micro-service.im.ui.description}

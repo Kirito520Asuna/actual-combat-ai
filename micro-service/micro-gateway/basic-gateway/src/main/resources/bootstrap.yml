@@ -84,43 +84,43 @@ config:
 micro-service:
   default:
     name: 默认
+    order: 2
     ui:
-      order: 2
       summary: 默认服务
       description: 默认服务
       document-uri: /doc.html
   user:
     name: basic-user
+    order: 2
     ui:
-      order: 2
       summary: user服务
       description: user服务
       document-uri: /doc.html
   task:
     name: basic-quartz
+    order: 2
     ui:
-      order: 2
       summary: quartz服务
       description: quartz服务
       document-uri: /doc.html
   websocket:
     name: basic-websocket
+    order: 2
     ui:
-      order: 2
       summary: websocket服务
       description: websocket服务
       document-uri: /doc.html
   gen:
     name: basic-gen
+    order: 2
     ui:
-      order: 2
       summary: gen服务
       description: gen服务
       document-uri: /doc.html
   im:
     name: basic-im
+    order: 2
     ui:
-      order: 2
       summary: im服务
       description: im服务
       document-uri: /doc.html

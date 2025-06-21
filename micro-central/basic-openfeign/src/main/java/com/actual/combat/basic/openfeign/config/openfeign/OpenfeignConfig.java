@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Scope;
  * @Description
  */
 @Configuration
-@EnableFeignClients(basePackages = {"com.actual_combat.basic.openfeign.factory.interfaces"})
+@EnableFeignClients(basePackages = {"com.actual.combat.basic.openfeign.factory.interfaces"})
 public class OpenfeignConfig {
     @Bean
     @Scope(BeanDefinition.SCOPE_PROTOTYPE)

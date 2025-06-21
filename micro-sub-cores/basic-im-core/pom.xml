@@ -38,8 +38,7 @@
         <dependency>
             <groupId>com.actual.combat</groupId>
             <artifactId>basic-user-core</artifactId>
-            <version>0.0.1-BOOT3-SNAPSHOT</version>
-            <scope>compile</scope>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 

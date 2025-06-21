@@ -13,6 +13,17 @@
     <dependencies>
         <dependency>
             <groupId>com.actual.combat</groupId>
+            <artifactId>auth</artifactId>
+            <version>${revision}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-webmvc</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.actual.combat</groupId>
             <artifactId>basic-dao</artifactId>
             <version>${revision}</version>
         </dependency>

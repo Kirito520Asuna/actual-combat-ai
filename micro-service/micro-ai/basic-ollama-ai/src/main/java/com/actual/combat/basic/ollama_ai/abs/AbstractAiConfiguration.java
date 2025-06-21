@@ -48,10 +48,7 @@ public interface AbstractAiConfiguration {
         if (CollUtil.isNotEmpty(advisors)) {
             builder = builder.defaultAdvisors(advisors);
         }
-        ChatClient build = builder
-                .defaultSystem(system)
-                .defaultAdvisors(advisors)//配置日志Advisors
-                .build();
+        ChatClient build = builder.build();
         return build;
     }
 }

@@ -18,7 +18,6 @@
         <dependency>
             <groupId>com.actual.combat</groupId>
             <artifactId>framework-nacos</artifactId>
-            <version>${revision}</version>
         </dependency>
         <!--阿里云oss-->
         <dependency>

@@ -20,7 +20,6 @@
         <dependency>
             <groupId>com.actual.combat</groupId>
             <artifactId>framework-quartz</artifactId>
-            <version>${revision}</version>
         </dependency>
     </dependencies>
 </project>

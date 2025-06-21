@@ -12,7 +12,6 @@
     <artifactId>framework-redis</artifactId>
 
     <properties>
-        <spring-boot.version>3.2.5</spring-boot.version>
         <redisson.version>3.45.1</redisson.version>
         <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
         <commons-io.version>2.13.0</commons-io.version>
@@ -115,12 +114,12 @@
             <optional>true</optional><!--不传递-->
         </dependency>
 
-        <!-- ...redisson... -->
+<!--        &lt;!&ndash; ...redisson... &ndash;&gt;
         <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson-spring-boot-starter</artifactId>
             <version>${redisson.version}</version>
-        </dependency>
+        </dependency>-->
 
         <!-- Redisson Spring Boot Starter -->
         <dependency>

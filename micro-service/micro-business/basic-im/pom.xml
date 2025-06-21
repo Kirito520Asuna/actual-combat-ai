@@ -41,7 +41,6 @@
         <dependency>
             <groupId>com.actual.combat</groupId>
             <artifactId>framework-nacos</artifactId>
-            <version>${revision}</version>
         </dependency>
         <!--nacos-->
         <!--redis-->
@@ -100,7 +99,6 @@
         <dependency>
             <groupId>com.actual.combat</groupId>
             <artifactId>framework-knife4j</artifactId>
-            <version>${revision}</version>
         </dependency>
         <!--dao-->
         <!--test-->

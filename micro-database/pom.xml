@@ -11,6 +11,19 @@
 
     <artifactId>micro-database</artifactId>
     <packaging>pom</packaging>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.actual.combat</groupId>
+                <artifactId>framework-bom</artifactId>
+                <version>${revision}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <modules>
         <module>micro-dao</module>
     </modules>

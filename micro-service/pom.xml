@@ -41,6 +41,14 @@
                 <artifactId>logstash-logback-encoder</artifactId>
                 <version>${logstash.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.actual.combat</groupId>
+                <artifactId>framework-bom</artifactId>
+                <version>${revision}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

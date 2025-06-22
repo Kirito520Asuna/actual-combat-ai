@@ -31,6 +31,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>com.actual.combat</groupId>
+                <artifactId>framework-bom</artifactId>
+                <version>${revision}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -38,7 +45,6 @@
         <dependency>
             <groupId>com.actual.combat</groupId>
             <artifactId>framework-nacos</artifactId>
-            <version>${revision}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>jackson-core</artifactId>

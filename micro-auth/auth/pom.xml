@@ -31,11 +31,6 @@
                 <version>${revision}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.actual.combat</groupId>
-                <artifactId>framework-mybatis-plus</artifactId>
-                <version>${revision}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 

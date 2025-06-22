@@ -29,13 +29,10 @@
             </dependency>
             <dependency>
                 <groupId>com.actual.combat</groupId>
-                <artifactId>framework-basic</artifactId>
+                <artifactId>framework-bom</artifactId>
                 <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.actual.combat</groupId>
-                <artifactId>framework-aop</artifactId>
-                <version>${revision}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>

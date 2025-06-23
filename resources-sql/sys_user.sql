@@ -26,10 +26,10 @@ create table `sys_user` (
 ) engine=innodb auto_increment=100 comment = '用户信息表';
 
 -- ----------------------------
--- 初始化-用户信息表数据
+-- 初始化-用户信息表数据 password:123456
 -- ----------------------------
-insert into `sys_user` values(1,'admin', '极简', '00', 'minimalist@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', sysdate(), '0', sysdate(), '0', sysdate(), '管理员');
-insert into `sys_user` values(2,'minimalist', '极简', '00', 'minimalist@qq.com',  '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', sysdate(), '0', sysdate(), '0', sysdate(), '测试员');
+insert into `sys_user` values(1,'admin', '极简', '00', 'minimalist@163.com', '15888888888', '1', '', '$2a$10$LtDdTn7X3DMbPgWF3bCe1Olf.7GCIDiC0LQk.AGbVle3SnX6R732.', '0', '0', '127.0.0.1', sysdate(), '0', sysdate(), '0', sysdate(), '管理员');
+insert into `sys_user` values(2,'minimalism', '极简', '00', 'minimalist@qq.com',  '15666666666', '1', '', '$2a$10$LtDdTn7X3DMbPgWF3bCe1Olf.7GCIDiC0LQk.AGbVle3SnX6R732.', '0', '0', '127.0.0.1', sysdate(), '0', sysdate(), '0', sysdate(), '测试员');
 
 -- ----------------------------
 -- 2、角色信息表

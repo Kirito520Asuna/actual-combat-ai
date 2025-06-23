@@ -12,9 +12,6 @@
     <artifactId>framework-aop</artifactId>
 
     <properties>
-        <spring-boot.version>3.1.0</spring-boot.version>
-        <springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
-
         <alibaba-ttl.version>2.14.4</alibaba-ttl.version>
         <commons-io.version>2.11.0</commons-io.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
@@ -80,13 +77,6 @@
                 <groupId>com.itextpdf</groupId>
                 <artifactId>itext-asian</artifactId>
                 <version>${itext-asian.version}</version>
-            </dependency>
-
-            <!--Swagger3相关-->
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-boot-starter</artifactId>
-                <version>${springfox-boot-starter.version}</version>
             </dependency>
 
             <!-- Swagger 注解包（核心） -->
@@ -218,13 +208,6 @@
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-        </dependency>
-
-        <!--Swagger3相关-->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-            <!--<optional>true</optional>-->
         </dependency>
 
         <dependency>

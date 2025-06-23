@@ -4,7 +4,7 @@
 # 极简
 #### 介绍
 让代码变简单
-
+项目依据 若依 为参考 修改 并提供了高扩展
 (springboot2)
 
 github 地址：https://github.com/Kirito520Asuna/minimalism
@@ -18,8 +18,17 @@ github 地址：https://github.com/Kirito520Asuna/actual-combat-ai
 gitee  地址：https://gitee.com/kirito-asuna/actual-combat-ai
 
 #### 软件架构
-软件架构说明
 
+- 架构:
+  - 微服务架构
+- 部署: 
+  - 提供了一键部署为docker运行的脚本
+- 安全框架: 
+  - 提供了shiro 和 security 俩种选择,甚至可以不同微服务使用俩种不同框架，
+    其中shiro使用的是自定义的注解实现的权限校验，
+    security使用的是spring security框架
+  - api和jwt校验提供了拦截器和过滤器俩种方案的实现
+    
 
 #### 安装教程
 
@@ -34,7 +43,7 @@ gitee  地址：https://gitee.com/kirito-asuna/actual-combat-ai
 - 包含 auth、security、shiro
 
 - micro-auth/auth 服务模块
-- 已经依赖 micro-auth下的auth-security,auth-shiro\n
+- 已经依赖 micro-auth下的auth-security,auth-shiro
 - 使用时 只需要引入auth即可 注意安全模块 security,shiro只能多选一
 - 不同的服务 可以引入不同的安全模块（已兼容）
 

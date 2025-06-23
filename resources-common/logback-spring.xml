@@ -85,10 +85,10 @@
         </connectionStrategy>
     </appender>
 
-    <root level="INFO">
-        <appender-ref ref="LOGSTASH"/>
-        <appender-ref ref="CONSOLE"/>
-    </root>
+<!--    <root level="INFO">-->
+<!--        <appender-ref ref="LOGSTASH"/>-->
+<!--        <appender-ref ref="CONSOLE"/>-->
+<!--    </root>-->
 
     <!--禁掉一些包-->
     <logger name="com.alibaba.nacos" level="OFF"></logger>

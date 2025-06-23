@@ -5,6 +5,7 @@
 #### 介绍
 让代码变简单
 项目依据 若依 为参考 修改 并提供了高扩展
+
 (springboot2)
 
 github 地址：https://github.com/Kirito520Asuna/minimalism

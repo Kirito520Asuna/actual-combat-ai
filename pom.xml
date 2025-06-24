@@ -88,13 +88,7 @@
 
     <!--远程仓库-->
     <repositories>
-        <repository>
-            <id>maven-central</id>
-            <url>https://repo1.maven.org/maven2/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
+
         <repository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>
@@ -106,6 +100,7 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+
         <repository>
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
@@ -114,10 +109,12 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+
         <repository>
             <id>aliyun-public</id>
             <url>https://maven.aliyun.com/nexus/content/groups/public/</url>
         </repository>
+
         <repository>
             <id>aliyun</id>
             <url>https://maven.aliyun.com/repository/public</url>
@@ -128,6 +125,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+
         <repository>
             <id>public</id>
             <name>huawei nexus</name>
@@ -136,6 +134,7 @@
                 <enabled>true</enabled>
             </releases>
         </repository>
+
         <repository>
             <id>snapshots-repo</id>
             <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
@@ -143,6 +142,15 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+
+        <repository>
+            <id>maven-central</id>
+            <url>https://repo1.maven.org/maven2/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
     </repositories>
 
     <!--    <pluginRepositories>-->

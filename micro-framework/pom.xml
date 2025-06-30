@@ -23,6 +23,7 @@
         <module>framework-kafka</module>
         <module>framework-knife4j</module>
         <module>framework-langchain4j</module>
+        <module>framework-mybatis</module>
         <module>framework-mybatis-plus</module>
         <module>framework-nacos</module>
         <module>framework-quartz</module>

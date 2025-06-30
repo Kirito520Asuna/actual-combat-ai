@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
  * @Description
  */
 @Mapper
-@ConditionalOnBean(AbsEntityHandler.class)
-@ConditionalOnMissingBean(MpMapper.class)
-public interface MpMapper<T>{
+@ConditionalOnBean(AbsEntityHandler.class) // 当存在AbsEntityHandler类时，才加载该类
+@ConditionalOnMissingBean(BaseMapper.class) // 当不存在BaseMapper类时，才加载该类
+public interface BaseMapper<T>{
 }

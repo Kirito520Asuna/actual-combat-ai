@@ -12,7 +12,7 @@ import jakarta.annotation.Resource;
  */
 public class ImplService<M extends BaseMapper<T>, T> implements IService<T> {
     @Resource
-    private M baseMapper;
+    protected M baseMapper;
 
     public M getBaseMapper() {
         return baseMapper;

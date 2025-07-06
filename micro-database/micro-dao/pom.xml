@@ -26,6 +26,7 @@
 
     <modules>
         <module>basic-dao</module>
+        <module>edu-volunteer-ai-dao</module>
     </modules>
 
 </project>

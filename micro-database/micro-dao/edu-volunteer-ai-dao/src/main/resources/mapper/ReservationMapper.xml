@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.actual.combat.ai.edu.volunteer.mapper.ReservationMapper">
+    <resultMap id="BaseResultMap" type="com.actual.combat.ai.edu.volunteer.domain.Reservation">
+        <!--@mbg.generated-->
+        <!--@Table reservation-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="gender" jdbcType="VARCHAR" property="gender"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="communication_time" jdbcType="TIMESTAMP" property="communicationTime"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="estimated_score" jdbcType="INTEGER" property="estimatedScore"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, `name`, gender, phone, communication_time, province, estimated_score
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from reservation
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete from reservation
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.actual.combat.ai.edu.volunteer.domain.Reservation"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into reservation (`name`, gender, phone,
+        communication_time, province, estimated_score
+        )
+        values (#{name,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+        #{communicationTime,jdbcType=TIMESTAMP}, #{province,jdbcType=VARCHAR}, #{estimatedScore,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.actual.combat.ai.edu.volunteer.domain.Reservation" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into reservation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="communicationTime != null">
+                communication_time,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="estimatedScore != null">
+                estimated_score,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="communicationTime != null">
+                #{communicationTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="province != null">
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="estimatedScore != null">
+                #{estimatedScore,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.actual.combat.ai.edu.volunteer.domain.Reservation">
+        <!--@mbg.generated-->
+        update reservation
+        <set>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                gender = #{gender,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="communicationTime != null">
+                communication_time = #{communicationTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="province != null">
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="estimatedScore != null">
+                estimated_score = #{estimatedScore,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.actual.combat.ai.edu.volunteer.domain.Reservation">
+        <!--@mbg.generated-->
+        update reservation
+        set `name` = #{name,jdbcType=VARCHAR},
+        gender = #{gender,jdbcType=VARCHAR},
+        phone = #{phone,jdbcType=VARCHAR},
+        communication_time = #{communicationTime,jdbcType=TIMESTAMP},
+        province = #{province,jdbcType=VARCHAR},
+        estimated_score = #{estimatedScore,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="getOneByPhone" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from reservation where phone = #{phone}
+    </select>
+</mapper>

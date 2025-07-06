@@ -1,4 +1,4 @@
-package com.actual.combat.ai.edu.volunteer.domain;
+package com.actual.combat.ai.langchain4j.edu.volunteer.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

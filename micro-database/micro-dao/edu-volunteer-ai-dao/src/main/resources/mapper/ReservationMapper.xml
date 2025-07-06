@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.actual.combat.ai.edu.volunteer.mapper.ReservationMapper">
-    <resultMap id="BaseResultMap" type="com.actual.combat.ai.edu.volunteer.domain.Reservation">
+<mapper namespace="com.actual.combat.ai.langchain4j.edu.volunteer.mapper.ReservationMapper">
+    <resultMap id="BaseResultMap" type="com.actual.combat.ai.langchain4j.edu.volunteer.domain.Reservation">
         <!--@mbg.generated-->
         <!--@Table reservation-->
         <id column="id" jdbcType="BIGINT" property="id"/>
@@ -28,7 +28,7 @@
         delete from reservation
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.actual.combat.ai.edu.volunteer.domain.Reservation"
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.actual.combat.ai.langchain4j.edu.volunteer.domain.Reservation"
             useGeneratedKeys="true">
         <!--@mbg.generated-->
         insert into reservation (`name`, gender, phone,
@@ -39,7 +39,7 @@
         )
     </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id"
-            parameterType="com.actual.combat.ai.edu.volunteer.domain.Reservation" useGeneratedKeys="true">
+            parameterType="com.actual.combat.ai.langchain4j.edu.volunteer.domain.Reservation" useGeneratedKeys="true">
         <!--@mbg.generated-->
         insert into reservation
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -83,7 +83,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.actual.combat.ai.edu.volunteer.domain.Reservation">
+    <update id="updateByPrimaryKeySelective" parameterType="com.actual.combat.ai.langchain4j.edu.volunteer.domain.Reservation">
         <!--@mbg.generated-->
         update reservation
         <set>
@@ -108,7 +108,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.actual.combat.ai.edu.volunteer.domain.Reservation">
+    <update id="updateByPrimaryKey" parameterType="com.actual.combat.ai.langchain4j.edu.volunteer.domain.Reservation">
         <!--@mbg.generated-->
         update reservation
         set `name` = #{name,jdbcType=VARCHAR},

@@ -1,6 +1,6 @@
-package com.actual.combat.ai.edu.volunteer.mapper;
+package com.actual.combat.ai.langchain4j.edu.volunteer.mapper;
 
-import com.actual.combat.ai.edu.volunteer.domain.Reservation;
+import com.actual.combat.ai.langchain4j.edu.volunteer.domain.Reservation;
 import com.minimalism.mybatis.abs.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

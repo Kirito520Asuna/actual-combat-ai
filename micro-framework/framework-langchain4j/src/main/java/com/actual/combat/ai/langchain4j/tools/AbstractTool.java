@@ -7,7 +7,7 @@ import jakarta.annotation.Resource;
  * @Date 2025/7/3 17:59:22
  * @Description
  */
-public abstract class Tool<T> {
+public abstract class AbstractTool<T> {
     @Resource
     protected T toolService;
 }

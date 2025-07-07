@@ -11,8 +11,10 @@
 
     <artifactId>micro-ai</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>basic-ollama-ai</module>
+        <module>edu-volunteer-langchain4j-ai</module>
     </modules>
 
     <properties>

@@ -44,6 +44,7 @@
         <module>basic-user-core</module>
         <module>basic-validate-core</module>
         <module>basic-websocket-core</module>
+        <module>edu-volunteer-core</module>
     </modules>
 
 </project>

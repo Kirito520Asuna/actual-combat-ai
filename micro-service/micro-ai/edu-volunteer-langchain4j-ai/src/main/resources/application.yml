@@ -1,0 +1,124 @@
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+# 请注意使用group名时如果配置了GroupedOpenApi引用自动配置时组名不能重复
+  open:
+    default-group-configs:
+      enable: true
+      api: true
+      jwt: true
+  group-configs:
+    - group: "other"
+      paths-to-exclude:
+        - "/swagger-resources/**"
+        - "/v2/api-docs"
+        - "/v3/api-docs"
+        - "/api/**"
+        - "/jwt/**"
+  swagger-ui:
+    operations-sorter: alpha
+    path: /swagger-ui.html
+    tags-sorter: alpha
+
+knife4j:
+  cors: true
+  enable: true
+  setting:
+    enable-dynamic-parameter: true
+  #swagger
+  basic:
+    #    enable: true
+    username: root
+    password: root
+
+langchain4j:
+  rag:
+    retrieval:
+      max-results:
+      min-score:
+
+  open-ai:
+    chat-model:
+      api-key: <your-api-key for open-ai>
+      base-url: https://dashscope.aliyuncs.com/compatible-mode/v1
+      model-name: qwen-plus #deepseek-r1-distill-llama-70b
+      timeout: 6000000
+      log-requests: true
+      log-responses: true
+    streaming-chat-model:
+      api-key: ${langchain4j.open-ai.chat-model.api-key}
+      base-url: ${langchain4j.open-ai.chat-model.base-url}
+      model-name: ${langchain4j.open-ai.chat-model.model-name}
+      timeout: ${langchain4j.open-ai.chat-model.timeout}
+      log-requests: ${langchain4j.open-ai.chat-model.log-requests}
+      log-responses: ${langchain4j.open-ai.chat-model.log-responses}
+    embedding-model:
+      api-key: ${langchain4j.open-ai.chat-model.api-key}
+      base-url: ${langchain4j.open-ai.chat-model.base-url}
+      model-name: text-embedding-v4
+      timeout: ${langchain4j.open-ai.chat-model.timeout}
+      log-requests: ${langchain4j.open-ai.chat-model.log-requests}
+      log-responses: ${langchain4j.open-ai.chat-model.log-responses}
+      max-segments-per-batch: 10
+  community:
+    redis:
+      #redis向量数据库==> docker run --name redis-vector -d -p 16379:6379 redislabs/redisearch
+      host: 127.0.0.1
+      port: 16379
+  #    dashscope:
+#      chat-model:
+#        api-key: <your-api-key for dashscope>
+#        #model-name: deepseek-r1 #会500 deepseek 的原因
+#        model-name: qwen-max-latest
+
+#  ollama:
+#    chat-model:
+#      base-url: http://192.168.3.224:11434
+#      model-name: deepseek-r1:latest
+#      timeout: 6000000
+#
+#    streaming-chat-model:
+#      base-url: ${langchain4j.ollama.chat-model.base-url}
+#      model-name: ${langchain4j.ollama.chat-model.model-name}
+#      timeout: ${langchain4j.ollama.chat-model.timeout}
+
+spring:
+  profiles:
+    #@spring.profiles.active@==>占位符
+    active: @spring.profiles.active@
+  application:
+    name: edu-volunteer-langchain4j-ai
+  main:
+    allow-circular-references: true
+  data:
+    redis:
+      host: 127.0.0.1
+      database: 2
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/master?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=UTC
+    username: root
+    password: root
+server:
+  port: 8098
+
+logging:
+  level:
+    org.mybatis: debug
+    dev.langchain4j: debug
+    com.actual.combat: debug
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    use-generated-keys: true
+    use-column-label: true
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+config:
+  langchain4j:
+    prop:
+      loader-document:
+        file-paths: /develop/code/actual-combat-ai/micro-service/micro-ai/edu-volunteer-langchain4j-ai/src/main/resources/pdf:pdf
+#        class-paths: content

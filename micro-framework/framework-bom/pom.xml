@@ -104,6 +104,11 @@
                 <artifactId>framework-weixin-java</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>com.actual.combat</groupId>
+                <artifactId>framework-langchain4j</artifactId>
+                <version>${revision}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

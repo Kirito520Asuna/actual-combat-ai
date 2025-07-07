@@ -88,7 +88,7 @@ public class EduAiLangchain4jConfig implements AbstractLangchain4jConfiguration{
 
     @Override
     @ConditionalOnMissingBean(EmbeddingStore.class)
-    @Bean
+    //@Bean
     //构建向量数据库对象 不需要每次启动都向量化只需要第一次启动向量化
     public EmbeddingStore store() {
         //获取LoaderDocumentProperties对象

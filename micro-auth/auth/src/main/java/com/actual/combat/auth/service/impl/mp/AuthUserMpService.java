@@ -2,6 +2,7 @@ package com.actual.combat.auth.service.impl.mp;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.actual.combat.aop.abs.bean.AbsBean;
+import com.actual.combat.auth.service.AuthUserService;
 import com.actual.combat.mp.abs.service.MpUserService;
 
 /**
@@ -12,6 +13,6 @@ import com.actual.combat.mp.abs.service.MpUserService;
 public class AuthUserMpService implements MpUserService, AbsBean {
     @Override
     public String getUserId() {
-        return SpringUtil.getBean(AuthUserMpService.class).getUserId();
+        return SpringUtil.getBean(AuthUserService.class).getUserId();
     }
 }

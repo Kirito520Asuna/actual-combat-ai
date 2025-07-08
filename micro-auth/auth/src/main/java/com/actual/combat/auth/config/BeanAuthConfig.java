@@ -1,12 +1,10 @@
 package com.actual.combat.auth.config;
 
-import com.actual.combat.aop.abs.bean.AbsBean;
 import com.actual.combat.auth.service.AuthUserService;
 import com.actual.combat.auth.service.impl.SecurityAuthUserService;
 import com.actual.combat.auth.service.impl.ShiroAuthUserService;
 import com.actual.combat.auth.service.impl.SimpleAuthUserService;
-import com.actual.combat.auth.service.impl.mp.AuthUserMpService;
-import com.actual.combat.auth.shiro.abs.AbsAuthorizationShiro;
+import com.actual.combat.auth.service.impl.database.AuthUserCoreService;
 import com.actual.combat.basic.core.abs.api.service.AbstractApiSaltService;
 import com.actual.combat.basic.core.abs.api.service.SimpleApiSaltService;
 import com.actual.combat.basic.core.abs.auth.config.AbsAuthSecurityConfig;
@@ -16,8 +14,8 @@ import com.actual.combat.basic.core.abs.auth.core.AbsShiroAuth;
 import com.actual.combat.basic.core.abs.bean.AbstractAuthBean;
 import com.actual.combat.basic.core.abs.bean.AbstractSecurityBean;
 import com.actual.combat.basic.core.abs.bean.AbstractShiroBean;
-import com.actual.combat.mp.abs.handler.AbsEntityHandler;
-import com.actual.combat.mp.abs.service.MpUserService;
+import com.actual.combat.database.core.abs.bean.DatabaseBean;
+import com.actual.combat.database.core.service.UserCoreService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -69,9 +67,9 @@ public class BeanAuthConfig implements AbstractAuthBean {
     }
 
     @Bean
-    @ConditionalOnBean(AbsEntityHandler.class)
-    @ConditionalOnMissingBean(MpUserService.class)
-    public MpUserService authUserMpService() {
-        return new AuthUserMpService();
+    @ConditionalOnBean(DatabaseBean.class)
+    @ConditionalOnMissingBean(UserCoreService.class)
+    public UserCoreService authUserMpService() {
+        return new AuthUserCoreService();
     }
 }

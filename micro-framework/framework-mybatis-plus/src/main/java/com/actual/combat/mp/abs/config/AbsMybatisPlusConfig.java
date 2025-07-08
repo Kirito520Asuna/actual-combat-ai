@@ -1,5 +1,6 @@
 package com.actual.combat.mp.abs.config;
 
+import com.actual.combat.database.core.abs.bean.DatabaseBean;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
@@ -14,7 +15,7 @@ import org.mybatis.spring.annotation.MapperScan;
  */
 
 @MapperScan(basePackages = {"com.actual.combat.**.dao","com.actual.combat.**.**.dao","com.actual.combat.**.mapper","com.actual.combat.**.**.mapper"})
-public interface AbsMybatisPlusConfig {
+public interface AbsMybatisPlusConfig extends DatabaseBean {
     /**
      * 3.4.0之前的版本用这个
      *

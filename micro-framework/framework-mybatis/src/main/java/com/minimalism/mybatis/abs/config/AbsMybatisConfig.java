@@ -1,5 +1,6 @@
 package com.minimalism.mybatis.abs.config;
 
+import com.actual.combat.database.core.abs.bean.DatabaseBean;
 import org.mybatis.spring.annotation.MapperScan;
 
 /**
@@ -9,7 +10,7 @@ import org.mybatis.spring.annotation.MapperScan;
  */
 
 @MapperScan(basePackages = {"com.minimalism.**.dao","com.minimalism.**.**.dao","com.minimalism.**.mapper","com.minimalism.**.**.mapper"})
-public interface AbsMybatisConfig {
+public interface AbsMybatisConfig extends DatabaseBean {
     /**
      * 3.4.0之前的版本用这个
      *

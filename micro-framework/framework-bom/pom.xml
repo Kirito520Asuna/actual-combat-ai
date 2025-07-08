@@ -61,6 +61,11 @@
             </dependency>
             <dependency>
                 <groupId>com.actual.combat</groupId>
+                <artifactId>framework-database-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.actual.combat</groupId>
                 <artifactId>framework-mybatis</artifactId>
                 <version>${revision}</version>
             </dependency>

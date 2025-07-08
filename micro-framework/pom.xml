@@ -33,6 +33,7 @@
         <module>framework-sharding-sphere</module>
         <module>framework-weixin-java</module>
         <module>framework-bom</module>
+        <module>framework-database-core</module>
     </modules>
 
 

@@ -150,6 +150,13 @@
 
         <dependency>
             <groupId>com.actual.combat</groupId>
+            <artifactId>framework-database-core</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.actual.combat</groupId>
             <artifactId>framework-dynamic-datasource</artifactId>
             <version>${revision}</version>
         </dependency>

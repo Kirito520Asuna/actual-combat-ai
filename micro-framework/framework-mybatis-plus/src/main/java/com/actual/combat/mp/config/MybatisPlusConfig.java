@@ -1,5 +1,6 @@
 package com.actual.combat.mp.config;
 
+import com.actual.combat.database.core.service.UserCoreService;
 import com.actual.combat.mp.abs.config.AbsMybatisPlusConfig;
 import com.actual.combat.mp.abs.handler.AbsEntityHandler;
 import com.actual.combat.mp.abs.service.DataScopeService;
@@ -75,8 +76,8 @@ public class MybatisPlusConfig implements AbsMybatisPlusConfig {
 
     @Bean
     @ConditionalOnBean(AbsEntityHandler.class)
-    @ConditionalOnMissingBean(MpUserService.class)
-    public MpUserService mpUserService() {
+    @ConditionalOnMissingBean(UserCoreService.class)
+    public UserCoreService mpUserService() {
         return new MpUserServiceImpl();
     }
 

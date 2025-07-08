@@ -81,5 +81,10 @@ public @interface SysLog {
      * 是否记录方法结果的数据
      */
     boolean logResultData() default true;
+
+    /**
+     * 是否包装返回结果
+     */
+    boolean wrapResult() default false;
 }
 

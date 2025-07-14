@@ -23,7 +23,8 @@ import java.util.UUID;
  * @Description JWT工具类
  */
 @Data
-@Component @Slf4j
+@Component
+@Slf4j
 @ConfigurationProperties(prefix = "common.jwt")
 public class JwtUtils {
     //有效期为
@@ -36,6 +37,10 @@ public class JwtUtils {
     //设置签发者
     public static final String IS_SUER = "yan";
     public static final String HEADER_AS_TOKEN = "Authorization";
+    //# 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+    private Boolean allowConcurrentLogin = false;
+    //# 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+    private Boolean isShare = false;
     private long expire = JWT_TTL;
     private long expireLong = LONG_JWT_TTL;
     private String secret = JWT_KEY;
@@ -65,7 +70,7 @@ public class JwtUtils {
         JwtUtils jwtUtils = new JwtUtils();
         try {
             jwtUtils = SpringUtil.getBean(JwtUtils.class);
-        }catch (Exception e){
+        } catch (Exception e) {
             log.warn("未找到JwtUtils Bean");
         }
         return jwtUtils;
@@ -175,6 +180,7 @@ public class JwtUtils {
     //    SecretKey key = new SecretKeySpec(encodedKey, 0, encodedKey.length, "AES");
     //    return key;
     //}
+
     /**
      * 生成 HMAC-SHA256 密钥
      */
@@ -208,7 +214,7 @@ public class JwtUtils {
         try {
             String subject = parseJWT(jwt).getSubject();
             return subject;
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new GlobalCustomException(ApiCode.UNAUTHORIZED);
         }
     }

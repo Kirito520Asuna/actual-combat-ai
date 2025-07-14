@@ -1,5 +1,9 @@
 package com.actual.combat.basic.utils.http;
 
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -10,6 +14,12 @@ import java.nio.charset.StandardCharsets;
  * @Description
  */
 public class HttpResponseUtils {
+
+    public static HttpServletResponse getResponse() {
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        return attributes != null ? attributes.getResponse() : null;
+    }
+
     public static String buildRedirectUrl(String baseUrl, String rangeHeader) {
         if (rangeHeader == null || rangeHeader.isEmpty()) {
             return baseUrl;

@@ -15,6 +15,8 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.util.List;
 
 /**
@@ -28,10 +30,20 @@ public class GlobalResponseBodyAdvice<T extends Object> implements ResponseBodyA
     @Resource
     protected ObjectMapper objectMapper;
 
+    public <A extends Annotation> A getAnnotation(MethodParameter returnType, Class<A> annotationClass) {
+        Class<? extends MethodParameter> typeClass = returnType.getClass();
+        Method typeMethod = returnType.getMethod();
+        A annotation = typeMethod.getAnnotation(annotationClass);
+        if (annotation == null) {
+            annotation = typeClass.getAnnotation(annotationClass);
+        }
+        return annotation;
+    }
+
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
         //这里可以判断是否需要封装响应
-        SysLog annotation = returnType.getMethod().getAnnotation(SysLog.class);
+        SysLog annotation = getAnnotation(returnType, SysLog.class);
         if (annotation != null) {
             Class<?> parameterType = returnType.getParameterType();
             List<Class<?>> classes = CollUtil.newArrayList(Result.class, Void.class);

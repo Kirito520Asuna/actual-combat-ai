@@ -93,16 +93,19 @@
     <!--禁掉一些包-->
     <logger name="com.alibaba.nacos" level="OFF"></logger>
     <springProfile name="prod">
-        <appender-ref ref="LOGSTASH"/>
-        <appender-ref ref="FILE"/>
+        <root level="INFO">
+            <appender-ref ref="LOGSTASH"/>
+            <appender-ref ref="FILE"/>
+        </root>
     </springProfile>
     <springProfile name="dev">
-        <appender-ref ref="LOGSTASH"/>
-        <appender-ref ref="FILE"/>
+        <root level="INFO">
+            <appender-ref ref="LOGSTASH"/>
+            <appender-ref ref="FILE"/>
+        </root>
     </springProfile>
     <springProfile name="test">
         <root level="INFO">
-            <appender-ref ref="CONSOLE"/>
             <appender-ref ref="FILE"/>
         </root>
     </springProfile>

@@ -10,7 +10,7 @@ run-name: "Jar ${{ github.event.inputs.tag_name || github.ref_name || 'v-manual'
 
 on:
   push:
-    tags:
+    branches:
       - 'v*'
   workflow_dispatch:
     inputs:
@@ -18,7 +18,7 @@ on:
         description: '输入 Release 标签 (eg: v0.35.1, v0.36.5-alpha.1)'
         required: false
         type: string
-        #default: 'v-manual'
+        default: 'v-manual'
       skip_tests:
         description: '是否跳过测试 (true/false)'
         required: true
@@ -27,6 +27,7 @@ on:
       java_version:
         description: '输入 Java 版本 (如 8, 11, 17)'
         required: true
+        type: string
         default: '8'
       jar_dir_prefix:
         description: 'JAR 文件前缀 (如 micro-service 或留空)'
@@ -48,26 +49,54 @@ jobs:
       #releases: write
       actions: read
     steps:
-      - name: 1.检出代码
+      - name: 1.调试触发信息
+        run: |
+          echo "Event Name: ${{ github.event_name }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "Tag Name: ${{ github.event.inputs.tag_name || github.ref_name }}"
+          echo "Skip Tests: ${{ github.event.inputs.skip_tests || true }}"
+          echo "Java Version: ${{ github.event.inputs.java_version || '17' }}"
+          echo "Jar Dir Prefix: ${{ github.event.inputs.jar_dir_prefix || 'micro-service' }}"
+          echo "Draft: ${{ github.event.inputs.draft || false }}"
+          echo "Prerelease: ${{ github.event.inputs.prerelease || false }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "SHA: ${{ github.sha }}"
+
+      - name: 2.检出代码
         uses: actions/checkout@v4
 
-      - name: 2.验证版本号
+      - name: 3.设置输入值
         run: |
-            TAG_NAME="${{ github.event.inputs.tag_name || github.ref_name}}"
-            echo "当前版本号: $TAG_NAME"
-            if ! [[ "$TAG_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?(\+[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?$ ]]; then
-              echo "❌ 错误：版本格式必须符合语义化版本规范 (例如: 1.2.3, 1.2.3-alpha, 1.2.3+build.123)"
-              exit 1
-            fi
-            echo "版本号验证通过"
+          TAG_NAME="${{ github.event.inputs.tag_name || github.ref_name }}"
+          SKIP_TESTS="${{ github.event.inputs.skip_tests || true }}"
+          JAVA_VERSION="${{ github.event.inputs.java_version || '17' }}"
+          JAR_DIR_PREFIX="${{ github.event.inputs.jar_dir_prefix || 'micro-service' }}"
+          DRAFT="${{ github.event.inputs.draft || false }}"
+          PRERELEASE="${{ github.event.inputs.prerelease || false }}"
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+          echo "SKIP_TESTS=$SKIP_TESTS" >> $GITHUB_ENV
+          echo "JAVA_VERSION=$JAVA_VERSION" >> $GITHUB_ENV
+          echo "JAR_DIR_PREFIX=$JAR_DIR_PREFIX" >> $GITHUB_ENV
+          echo "DRAFT=$DRAFT" >> $GITHUB_ENV
+          echo "PRERELEASE=$PRERELEASE" >> $GITHUB_ENV
+          echo "设置的输入值: TAG_NAME=$TAG_NAME, SKIP_TESTS=$SKIP_TESTS, JAVA_VERSION=$JAVA_VERSION, JAR_DIR_PREFIX=$JAR_DIR_PREFIX, DRAFT=$DRAFT, PRERELEASE=$PRERELEASE"
 
-      - name: 3.设置 Java 环境 version=${{ github.event.inputs.java_version}}
+      - name: 4.验证版本号
+        run: |
+          echo "当前版本号: $TAG_NAME"
+          if ! [[ "$TAG_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?(\+[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?$ ]]; then
+            echo "❌ 错误：版本格式必须符合语义化版本规范 (例如: 1.2.3, 1.2.3-alpha, 1.2.3+build.123)"
+            exit 1
+          fi
+          echo "版本号验证通过"
+
+      - name: 5.设置 Java 环境 version=${{ github.event.inputs.java_version}}
         uses: actions/setup-java@v4
         with:
           java-version: ${{ github.event.inputs.java_version}}
           distribution: 'temurin'
 
-      - name: 4.缓存 Maven 依赖
+      - name: 6.缓存 Maven 依赖
         uses: actions/cache@v4
         with:
           path: ~/.m2/repository
@@ -75,7 +104,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: 5.使用 Maven 构建并生成 JAR
+      - name: 7.使用 Maven 构建并生成 JAR
         run: |
           if [ "${{ inputs.skip_tests }}" = "true" ]; then
             echo "跳过测试"
@@ -87,7 +116,7 @@ jobs:
           fi
           echo "Maven 构建完成"
 
-      - name: 6.列出匹配的 JAR 文件
+      - name: 8.列出匹配的 JAR 文件
         run: |
           if [ "${{ inputs.jar_dir_prefix }}" = "" ]; then
             echo "匹配的 JAR 文件 (*/target/*.jar):"
@@ -97,7 +126,7 @@ jobs:
             find . -type f -path "*/${{ inputs.jar_dir_prefix }}/*/target/*.jar" || echo "未找到匹配的 JAR 文件"
           fi
 
-      - name: 7.打包所有 JAR 文件成 ZIP
+      - name: 9.打包所有 JAR 文件成 ZIP
         run: |
           if [ "${{ inputs.jar_dir_prefix }}" = "" ]; then
             find . -type f -path "*/target/*.jar" -exec zip -j jars-${{ github.event.inputs.tag_name || github.ref_name }}.zip {} +
@@ -108,20 +137,20 @@ jobs:
           # +: 尽量将多个文件放入一个 zip 命令，减少调用次数
         shell: bash
 
-      - name: 8.验证 ZIP 文件
+      - name: 10.验证 ZIP 文件
         run: |
           ls -la jars-${{ github.event.inputs.tag_name || github.ref_name }}.zip
           echo "ZIP 文件内容:"
           unzip -l jars-${{ github.event.inputs.tag_name || github.ref_name }}.zip
 
-      - name: 9.解压 ZIP 文件
+      - name: 11.解压 ZIP 文件
         run: |
           mkdir -p extracted-jars
           unzip jars-${{ github.event.inputs.tag_name || github.ref_name }}.zip -d extracted-jars
           echo "解压后的文件:"
           ls -la extracted-jars
 
-      - name: 10.上传 ZIP 到 GitHub Release
+      - name: 12.上传 ZIP 到 GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
@@ -133,9 +162,9 @@ jobs:
             **Release 信息**
             - 标签: ${{ github.event.inputs.tag_name || github.ref_name }}
             - Java 版本: ${{ github.event.inputs.java_version}}
-#            - 是否跳过测试: ${{ github.event.inputs.skip_tests == 'true' && '是' || '否' }}
-#            - Draft 状态: ${{ github.event.inputs.draft == 'true' && '是' || '否' }}
-#            - Pre-release 状态: ${{ github.event.inputs.prerelease == 'true' && '是' || '否' }}
+          #            - 是否跳过测试: ${{ github.event.inputs.skip_tests == 'true' && '是' || '否' }}
+          #            - Draft 状态: ${{ github.event.inputs.draft == 'true' && '是' || '否' }}
+          #            - Pre-release 状态: ${{ github.event.inputs.prerelease == 'true' && '是' || '否' }}
           draft: ${{ github.event.inputs.draft == 'true' || false }}
           prerelease: ${{ github.event.inputs.prerelease == 'true' || false }}
         env:

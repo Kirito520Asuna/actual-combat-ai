@@ -1,0 +1,106 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+name: Java 项目构建生成 JAR 包并 压缩成 ZIP 发布
+
+on:
+  push:
+    tags:  # 触发条件1：推送 v* 标签时（如 v1.0.0）
+      - 'v*'
+  workflow_dispatch:  # 触发条件2：手动触发
+    inputs:
+      tag_name:  # 用户输入的 Release 标签
+        description: '输入 Release 标签 (如 v1.0.0)'
+        required: true
+        default: 'v-manual'
+      skip_tests:  # 是否跳过 Maven 测试
+        description: '是否跳过测试 (true/false)'
+        required: true
+        type: boolean
+        default: false
+      java_version:
+        description: '输入 Java 版本 (如 8, 11, 17)'
+        required: true
+        default: '8'
+      draft:
+        description: '是否为草稿 Release (true/false)'
+        type: boolean
+        default: false
+      prerelease:
+        description: '是否为预发布 Release (true/false)'
+        type: boolean
+        default: false
+
+jobs:
+  build-and-release:
+      runs-on: ubuntu-latest
+      
+      permissions:
+        contents: write
+        actions: read
+        
+      steps:
+      - name: 1.检出代码
+        uses: actions/checkout@v4
+
+      - name: 2.设置 Java 环境 version=${{ github.event.inputs.java_version || '8' }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ github.event.inputs.java_version || '8' }}  # 使用输入的 Java 版本，默认为 8
+          distribution: 'temurin'
+
+      - name: 3.缓存 Maven 依赖
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+       # 4.使用 Maven 构建并生成 JAR
+      - name: 4.使用 Maven 构建并生成 JAR
+        run: |
+            if [ "${{ inputs.skip_tests }}" = "true" ]; then
+              echo "跳过测试"
+              echo "mvn clean package -B -DskipTests"  # 打印命令
+              mvn clean package -B -DskipTests  # 根据输入动态跳过测试
+            else
+              echo "mvn clean package -B "  # 打印命令
+              mvn clean package -B   # 根据输入动态跳过测试
+            fi
+            echo "Maven 构建 完成"
+        # 5. 打包所有 JAR 文件成 ZIP
+      - name: 5.打包所有 JAR 文件成 ZIP
+        run: |
+            # 查找所有 JAR 文件并打包成 ZIP
+            find . -type f -path '*/target/*.jar' -exec zip -j jars-${{ github.event.inputs.tag_name || github.ref_name }}.zip {} +
+            # -j: 仅打包文件，不保留目录结构
+            # +: 尽量将多个文件放入一个 zip 命令，减少调用次数
+        shell: bash
+
+        # 6. 调试：验证 ZIP 文件
+      - name: 6.验证 ZIP 文件
+        run: ls -la jars-${{ github.event.inputs.tag_name || github.ref_name }}.zip
+
+      - name: 7.上传 jars-${{ github.event.inputs.tag_name || github.ref_name }}.zip 到 GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: jars-${{ github.event.inputs.tag_name || github.ref_name }}.zip  # 上传生成的 ZIP 文件
+          tag_name: ${{ github.event.inputs.tag_name || github.ref_name }}
+          name: Release ${{ github.event.inputs.tag_name || github.ref_name }} ${{ github.event.inputs.draft == 'true' && '(Draft)' || '' }} ${{ github.event.inputs.prerelease == 'true' && '(Pre-release)' || '' }}
+          body: |
+            **Release 信息**
+            - 标签: ${{ github.event.inputs.tag_name || github.ref_name }}
+            - Java 版本: ${{ github.event.inputs.java_version || '8' }}
+#            - 是否跳过测试: ${{ github.event.inputs.skip_tests == 'true' && '是' || '否' }}
+#            - Draft 状态: ${{ github.event.inputs.draft == 'true' && '是' || '否' }}
+#            - Pre-release 状态: ${{ github.event.inputs.prerelease == 'true' && '是' || '否' }}
+          draft: ${{ github.event.inputs.draft == 'true' || false }}
+          #draft: false
+          prerelease: ${{ github.event.inputs.prerelease == 'true' || false }}
+          #prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}  # 使用 GitHub Token 认证

@@ -103,19 +103,28 @@ jobs:
           echo "ZIP 文件内容:"
           unzip -l jars-${{ github.event.inputs.tag_name || github.ref_name }}.zip
 
-      - name: 8.上传 ZIP 到 GitHub Release
+      - name: 8.解压 ZIP 文件
+        run: |
+          mkdir -p extracted-jars
+          unzip jars-${{ github.event.inputs.tag_name || github.ref_name }}.zip -d extracted-jars
+          echo "解压后的文件:"
+          ls -la extracted-jars
+
+      - name: 9.上传 ZIP 到 GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: jars-${{ github.event.inputs.tag_name || github.ref_name }}.zip
+          files: |
+            jars-${{ github.event.inputs.tag_name || github.ref_name }}.zip
+            extracted-jars/*.jar
           tag_name: ${{ github.event.inputs.tag_name || github.ref_name }}
           name: Release ${{ github.event.inputs.tag_name || github.ref_name }} ${{ github.event.inputs.draft == 'true' && '(Draft)' || '' }} ${{ github.event.inputs.prerelease == 'true' && '(Pre-release)' || '' }}
           body: |
             **Release 信息**
             - 标签: ${{ github.event.inputs.tag_name || github.ref_name }}
             - Java 版本: ${{ github.event.inputs.java_version || '8' }}
-#            - 是否跳过测试: ${{ github.event.inputs.skip_tests == 'true' && '是' || '否' }}
-#            - Draft 状态: ${{ github.event.inputs.draft == 'true' && '是' || '否' }}
-#            - Pre-release 状态: ${{ github.event.inputs.prerelease == 'true' && '是' || '否' }}
+          #            - 是否跳过测试: ${{ github.event.inputs.skip_tests == 'true' && '是' || '否' }}
+          #            - Draft 状态: ${{ github.event.inputs.draft == 'true' && '是' || '否' }}
+          #            - Pre-release 状态: ${{ github.event.inputs.prerelease == 'true' && '是' || '否' }}
           draft: ${{ github.event.inputs.draft == 'true' || false }}
           prerelease: ${{ github.event.inputs.prerelease == 'true' || false }}
         env:

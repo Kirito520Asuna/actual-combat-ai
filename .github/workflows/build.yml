@@ -31,6 +31,7 @@ on:
         default: '8'
       jar_dir_prefix:
         description: 'JAR 文件前缀 (如 micro-service 或留空)'
+        type: string
         default: ''
       draft:
         description: '是否为草稿 Release (true/false)'

@@ -68,11 +68,11 @@ jobs:
         run: |
           if [ "${{ inputs.skip_tests }}" = "true" ]; then
             echo "跳过测试"
-            echo "mvn clean package -B -DskipTests"
-            mvn clean package -B -DskipTests
+            echo "mvn clean package -B -DskipTests -Dquickly"
+            mvn clean package -B -DskipTests -Dquickly
           else
-            echo "mvn clean package -B"
-            mvn clean package -B
+            echo "mvn clean package -B -Dquickly"
+            mvn clean package -B -Dquickly
           fi
           echo "Maven 构建完成"
 

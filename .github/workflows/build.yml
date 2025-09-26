@@ -54,7 +54,7 @@ jobs:
           echo "Ref: ${{ github.ref }}"
           echo "Tag Name: ${{ github.event.inputs.tag_name || github.ref_name }}"
           echo "Skip Tests: ${{ github.event.inputs.skip_tests || true }}"
-          echo "Java Version: ${{ github.event.inputs.java_version || '17' }}"
+          echo "Java Version: ${{ github.event.inputs.java_version ||secrets.JAVA_VERSION|| '17' }}"
           echo "Jar Dir Prefix: ${{ github.event.inputs.jar_dir_prefix || 'micro-service' }}"
           echo "Draft: ${{ github.event.inputs.draft || false }}"
           echo "Prerelease: ${{ github.event.inputs.prerelease || false }}"
@@ -68,7 +68,7 @@ jobs:
         run: |
           TAG_NAME="${{ github.event.inputs.tag_name || github.ref_name }}"
           SKIP_TESTS="${{ github.event.inputs.skip_tests || true }}"
-          JAVA_VERSION="${{ github.event.inputs.java_version || '17' }}"
+          JAVA_VERSION="${{ github.event.inputs.java_version ||secrets.JAVA_VERSION|| '17' }}"
           JAR_DIR_PREFIX="${{ github.event.inputs.jar_dir_prefix || 'micro-service' }}"
           DRAFT="${{ github.event.inputs.draft || false }}"
           PRERELEASE="${{ github.event.inputs.prerelease || false }}"

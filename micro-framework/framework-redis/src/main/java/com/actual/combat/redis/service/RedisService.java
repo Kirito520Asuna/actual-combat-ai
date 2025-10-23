@@ -12,6 +12,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
 import java.util.Collection;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -195,16 +196,17 @@ public interface RedisService {
      */
     default boolean del(String cacheName, boolean isHash, String key) {
         RedisTemplate redisTemplate = getRedisTemplate();
+        boolean del = false;
         Logger log = log();
         if (isHash) {
-            redisTemplate.opsForHash().delete(cacheName, key);
+            del = redisTemplate.opsForHash().delete(cacheName, key) > 0;
             key = cacheName + ":" + key;
             log.debug("[RT]删除hash缓存成功,key:{}", key);
         } else {
-            redisTemplate.delete(key);
+            del = redisTemplate.delete(key);
             log.debug("[RT]删除缓存成功,key:{}", key);
         }
-        return true;
+        return del;
     }
 
     /**
@@ -234,6 +236,76 @@ public interface RedisService {
     default Collection<String> keys(String pattern) {
         RedisTemplate redisTemplate = getRedisTemplate();
         return redisTemplate.keys(pattern);
+    }
+
+    /**
+     * add Set key value
+     *
+     * @param key
+     * @param values
+     * @return
+     */
+    default boolean addToSet(Object key, Object... values) {
+        // 使用 opsForSet() 获取 Set 操作对象
+        boolean add = getRedisTemplate().opsForSet().add(key, values) > 0;
+        Logger log = log();
+        if (add) {
+            log.debug("[RT]添加Set缓存成功,key:{},values:{}", key, values);
+        }else {
+            log.error("[RT]添加Set缓存失败,key:{},values:{}", key, values);
+        }
+        return add;
+    }
+
+    /**
+     * 获取Set
+     *
+     * @param key
+     * @return
+     */
+    default Set<Object> getSetMembers(Object key) {
+        // 获取 Set 中的所有成员
+        Set<Object> members = getRedisTemplate().opsForSet().members(key);
+        Logger log = log();
+        log.debug("[RT]缓存Set命中,key:{},value:{}", key, members);
+        return members;
+    }
+
+    /**
+     * 从Set中移除指定元素
+     *
+     * @param key
+     * @param value
+     * @return
+     */
+    default boolean removeFromSet(Object key, Object value) {
+        // 从 Set 中移除指定元素
+        boolean del = getRedisTemplate().opsForSet().remove(key, value) > 0;
+        Logger log = log();
+        if (del) {
+            log.debug("[RT]删除Set缓存成功,key:{}", key, value);
+        } else {
+            log.error("[RT]删除Set缓存失败,key:{}", key, value);
+        }
+        return del;
+    }
+
+    /**
+     * 获取Set的大小
+     *
+     * @param key
+     * @return
+     */
+    default Long getSetSize(String key) {
+        // 获取 Set 的大小
+        Long size = getRedisTemplate().opsForSet().size(key);
+        Logger log = log();
+        if (size != null) {
+            log.debug("[RT]缓存Set命中,key:{},size:{}", key, size);
+        } else {
+            log.error("[RT]缓存Set未命中");
+        }
+        return size;
     }
 
     /*[RedissonClient]===========================================================================================*/

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration>
 <configuration>
-    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+<!--    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>-->
 <!--    <include resource="org/springframework/boot/logging/logback/base.xml"/>-->
 
     <springProperty scope="context" name="application" source="spring.application.name"/>
@@ -22,9 +22,9 @@
 
     <!-- 控制台输出 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+<!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
-        </filter>
+        </filter>-->
         <!-- 日志输出编码 -->
         <encoder>
             <!--输出格式化-->
@@ -85,16 +85,27 @@
         </connectionStrategy>
     </appender>
 
-<!--    <root level="INFO">-->
-<!--        <appender-ref ref="LOGSTASH"/>-->
-<!--        <appender-ref ref="CONSOLE"/>-->
-<!--    </root>-->
+    <root level="INFO">
+        <!--<appender-ref ref="LOGSTASH"/>-->
+        <appender-ref ref="CONSOLE"/>
+    </root>
 
     <!--禁掉一些包-->
     <logger name="com.alibaba.nacos" level="OFF"></logger>
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="LOGSTASH"/>
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+    <springProfile name="dev">
+        <root level="INFO">
+            <appender-ref ref="LOGSTASH"/>
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
     <springProfile name="test">
         <root level="INFO">
-            <appender-ref ref="CONSOLE"/>
             <appender-ref ref="FILE"/>
         </root>
     </springProfile>

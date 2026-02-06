@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.json.JSONObject;
 import com.actual.combat.redis.abs.aop.AbsRedisAspect;
 import com.actual.combat.redis.aop.redis.RedisLock;
+import com.actual.combat.redis.config.RedissonConfig;
 import com.actual.combat.redis.exception.RedisException;
 import jakarta.annotation.Resource;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +31,7 @@ import java.util.Map;
 @Aspect
 @Slf4j
 @Component
+@ConditionalOnBean(RedissonConfig.class)
 @Getter
 public class RedisLockAspect implements AbsRedisAspect {
     /**

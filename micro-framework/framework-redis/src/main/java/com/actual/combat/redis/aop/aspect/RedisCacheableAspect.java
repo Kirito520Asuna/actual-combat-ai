@@ -7,6 +7,7 @@ import cn.hutool.json.JSONUtil;
 
 import com.actual.combat.redis.abs.aop.AbsRedisAspect;
 import com.actual.combat.redis.aop.redis.RedisCacheable;
+import com.actual.combat.redis.config.RedissonConfig;
 import com.actual.combat.redis.exception.RedisException;
 import com.actual.combat.redis.service.RedisService;
 import com.alibaba.ttl.TransmittableThreadLocal;
@@ -17,6 +18,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -32,6 +34,7 @@ import java.util.Map;
 @Aspect
 @Slf4j
 @Component
+@ConditionalOnBean(RedissonConfig.class)
 @Getter
 public class RedisCacheableAspect implements AbsRedisAspect {
     @Lazy

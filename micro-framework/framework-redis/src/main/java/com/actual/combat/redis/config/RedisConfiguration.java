@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
  * @Description
  */
 @Configuration
+@ConditionalOnMissingBean(DisabledRedisConfig.class)  // 反向：当 none 时不加载
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -46,8 +48,8 @@ public class RedisConfiguration {
     private String clusterNodeStr;
     @Value("${spring.data.redis.cluster.nodes:redis://127.0.0.1:6379}")
     private List<String> clusterNodes = CollUtil.newArrayList();
-    @Resource
-    private RedisProperties redisProperties;
+    //@Resource
+    //private RedisProperties redisProperties;
 
     public enum RedisMode {
         none,single, sentinel, cluster;

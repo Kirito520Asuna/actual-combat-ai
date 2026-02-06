@@ -27,6 +27,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 @EnableAspectJAutoProxy
 @EnableCaching // 开启Spring Redis Cache，使用注解驱动缓存机制
 @ConditionalOnBean(RedisConfiguration.class)
+@ConditionalOnExpression("${spring.redis.mode}!= 'none'")
 public class RedissonConfig implements AbsRedissonConfig {
 
     @Resource

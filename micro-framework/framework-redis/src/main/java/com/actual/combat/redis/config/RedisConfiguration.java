@@ -50,7 +50,7 @@ public class RedisConfiguration {
     private RedisProperties redisProperties;
 
     public enum RedisMode {
-        single, sentinel, cluster;
+        none,single, sentinel, cluster;
     }
 
     public RedisMode getRedisModeEnum() {

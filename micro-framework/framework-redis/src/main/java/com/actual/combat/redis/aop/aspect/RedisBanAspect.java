@@ -7,6 +7,7 @@ import com.actual.combat.redis.aop.ban.Ban;
 import com.actual.combat.redis.ban.BanConfiguration;
 import com.actual.combat.redis.ban.BanType;
 import com.actual.combat.redis.ban.SimpleBanManager;
+import com.actual.combat.redis.config.RedissonConfig;
 import com.actual.combat.redis.exception.BanException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -32,6 +34,7 @@ import static cn.hutool.extra.servlet.JakartaServletUtil.getClientIP;
 @Aspect
 @Slf4j
 @Component
+@ConditionalOnBean(RedissonConfig.class)
 public class RedisBanAspect implements AbsRedisAspect {
     static BanManager DEFAULT_BAN_MANAGER;
     static BanConfiguration DEFAULT_BAN_CONFIGURATION;

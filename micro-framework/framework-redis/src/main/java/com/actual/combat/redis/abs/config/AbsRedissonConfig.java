@@ -88,7 +88,8 @@ public interface AbsRedissonConfig {
         RedisConfiguration.RedisMode redisModeEnum = configuration.getRedisModeEnum();
         RedisProperties redisProperties;
         try {
-            redisProperties = configuration.getRedisProperties();
+            //redisProperties = configuration.getRedisProperties();
+            redisProperties = SpringUtil.getBean(RedisProperties.class);
         } catch (NullPointerException e) {
             log.error("[error] RedisProperties  ... ");
             redisProperties = SpringUtil.getBean(RedisProperties.class);

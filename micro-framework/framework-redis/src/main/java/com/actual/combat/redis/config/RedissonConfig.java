@@ -28,13 +28,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 @EnableAspectJAutoProxy
 @EnableCaching // 开启Spring Redis Cache，使用注解驱动缓存机制
 @ConditionalOnBean(RedisConfiguration.class)
-@ImportAutoConfiguration({  // 手动导入官方配置（或你的自定义）
-        // 加其他需要的，如 RedisReactiveAutoConfiguration 如果要响应式
-        org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration.class,
-        org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration.class,
-        org.redisson.spring.starter.RedissonAutoConfigurationV2.class,
-        org.redisson.spring.starter.RedissonAutoConfiguration.class,
-})
 public class RedissonConfig implements AbsRedissonConfig {
 
     @Resource

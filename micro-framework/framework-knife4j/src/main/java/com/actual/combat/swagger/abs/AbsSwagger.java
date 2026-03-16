@@ -366,38 +366,26 @@ public interface AbsSwagger {
                 .components(new Components()
                         .addSecuritySchemes(authorization, new SecurityScheme().name(authorization)
                                 .type(SecurityScheme.Type.HTTP)
-                                .scheme("Bearer ")
+                                .scheme("bearer")
                                 .in(SecurityScheme.In.HEADER)
                                 .description("鉴权token")));
         return api;
     }
 
+    /**
+     * 构建 Authorization 认证请求头参数
+     * <p>
+     * 解决 Knife4j <a href="https://github.com/xiaoymin/knife4j/issues/545">Authorize 未生效，请求header里未包含参数</a>
+     *
+     * 构建全局 OpenAPI 自定义器，用于配置 API 文档中的安全认证相关信息
+     * @return 返回一个 GlobalOpenApiCustomizer 实例，用于自定义 OpenAPI 规范
+     */
     default GlobalOpenApiCustomizer buildGlobalOpenApiCustomizer() {
-        //Logger log = LoggerFactory.getLogger(getClass());
-        //log.info("start");
+        //
         return openApi -> {
-            if (ObjectUtil.isNotEmpty(openApi)) {
-                openApi.getPaths().forEach((path, pathItem) -> {
-                    boolean pathBool = false;
-                    //log.info("path:{};pathItem:{};", path, pathItem);
-                    List<String> list = getPrefixByAuthorization();
-                    if (CollUtil.isEmpty(list)) {
-                        pathBool = true;
-                    } else {
-                        for (String prefix : list) {
-                            if (path.startsWith(prefix)) {
-                                pathBool = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (pathBool) {
-                        pathItem.readOperations().forEach(operation ->
-                                operation.addSecurityItem(new SecurityRequirement().addList(HttpHeaders.AUTHORIZATION))
-                        );
-                    }
-                });
-            }
+            openApi.getPaths().values().stream()
+                    .flatMap(pathItem -> pathItem.readOperations().stream())
+                    .forEach(operation -> operation.security(openApi.getSecurity()));
         };
     }
 
